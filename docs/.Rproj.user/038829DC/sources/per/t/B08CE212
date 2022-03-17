@@ -1,0 +1,30 @@
+{
+    "id": "B08CE212",
+    "path": "F:/Github/zhenghu159.github.io/Biorplot/02-scRNAseq.Rmd",
+    "project_path": "02-scRNAseq.Rmd",
+    "type": "r_markdown",
+    "hash": "543544430",
+    "contents": "",
+    "dirty": false,
+    "created": 1647413675741.0,
+    "source_on_save": false,
+    "relative_order": 4,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "4,0",
+        "scrollLine": "0",
+        "rmdVisualMode": "false",
+        "rmdVisualModeLocation": "65:88.80000305175781",
+        "rmdVisualWrapConfigured": "true",
+        "docOutlineVisible": "0"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1646062027,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1646062027,
+    "read_only": false,
+    "read_only_alternatives": []
+}

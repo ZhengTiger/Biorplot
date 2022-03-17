@@ -1,0 +1,11 @@
+installation-usage
+dependence
+example
+basic-plot
+bior_sankey
+bior_pie
+scrnaseq-plot
+bior_dimplot
+bior_featurevlnplot
+ngs-plot
+bior_volcano

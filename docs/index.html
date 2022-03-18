@@ -30,7 +30,7 @@ The HTML output format for this example is bookdown::gitbook,</p>" />
 <meta name="author" content="Zheng Hu" />
 
 
-<meta name="date" content="2022-03-16" />
+<meta name="date" content="2022-03-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -186,13 +186,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">Biorplot Documentation</h1>
 <p class="author"><em>Zheng Hu</em></p>
-<p class="date"><em>2022-03-16</em></p>
+<p class="date"><em>2022-03-18</em></p>
 </div>
 <div id="installation-usage" class="section level1 hasAnchor" number="1">
 <h1><span class="header-section-number">Chapter 1</span> Installation &amp; Usage<a href="index.html#installation-usage" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>TODO</p>
+<p>You can download the package from <a href="https://github.com/zhenghu159/Biorplot">Biorplot GitHub Page</a>:<br />
+</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1" aria-hidden="true" tabindex="-1"></a>git clone https<span class="sc">:</span><span class="er">//</span>github.com<span class="sc">/</span>zhenghu159<span class="sc">/</span>Biorplot.git</span></code></pre></div>
+<p>Then load the package by:<br />
+</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="index.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&#39;Biorplot.R&#39;</span>)</span></code></pre></div>
 <div id="dependence" class="section level2 hasAnchor" number="1.1">
 <h2><span class="header-section-number">1.1</span> Dependence<a href="index.html#dependence" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>You should install these dependence:<br />
+<a href="https://github.com/r-lib/scales">scales</a>, <a href="https://github.com/nanxstats/ggsci">ggsci</a>,
+<a href="https://github.com/jrnold/ggthemes">ggthemes</a>, <a href="https://github.com/tidyverse/ggplot2">ggplot2</a>,
+<a href="https://github.com/wilkelab/cowplot">cowplot</a>, <a href="https://github.com/slowkow/ggrepel">ggrepel</a></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="index.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">&quot;scales&quot;</span>,<span class="st">&quot;ggsci&quot;</span>,<span class="st">&quot;ggthemes&quot;</span>,<span class="st">&quot;ggplot2&quot;</span>,<span class="st">&quot;cowplot&quot;</span>,<span class="st">&quot;ggrepel&quot;</span>))</span></code></pre></div>
 </div>
 <div id="example" class="section level2 hasAnchor" number="1.2">
 <h2><span class="header-section-number">1.2</span> example<a href="index.html#example" class="anchor-section" aria-label="Anchor link to header"></a></h2>

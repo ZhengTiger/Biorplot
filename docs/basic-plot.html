@@ -30,7 +30,7 @@ The HTML output format for this example is bookdown::gitbook,</p>" />
 <meta name="author" content="Zheng Hu" />
 
 
-<meta name="date" content="2022-03-16" />
+<meta name="date" content="2022-03-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -207,19 +207,22 @@ nodePadding=10, margin=NULL, height=600, width=600, sinksRight=TRUE)<br />
 * sinksRight: boolean. If TRUE, the last nodes are moved to the right border of the plot<br />
 <strong>Examples</strong><br />
 </p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="basic-plot.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># links data, colnames must have &#39;source&#39; &#39;target&#39; &#39;value&#39;</span></span>
-<span id="cb1-2"><a href="basic-plot.html#cb1-2" aria-hidden="true" tabindex="-1"></a>links <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb1-3"><a href="basic-plot.html#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">source=</span><span class="fu">c</span>(<span class="st">&quot;C&quot;</span>,<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;E&quot;</span>, <span class="st">&quot;D&quot;</span>), </span>
-<span id="cb1-4"><a href="basic-plot.html#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">target=</span><span class="fu">c</span>(<span class="st">&quot;b&quot;</span>,<span class="st">&quot;c&quot;</span>, <span class="st">&quot;a&quot;</span>, <span class="st">&quot;e&quot;</span>, <span class="st">&quot;d&quot;</span>), </span>
-<span id="cb1-5"><a href="basic-plot.html#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">value=</span><span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">4</span>, <span class="dv">5</span>)</span>
-<span id="cb1-6"><a href="basic-plot.html#cb1-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb1-7"><a href="basic-plot.html#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Set Nodes order and colour</span></span>
-<span id="cb1-8"><a href="basic-plot.html#cb1-8" aria-hidden="true" tabindex="-1"></a>Nodes.order <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;D&quot;</span>, <span class="st">&quot;E&quot;</span>, <span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>, <span class="st">&quot;e&quot;</span>)</span>
-<span id="cb1-9"><a href="basic-plot.html#cb1-9" aria-hidden="true" tabindex="-1"></a>Nodes.colour <span class="ot">&lt;-</span> <span class="fu">pal_d3</span>(<span class="st">&quot;category20&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>)(<span class="dv">20</span>)</span>
-<span id="cb1-10"><a href="basic-plot.html#cb1-10" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">Bior_Sankey</span>(links, <span class="at">Nodes.order=</span>Nodes.order, <span class="at">Nodes.colour=</span>Nodes.colour, <span class="at">fontSize=</span><span class="dv">20</span>)</span>
-<span id="cb1-11"><a href="basic-plot.html#cb1-11" aria-hidden="true" tabindex="-1"></a>p</span>
-<span id="cb1-12"><a href="basic-plot.html#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Use saveNetwork() to save the plot as html</span></span>
-<span id="cb1-13"><a href="basic-plot.html#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">saveNetwork</span>(p,<span class="st">&quot;sankey.html&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="basic-plot.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># first you should install and library networkD3 packages</span></span>
+<span id="cb4-2"><a href="basic-plot.html#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;networkD3&quot;</span>) </span>
+<span id="cb4-3"><a href="basic-plot.html#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(networkD3)</span>
+<span id="cb4-4"><a href="basic-plot.html#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># links data, colnames must have &#39;source&#39; &#39;target&#39; &#39;value&#39;</span></span>
+<span id="cb4-5"><a href="basic-plot.html#cb4-5" aria-hidden="true" tabindex="-1"></a>links <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb4-6"><a href="basic-plot.html#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">source=</span><span class="fu">c</span>(<span class="st">&quot;C&quot;</span>,<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;E&quot;</span>, <span class="st">&quot;D&quot;</span>), </span>
+<span id="cb4-7"><a href="basic-plot.html#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">target=</span><span class="fu">c</span>(<span class="st">&quot;b&quot;</span>,<span class="st">&quot;c&quot;</span>, <span class="st">&quot;a&quot;</span>, <span class="st">&quot;e&quot;</span>, <span class="st">&quot;d&quot;</span>), </span>
+<span id="cb4-8"><a href="basic-plot.html#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">value=</span><span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">4</span>, <span class="dv">5</span>)</span>
+<span id="cb4-9"><a href="basic-plot.html#cb4-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-10"><a href="basic-plot.html#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Set Nodes order and colour</span></span>
+<span id="cb4-11"><a href="basic-plot.html#cb4-11" aria-hidden="true" tabindex="-1"></a>Nodes.order <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;D&quot;</span>, <span class="st">&quot;E&quot;</span>, <span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>, <span class="st">&quot;e&quot;</span>)</span>
+<span id="cb4-12"><a href="basic-plot.html#cb4-12" aria-hidden="true" tabindex="-1"></a>Nodes.colour <span class="ot">&lt;-</span> <span class="fu">pal_d3</span>(<span class="st">&quot;category20&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>)(<span class="dv">20</span>)</span>
+<span id="cb4-13"><a href="basic-plot.html#cb4-13" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">Bior_Sankey</span>(links, <span class="at">Nodes.order=</span>Nodes.order, <span class="at">Nodes.colour=</span>Nodes.colour, <span class="at">fontSize=</span><span class="dv">20</span>)</span>
+<span id="cb4-14"><a href="basic-plot.html#cb4-14" aria-hidden="true" tabindex="-1"></a>p</span>
+<span id="cb4-15"><a href="basic-plot.html#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Use saveNetwork() to save the plot as html</span></span>
+<span id="cb4-16"><a href="basic-plot.html#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="fu">saveNetwork</span>(p,<span class="st">&quot;sankey.html&quot;</span>)</span></code></pre></div>
 <p><img src="images/Bior_Sankey.png" /></p>
 </div>
 <div id="bior_pie" class="section level2 hasAnchor" number="2.2">
@@ -237,11 +240,11 @@ Bior_pie(x, labels, col=pal_d3(“category20,”alpha=0.7)(20), title=““, fo
 * legend.key.size: legend size<br />
 <strong>Examples</strong><br />
 </p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="basic-plot.html#cb2-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">7</span>,<span class="dv">9</span>,<span class="dv">1</span>,<span class="dv">2</span>)</span>
-<span id="cb2-2"><a href="basic-plot.html#cb2-2" aria-hidden="true" tabindex="-1"></a>labels <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;D&quot;</span>, <span class="st">&quot;E&quot;</span>)</span>
-<span id="cb2-3"><a href="basic-plot.html#cb2-3" aria-hidden="true" tabindex="-1"></a>col <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;#AEC7E8B2&quot;</span>, <span class="st">&quot;#FFBB78B2&quot;</span>, <span class="st">&quot;#98DF8AB2&quot;</span>, <span class="st">&quot;#FF9896B2&quot;</span>, <span class="st">&quot;#C5B0D5B2&quot;</span>)</span>
-<span id="cb2-4"><a href="basic-plot.html#cb2-4" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">Bior_pie</span>(x, labels, <span class="at">col=</span>col, <span class="at">title=</span><span class="st">&quot;Test Bior_pie&quot;</span>)</span>
-<span id="cb2-5"><a href="basic-plot.html#cb2-5" aria-hidden="true" tabindex="-1"></a>p</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="basic-plot.html#cb5-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">7</span>,<span class="dv">9</span>,<span class="dv">1</span>,<span class="dv">2</span>)</span>
+<span id="cb5-2"><a href="basic-plot.html#cb5-2" aria-hidden="true" tabindex="-1"></a>labels <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;D&quot;</span>, <span class="st">&quot;E&quot;</span>)</span>
+<span id="cb5-3"><a href="basic-plot.html#cb5-3" aria-hidden="true" tabindex="-1"></a>col <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;#AEC7E8B2&quot;</span>, <span class="st">&quot;#FFBB78B2&quot;</span>, <span class="st">&quot;#98DF8AB2&quot;</span>, <span class="st">&quot;#FF9896B2&quot;</span>, <span class="st">&quot;#C5B0D5B2&quot;</span>)</span>
+<span id="cb5-4"><a href="basic-plot.html#cb5-4" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">Bior_pie</span>(x, labels, <span class="at">col=</span>col, <span class="at">title=</span><span class="st">&quot;Test Bior_pie&quot;</span>)</span>
+<span id="cb5-5"><a href="basic-plot.html#cb5-5" aria-hidden="true" tabindex="-1"></a>p</span></code></pre></div>
 <p><img src="images/Bior_pie.png" /></p>
 
 </div>

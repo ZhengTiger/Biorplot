@@ -30,29 +30,48 @@ p <- Bior_pie(x, labels, col=col, title="Test Bior_pie")
 p
 
 
+# 2.3 Bior_StackBarplot --------------------------------------------------------
+data <- data.frame(matrix(rnorm(20, mean = 20, sd = 5),c(4,5)))
+data <- round(data)
+rownames(data) <- paste('gene',1:4, sep='')
+colnames(data) <- paste('sample',1:5,sep='')
+x.order <- c('sample1','sample5','sample4','sample3','sample2')
+type.order <- c('gene1','gene2','gene3','gene4')
+col <- pal_d3("category20")(20)[11:20]
+p <- Bior_StackBarplot(data, x.order=x.order, type.order=type.order, col = col,
+                  labs.x='Samples', labs.y='Numbers', title='Test Bior_StackBarplot',
+                  theme=theme_minimal())
+p
+
+
 
 
 # 3 scRNAseq Plot ==============================================================
 # first you should install and library Seurat packages
-install.packages("Seurat") 
+install.packages("Seurat")
 library(Seurat)
 # load test data
-seuratobject <- readRDS("testdata/pbmc3k_final.rds")
+seuratobject <- readRDS("pbmc3k_final.rds")
 # colors
 cols <- pal_d3("category20")(20)
 
-# Bior_DimPlot -----------------------------------------------------------------
+# 3.1 Bior_DimPlot -------------------------------------------------------------
 p <- Bior_DimPlot(seuratobject, cols = cols)
 p
 
 
-# Bior_FeatureVlnplot ----------------------------------------------------------
+# 3.2 Bior_FeatureVlnplot ------------------------------------------------------
 genes <- c("MS4A1", "GNLY", "CD3E", "CD14", "FCER1A", "FCGR3A")
 p <- Bior_FeatureVlnplot(seuratobject, genes, scale=0.8, pt.size=0.5, nrow=2, cols=cols)
 p
 
 
-
+# 3.3 Bior_DoHeatmap ------------------------------------------------------------
+library(dplyr)
+pbmc.markers <- FindAllMarkers(seuratobject, only.pos = TRUE, min.pct = 0.25, logfc.threshold = 0.25)
+top10 <- pbmc.markers %>% group_by(cluster) %>% top_n(n = 10, wt = avg_log2FC)
+p <- Bior_DoHeatmap(seuratobject, top10$gene, group.colors=cols, group.size=3, gene.label=F,margin=margin(20,20,0,0))
+p
 
 
 # 4 NGS Plot ===================================================================

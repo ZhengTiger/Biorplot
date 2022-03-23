@@ -4,8 +4,10 @@ example
 basic-plot
 bior_sankey
 bior_pie
+bior_stackbarplot
 scrnaseq-plot
 bior_dimplot
 bior_featurevlnplot
+bior_doheatmap
 ngs-plot
 bior_volcano

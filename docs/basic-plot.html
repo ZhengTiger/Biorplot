@@ -30,7 +30,7 @@ The HTML output format for this example is bookdown::gitbook,</p>" />
 <meta name="author" content="Zheng Hu" />
 
 
-<meta name="date" content="2022-03-19" />
+<meta name="date" content="2022-03-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -153,11 +153,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="2.1" data-path="basic-plot.html"><a href="basic-plot.html#bior_sankey"><i class="fa fa-check"></i><b>2.1</b> Bior_Sankey<span></span></a></li>
 <li class="chapter" data-level="2.2" data-path="basic-plot.html"><a href="basic-plot.html#bior_pie"><i class="fa fa-check"></i><b>2.2</b> Bior_pie<span></span></a></li>
+<li class="chapter" data-level="2.3" data-path="basic-plot.html"><a href="basic-plot.html#bior_stackbarplot"><i class="fa fa-check"></i><b>2.3</b> Bior_StackBarplot<span></span></a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="scrnaseq-plot.html"><a href="scrnaseq-plot.html"><i class="fa fa-check"></i><b>3</b> scRNAseq Plot<span></span></a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="scrnaseq-plot.html"><a href="scrnaseq-plot.html#bior_dimplot"><i class="fa fa-check"></i><b>3.1</b> Bior_DimPlot<span></span></a></li>
 <li class="chapter" data-level="3.2" data-path="scrnaseq-plot.html"><a href="scrnaseq-plot.html#bior_featurevlnplot"><i class="fa fa-check"></i><b>3.2</b> Bior_FeatureVlnplot<span></span></a></li>
+<li class="chapter" data-level="3.3" data-path="scrnaseq-plot.html"><a href="scrnaseq-plot.html#bior_doheatmap"><i class="fa fa-check"></i><b>3.3</b> Bior_DoHeatmap<span></span></a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="ngs-plot.html"><a href="ngs-plot.html"><i class="fa fa-check"></i><b>4</b> NGS Plot<span></span></a>
 <ul>
@@ -189,8 +191,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="bior_sankey" class="section level2 hasAnchor" number="2.1">
 <h2><span class="header-section-number">2.1</span> Bior_Sankey<a href="basic-plot.html#bior_sankey" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><strong>Description</strong><br />
-A sankey plot, you can use Nodes.colour and Nodes.order to set Nodes colour and
-order, this function will automatically remove links$value==0 rows<br />
+sankey plot based on networkD3::sankeyNetwork(), you can use Nodes.colour and
+Nodes.order to set Nodes colour and order, this function will automatically remove
+links$value==0 rows<br />
 <strong>Usage</strong><br />
 Bior_Sankey(links, Nodes.colour=NULL, Nodes.order=NULL, fontSize=12,nodeWidth=30,
 nodePadding=10, margin=NULL, height=600, width=600, sinksRight=TRUE)<br />
@@ -228,7 +231,7 @@ nodePadding=10, margin=NULL, height=600, width=600, sinksRight=TRUE)<br />
 <div id="bior_pie" class="section level2 hasAnchor" number="2.2">
 <h2><span class="header-section-number">2.2</span> Bior_pie<a href="basic-plot.html#bior_pie" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><strong>Description</strong><br />
-Pie plot<br />
+Pie plot based on ggplot<br />
 <strong>Usage</strong><br />
 Bior_pie(x, labels, col=pal_d3(“category20,”alpha=0.7)(20), title=““, fontsize=20, legend.key.size=1)<br />
 <strong>Arguments</strong><br />
@@ -246,6 +249,42 @@ Bior_pie(x, labels, col=pal_d3(“category20,”alpha=0.7)(20), title=““, fo
 <span id="cb5-4"><a href="basic-plot.html#cb5-4" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">Bior_pie</span>(x, labels, <span class="at">col=</span>col, <span class="at">title=</span><span class="st">&quot;Test Bior_pie&quot;</span>)</span>
 <span id="cb5-5"><a href="basic-plot.html#cb5-5" aria-hidden="true" tabindex="-1"></a>p</span></code></pre></div>
 <p><img src="images/Bior_pie.png" /></p>
+</div>
+<div id="bior_stackbarplot" class="section level2 hasAnchor" number="2.3">
+<h2><span class="header-section-number">2.3</span> Bior_StackBarplot<a href="basic-plot.html#bior_stackbarplot" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>Description</strong><br />
+Stacked Barplot based on ggplot<br />
+<strong>Usage</strong><br />
+Bior_StackBarplot(data, x.order=NULL, type.order=NULL, col=category20, label.size=5,
+labs.x=’‘, labs.y=’‘, title=’’, legend.key.size=1, text.size=15, bar.width=0.7,
+theme=theme_bw())<br />
+<strong>Arguments</strong><br />
+* data: A dataframe, the columns are x-axis sample, the rows are fill type<br />
+* x.order: x axis sample order<br />
+* type.order: fill type order<br />
+* col:fill colours<br />
+* label.size: label size<br />
+* labs.x: x axis title<br />
+* labs.y: y axis title<br />
+* title: figure title<br />
+* legend.key.size: legend size<br />
+* text.size: text size<br />
+* bar.width: bar width<br />
+* theme: choose ggthemes, eg:theme_bw(), theme_classic()<br />
+<strong>Examples</strong><br />
+</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="basic-plot.html#cb6-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">matrix</span>(<span class="fu">rnorm</span>(<span class="dv">20</span>, <span class="at">mean =</span> <span class="dv">20</span>, <span class="at">sd =</span> <span class="dv">5</span>),<span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">5</span>)))</span>
+<span id="cb6-2"><a href="basic-plot.html#cb6-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">round</span>(data)</span>
+<span id="cb6-3"><a href="basic-plot.html#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(data) <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">&#39;gene&#39;</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">sep=</span><span class="st">&#39;&#39;</span>)</span>
+<span id="cb6-4"><a href="basic-plot.html#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(data) <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">&#39;sample&#39;</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,<span class="at">sep=</span><span class="st">&#39;&#39;</span>)</span>
+<span id="cb6-5"><a href="basic-plot.html#cb6-5" aria-hidden="true" tabindex="-1"></a>x.order <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;sample1&#39;</span>,<span class="st">&#39;sample5&#39;</span>,<span class="st">&#39;sample4&#39;</span>,<span class="st">&#39;sample3&#39;</span>,<span class="st">&#39;sample2&#39;</span>)</span>
+<span id="cb6-6"><a href="basic-plot.html#cb6-6" aria-hidden="true" tabindex="-1"></a>type.order <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;gene1&#39;</span>,<span class="st">&#39;gene2&#39;</span>,<span class="st">&#39;gene3&#39;</span>,<span class="st">&#39;gene4&#39;</span>)</span>
+<span id="cb6-7"><a href="basic-plot.html#cb6-7" aria-hidden="true" tabindex="-1"></a>col <span class="ot">&lt;-</span> <span class="fu">pal_d3</span>(<span class="st">&quot;category20&quot;</span>)(<span class="dv">20</span>)[<span class="dv">11</span><span class="sc">:</span><span class="dv">20</span>]</span>
+<span id="cb6-8"><a href="basic-plot.html#cb6-8" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">Bior_StackBarplot</span>(data, <span class="at">x.order=</span>x.order, <span class="at">type.order=</span>type.order, <span class="at">col =</span> col,</span>
+<span id="cb6-9"><a href="basic-plot.html#cb6-9" aria-hidden="true" tabindex="-1"></a>                  <span class="at">labs.x=</span><span class="st">&#39;Samples&#39;</span>, <span class="at">labs.y=</span><span class="st">&#39;Numbers&#39;</span>, <span class="at">title=</span><span class="st">&#39;Test Bior_StackBarplot&#39;</span>,</span>
+<span id="cb6-10"><a href="basic-plot.html#cb6-10" aria-hidden="true" tabindex="-1"></a>                  <span class="at">theme=</span><span class="fu">theme_minimal</span>())</span>
+<span id="cb6-11"><a href="basic-plot.html#cb6-11" aria-hidden="true" tabindex="-1"></a>p</span></code></pre></div>
+<p><img src="images/Bior_StackBarplot.png" /></p>
 
 </div>
 </div>

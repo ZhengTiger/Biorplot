@@ -5,6 +5,9 @@ library(ggplot2)
 library(cowplot)
 library(ggrepel)
 
+# some colors
+category20 <- pal_d3("category20")(20)
+
 
 # 2 Basic Plot =================================================================
 # 2.1 Bior_Sankey --------------------------------------------------------------
@@ -66,6 +69,42 @@ Bior_pie <- function(x, labels, col=pal_d3("category20,",alpha=0.7)(20), title="
 }
 
 
+# 2.3 Bior_StackBarplot --------------------------------------------------------
+Bior_StackBarplot <- function(data, x.order=NULL, type.order=NULL, col=category20, 
+                              label.size=5, labs.x='', labs.y='', title='', 
+                              legend.key.size=1, text.size=15, bar.width=0.7, 
+                              theme=theme_bw()){
+  # adjust data format
+  x <- c()
+  type <- c()
+  value <- c()
+  for (i in 1:nrow(data)){
+    for (j in 1:ncol(data)){
+      x <- c(x, colnames(data)[j])
+      type <- c(type, rownames(data)[i])
+      value <- c(value, data[i,j])
+    }
+  }
+  df <- data.frame(x=x, type=type, value=value)
+  if (!is.null(x.order)){
+    df$x <- factor(df$x, levels = x.order)
+  }
+  if (!is.null(type.order)){
+    df$type <- factor(df$type, levels = type.order)
+  }
+  # plot
+  p <- ggplot(data=df, aes(x=x, y=value, fill=type)) + geom_bar(stat="identity", width=bar.width) +
+    scale_fill_manual(values=col) +
+    labs(x=labs.x, y=labs.y, title=title) +
+    geom_text(aes(label=value), color="black", size=label.size, position=position_stack(0.5)) +
+    theme +
+    theme(panel.grid = element_blank(),
+          text=element_text(size=text.size), plot.title=element_text(hjust=0.5),
+          legend.title=element_blank(),
+          legend.key.size=unit(legend.key.size, "cm"))
+  return(p)
+}
+
 
 
 
@@ -105,6 +144,25 @@ Bior_FeatureVlnplot <- function(seuratobject, genes, title.size=15, axis.text.si
   return(p)
 }
 
+
+# 3.3 Bior_DoHeatmap -----------------------------------------------------------
+Bior_DoHeatmap <- function(seuratobject, features, group.by="ident", group.bar=TRUE,
+                           group.colors=NULL, group.size=5, group.label=TRUE,
+                           gene.size=5, gene.label=TRUE, margin=margin(0,0,0,0)){
+  if (gene.label){
+    axis.text.y <- element_text(size=gene.size)
+  }else{
+    axis.text.y <- element_blank()
+  }
+  
+  p <- DoHeatmap(seuratobject, features=top10$gene, group.by=group.by, group.bar=group.bar,
+                 group.colors=group.colors, size=group.size, label=group.label) +
+    theme(axis.text.y = axis.text.y, 
+          plot.margin = margin) +
+    scale_fill_gradientn(colors = c("navy","white","firebrick3")) +
+    NoLegend()
+  return(p)
+}
 
 
 

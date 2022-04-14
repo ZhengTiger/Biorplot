@@ -4,13 +4,13 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Biorplot Documentation</title>
+  <title>Chapter 7 Bior_Combn | Biorplot Documentation</title>
   <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
 set in the _output.yml file.
 The HTML output format for this example is bookdown::gitbook,</p>" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Biorplot Documentation" />
+  <meta property="og:title" content="Chapter 7 Bior_Combn | Biorplot Documentation" />
   <meta property="og:type" content="book" />
   
   
@@ -20,7 +20,7 @@ The HTML output format for this example is bookdown::gitbook,</p>" />
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Biorplot Documentation" />
+  <meta name="twitter:title" content="Chapter 7 Bior_Combn | Biorplot Documentation" />
   
   <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
 set in the _output.yml file.
@@ -37,8 +37,8 @@ The HTML output format for this example is bookdown::gitbook,</p>" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
+<link rel="prev" href="bior_dim2to1.html"/>
 
-<link rel="next" href="basic-plot.html"/>
 <script src="libs/header-attrs-2.13/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -167,11 +167,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="4.1" data-path="ngs-plot.html"><a href="ngs-plot.html#bior_volcano"><i class="fa fa-check"></i><b>4.1</b> Bior_Volcano<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="data-analysis.html"><a href="data-analysis.html"><i class="fa fa-check"></i><b>5</b> Data Analysis<span></span></a>
-<ul>
-<li class="chapter" data-level="5.1" data-path="data-analysis.html"><a href="data-analysis.html#bior_dim2to1"><i class="fa fa-check"></i><b>5.1</b> Bior_Dim2to1<span></span></a></li>
-<li class="chapter" data-level="5.2" data-path="data-analysis.html"><a href="data-analysis.html#bior_combn"><i class="fa fa-check"></i><b>5.2</b> Bior_Combn<span></span></a></li>
-</ul></li>
+<li class="chapter" data-level="5" data-path="data-analysis.html"><a href="data-analysis.html"><i class="fa fa-check"></i><b>5</b> Data Analysis<span></span></a></li>
+<li class="chapter" data-level="6" data-path="bior_dim2to1.html"><a href="bior_dim2to1.html"><i class="fa fa-check"></i><b>6</b> Bior_Dim2to1<span></span></a></li>
+<li class="chapter" data-level="7" data-path="bior_combn.html"><a href="bior_combn.html"><i class="fa fa-check"></i><b>7</b> Bior_Combn<span></span></a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -192,137 +190,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Biorplot Documentation</h1>
-<p class="author"><em>Zheng Hu</em></p>
-<p class="date"><em>2022-04-14</em></p>
-</div>
-<div id="installation-usage" class="section level1 hasAnchor" number="1">
-<h1><span class="header-section-number">Chapter 1</span> Installation &amp; Usage<a href="index.html#installation-usage" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>You can download the package from <a href="https://github.com/zhenghu159/Biorplot">Biorplot GitHub Page</a>:<br />
+<div id="bior_combn" class="section level1 hasAnchor" number="7">
+<h1><span class="header-section-number">Chapter 7</span> Bior_Combn<a href="bior_combn.html#bior_combn" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p><strong>Description</strong><br />
+Generate all combinations of the elements of inputdata.<br />
+<strong>Usage</strong><br />
+Bior_Combn(inputdata)<br />
+<strong>Arguments</strong><br />
+* inputdata: a vector<br />
+<strong>Examples</strong><br />
 </p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1" aria-hidden="true" tabindex="-1"></a>git clone https<span class="sc">:</span><span class="er">//</span>github.com<span class="sc">/</span>zhenghu159<span class="sc">/</span>Biorplot.git</span></code></pre></div>
-<p>Then load the package by:<br />
-</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="index.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&#39;Biorplot.R&#39;</span>)</span></code></pre></div>
-<div id="dependence" class="section level2 hasAnchor" number="1.1">
-<h2><span class="header-section-number">1.1</span> Dependence<a href="index.html#dependence" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>You should install these dependence:<br />
-<a href="https://github.com/r-lib/scales">scales</a>, <a href="https://github.com/nanxstats/ggsci">ggsci</a>,
-<a href="https://github.com/jrnold/ggthemes">ggthemes</a>, <a href="https://github.com/tidyverse/ggplot2">ggplot2</a>,
-<a href="https://github.com/wilkelab/cowplot">cowplot</a>, <a href="https://github.com/slowkow/ggrepel">ggrepel</a></p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="index.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">&quot;scales&quot;</span>,<span class="st">&quot;ggsci&quot;</span>,<span class="st">&quot;ggthemes&quot;</span>,<span class="st">&quot;ggplot2&quot;</span>,<span class="st">&quot;cowplot&quot;</span>,<span class="st">&quot;ggrepel&quot;</span>))</span></code></pre></div>
-</div>
-<div id="example" class="section level2 hasAnchor" number="1.2">
-<h2><span class="header-section-number">1.2</span> example<a href="index.html#example" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><strong>Basic Plot</strong><br />
-</p>
-<table width="1000">
-<tr>
-<td width="200">
-<justify>
-<a href=https://zhenghu159.github.io/Biorplot/basic-plot.html#bior_sankey target="-blank" title="Bior_Sankey">
-<img src="images/2.1%20Bior_Sankey.png" >
-</a>
-</justify>
-</td>
-<td width="200">
-<justify>
-<a href=https://zhenghu159.github.io/Biorplot/basic-plot.html#bior_pie target="-blank" title="Bior_pie">
-<img src="images/2.2%20Bior_pie.png" >
-</a>
-</justify>
-</td>
-<td width="200">
-<justify>
-<a href=https://zhenghu159.github.io/Biorplot/basic-plot.html#bior_stackbarplot target="-blank" title="Bior_StackBarplot">
-<img src="images/2.3%20Bior_StackBarplot.png" >
-</a>
-<justify>
-</td>
-<td width="200">
-<justify>
-<a href=https://zhenghu159.github.io/Biorplot/basic-plot.html#bior_line target="-blank"  title="Bior_Line">
-<img src="images/2.4%20Bior_Line.png" >
-</a>
-<justify>
-</td>
-<td width="200">
-</td>
-</tr>
-</table>
-<p><strong>scRNAseq Plot</strong><br />
-</p>
-<table>
-<tr>
-<td width="200">
-<justify>
-<a href=https://zhenghu159.github.io/Biorplot/scrnaseq-plot.html#bior_dimplot target="-blank" title="Bior_DimPlot">
-<img src="images/3.1.1%20Bior_DimPlot.png" >
-</a>
-</justify>
-</td>
-<td width="200">
-<justify>
-<a href=https://zhenghu159.github.io/Biorplot/scrnaseq-plot.html#bior_dimplot target="-blank" title="Bior_DimPlot">
-<img src="images/3.1.2%20Bior_DimPlot.png" >
-</a>
-</justify>
-</td>
-<td width="200">
-<justify>
-<a href=https://zhenghu159.github.io/Biorplot/scrnaseq-plot.html#bior_featurevlnplot target="-blank" title="Bior_FeatureVlnplot">
-<img src="images/3.2%20Bior_FeatureVlnplot.png" >
-</a>
-</justify>
-</td>
-<td width="200">
-<justify>
-<a href=https://zhenghu159.github.io/Biorplot/scrnaseq-plot.html#bior_doheatmap target="-blank" title="Bior_DoHeatmap">
-<img src="images/3.3%20Bior_DoHeatmap.png" >
-</a>
-<justify>
-</td>
-<td width="200">
-<justify>
-<a href=https://zhenghu159.github.io/Biorplot/scrnaseq-plot.html#bior_featurebox target="-blank" title="Bior_Featurebox">
-<img src="images/3.4%20Bior_Featurebox.png" >
-</a>
-<justify>
-</td>
-</tr>
-</table>
-<p><strong>NGS Plot</strong><br />
-</p>
-<table>
-<tr>
-<td width="200">
-<justify>
-<a href=https://zhenghu159.github.io/Biorplot/ngs-plot.html#bior_volcano target="-blank" title="Bior_Volcano">
-<img src="images/4.1%20Bior_Volcano.png" >
-</a>
-</justify>
-</td>
-<td width="200">
-</td>
-<td width="200">
-</td>
-<td width="200">
-</td>
-<td width="200">
-</td>
-</tr>
-</table>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="bior_combn.html#cb16-1" aria-hidden="true" tabindex="-1"></a>inputdata <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;A&#39;</span>,<span class="st">&#39;B&#39;</span>,<span class="st">&#39;C&#39;</span>)</span>
+<span id="cb16-2"><a href="bior_combn.html#cb16-2" aria-hidden="true" tabindex="-1"></a>motifs <span class="ot">&lt;-</span> <span class="fu">Bior_Combn</span>(inputdata)</span>
+<span id="cb16-3"><a href="bior_combn.html#cb16-3" aria-hidden="true" tabindex="-1"></a>motifs</span>
+<span id="cb16-4"><a href="bior_combn.html#cb16-4" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">&quot;A&quot;</span>     <span class="st">&quot;B&quot;</span>     <span class="st">&quot;C&quot;</span>     <span class="st">&quot;A+B&quot;</span>   <span class="st">&quot;A+C&quot;</span>   <span class="st">&quot;B+C&quot;</span>   <span class="st">&quot;A+B+C&quot;</span></span></code></pre></div>
 
-</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
+<a href="bior_dim2to1.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
-<a href="basic-plot.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -353,7 +243,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/USERNAME/REPO/edit/BRANCH/index.Rmd",
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/04-Data_analysis.Rmd",
 "text": "Edit"
 },
 "history": {

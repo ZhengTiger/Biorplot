@@ -44,6 +44,14 @@ p <- Bior_StackBarplot(data, x.order=x.order, type.order=type.order, col = col,
 p
 
 
+# 2.4 Bior_Line ----------------------------------------------------------------
+data <- data.frame('x' = c(1:20), 'y' = rnorm(20), 'Type' = rep(c('A','B'), 10))
+col <- c("#f89588","#63b2ee")
+p <- Bior_Line(data, title = 'Test Bior_Line', col = col)
+p
+
+
+
 
 
 # 3 scRNAseq Plot ==============================================================
@@ -52,26 +60,40 @@ install.packages("Seurat")
 library(Seurat)
 # load test data
 seuratobject <- readRDS("pbmc3k_final.rds")
-# colors
-cols <- pal_d3("category20")(20)
+
 
 # 3.1 Bior_DimPlot -------------------------------------------------------------
-p <- Bior_DimPlot(seuratobject, cols = cols)
+cols <- pal_d3("category20")(20)
+p <- Bior_DimPlot(seuratobject, reduction='umap', cols = cols)
 p
-
+# highlight cell
+highlight_cell <- names(seuratobject@active.ident)[which(seuratobject@active.ident=='Naive CD4 T')]
+p <- Bior_DimPlot(seuratobject, reduction='umap', text.size=20, cells.highlight=highlight_cell,
+             cols.highlight='#f8cb7f', sizes.highlight=1, pt.size=1, cols='#90a5e1', label = F)
+p
 
 # 3.2 Bior_FeatureVlnplot ------------------------------------------------------
 genes <- c("MS4A1", "GNLY", "CD3E", "CD14", "FCER1A", "FCGR3A")
+cols <- pal_d3("category20")(20)
 p <- Bior_FeatureVlnplot(seuratobject, genes, scale=0.8, pt.size=0.5, nrow=2, cols=cols)
 p
 
 
-# 3.3 Bior_DoHeatmap ------------------------------------------------------------
+# 3.3 Bior_DoHeatmap -----------------------------------------------------------
 library(dplyr)
 pbmc.markers <- FindAllMarkers(seuratobject, only.pos = TRUE, min.pct = 0.25, logfc.threshold = 0.25)
 top10 <- pbmc.markers %>% group_by(cluster) %>% top_n(n = 10, wt = avg_log2FC)
-p <- Bior_DoHeatmap(seuratobject, top10$gene, group.colors=cols, group.size=3, gene.label=F,margin=margin(20,20,0,0))
+cols <- pal_d3("category20")(20)
+p <- Bior_DoHeatmap(seuratobject, top10$gene, group.colors=cols, group.size=3, gene.label=F, margin=margin(20,20,0,0))
 p
+
+
+# 3.4 Bior_Featurebox ----------------------------------------------------------
+cols <- pal_d3("category20")(20)
+P <- Bior_Featurebox(seuratobject, feature = 'nFeature_RNA', cols = cols)
+P
+
+
 
 
 # 4 NGS Plot ===================================================================
@@ -88,3 +110,19 @@ p
 
   
   
+# 5 Data analysis ==============================================================
+# 5.1 Bior_Dim2to1 -------------------------------------------------------------
+data <- matrix(c(1:9), nrow = 3, ncol = 3)
+colnames(data) <- c('A','B','C')
+rownames(data) <- c('a','b','c')
+data
+df <- Bior_Dim2to1(data)
+df
+
+
+# Bior_Combn -------------------------------------------------------------------
+inputdata <- c('A','B','C')
+motifs <- Bior_Combn(inputdata)
+motifs
+
+

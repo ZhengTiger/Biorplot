@@ -30,7 +30,7 @@ The HTML output format for this example is bookdown::gitbook,</p>" />
 <meta name="author" content="Zheng Hu" />
 
 
-<meta name="date" content="2022-03-23" />
+<meta name="date" content="2022-04-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -38,7 +38,7 @@ The HTML output format for this example is bookdown::gitbook,</p>" />
   
   
 <link rel="prev" href="scrnaseq-plot.html"/>
-
+<link rel="next" href="data-analysis.html"/>
 <script src="libs/header-attrs-2.13/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -154,16 +154,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.1" data-path="basic-plot.html"><a href="basic-plot.html#bior_sankey"><i class="fa fa-check"></i><b>2.1</b> Bior_Sankey<span></span></a></li>
 <li class="chapter" data-level="2.2" data-path="basic-plot.html"><a href="basic-plot.html#bior_pie"><i class="fa fa-check"></i><b>2.2</b> Bior_pie<span></span></a></li>
 <li class="chapter" data-level="2.3" data-path="basic-plot.html"><a href="basic-plot.html#bior_stackbarplot"><i class="fa fa-check"></i><b>2.3</b> Bior_StackBarplot<span></span></a></li>
+<li class="chapter" data-level="2.4" data-path="basic-plot.html"><a href="basic-plot.html#bior_line"><i class="fa fa-check"></i><b>2.4</b> Bior_Line<span></span></a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="scrnaseq-plot.html"><a href="scrnaseq-plot.html"><i class="fa fa-check"></i><b>3</b> scRNAseq Plot<span></span></a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="scrnaseq-plot.html"><a href="scrnaseq-plot.html#bior_dimplot"><i class="fa fa-check"></i><b>3.1</b> Bior_DimPlot<span></span></a></li>
 <li class="chapter" data-level="3.2" data-path="scrnaseq-plot.html"><a href="scrnaseq-plot.html#bior_featurevlnplot"><i class="fa fa-check"></i><b>3.2</b> Bior_FeatureVlnplot<span></span></a></li>
 <li class="chapter" data-level="3.3" data-path="scrnaseq-plot.html"><a href="scrnaseq-plot.html#bior_doheatmap"><i class="fa fa-check"></i><b>3.3</b> Bior_DoHeatmap<span></span></a></li>
+<li class="chapter" data-level="3.4" data-path="scrnaseq-plot.html"><a href="scrnaseq-plot.html#bior_featurebox"><i class="fa fa-check"></i><b>3.4</b> Bior_Featurebox<span></span></a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="ngs-plot.html"><a href="ngs-plot.html"><i class="fa fa-check"></i><b>4</b> NGS Plot<span></span></a>
 <ul>
 <li class="chapter" data-level="4.1" data-path="ngs-plot.html"><a href="ngs-plot.html#bior_volcano"><i class="fa fa-check"></i><b>4.1</b> Bior_Volcano<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="data-analysis.html"><a href="data-analysis.html"><i class="fa fa-check"></i><b>5</b> Data Analysis<span></span></a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="data-analysis.html"><a href="data-analysis.html#bior_dim2to1"><i class="fa fa-check"></i><b>5.1</b> Bior_Dim2to1<span></span></a></li>
+<li class="chapter" data-level="5.2" data-path="data-analysis.html"><a href="data-analysis.html#bior_combn"><i class="fa fa-check"></i><b>5.2</b> Bior_Combn<span></span></a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -196,7 +203,7 @@ Volcano plot<br />
 <strong>Usage</strong><br />
 Bior_Volcano(gene, logfc, pvalue, label.gene=’‘, label.size=5, logfc.threshold.up=1,
 logfc.threshold.Down=-1, pvalue.threshold=0.01, point.size=2, point.shape= 20,
-fontsize=20, title=’‘, limits.x=c(-10,10), limits.y=c(0,15), legend.position=’right’)<br />
+fontsize=20, title=’‘, limits.x=c(-10,10), limits.y=c(0,15), legend.position=’right,’ color=c(‘#2f5688,’‘#BBBBBB,’‘#CC0000’))<br />
 <strong>Arguments</strong><br />
 * gene: RNAseq gene<br />
 * logfc: RNAseq log2FoldChange<br />
@@ -214,17 +221,18 @@ fontsize=20, title=’‘, limits.x=c(-10,10), limits.y=c(0,15), legend.position
 * limits.y: y-axis range<br />
 * legend.position: legend position, you can choose one in {‘left,’‘top,’‘right,’
 ‘bottom,’‘none’}<br />
+* color: point color<br />
 <strong>Examples</strong><br />
 </p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="ngs-plot.html#cb11-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">&#39;testdata/Bior_Volcano.txt&#39;</span>, <span class="at">header=</span>T)</span>
-<span id="cb11-2"><a href="ngs-plot.html#cb11-2" aria-hidden="true" tabindex="-1"></a>gene <span class="ot">&lt;-</span> data<span class="sc">$</span>Gene</span>
-<span id="cb11-3"><a href="ngs-plot.html#cb11-3" aria-hidden="true" tabindex="-1"></a>logfc <span class="ot">&lt;-</span> data<span class="sc">$</span>log2FoldChange</span>
-<span id="cb11-4"><a href="ngs-plot.html#cb11-4" aria-hidden="true" tabindex="-1"></a>pvalue <span class="ot">&lt;-</span> data<span class="sc">$</span>pvalue</span>
-<span id="cb11-5"><a href="ngs-plot.html#cb11-5" aria-hidden="true" tabindex="-1"></a>label.gene <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;DOK6&#39;</span>,<span class="st">&#39;TBX5&#39;</span>,<span class="st">&#39;EMILIN2&#39;</span>)</span>
-<span id="cb11-6"><a href="ngs-plot.html#cb11-6" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">Bior_Volcano</span>(gene, logfc, pvalue, label.gene, <span class="at">label.size=</span><span class="dv">5</span>, <span class="at">title=</span><span class="st">&quot;Test Bior_Volcano&quot;</span>, </span>
-<span id="cb11-7"><a href="ngs-plot.html#cb11-7" aria-hidden="true" tabindex="-1"></a>                  <span class="at">legend.position=</span><span class="st">&quot;none&quot;</span>, <span class="at">limits.x=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">3</span>,<span class="dv">3</span>),<span class="at">limits.y=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">10</span>))</span>
-<span id="cb11-8"><a href="ngs-plot.html#cb11-8" aria-hidden="true" tabindex="-1"></a>p</span></code></pre></div>
-<p><img src="images/Bior_Volcano.png" /></p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="ngs-plot.html#cb14-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">&#39;testdata/Bior_Volcano.txt&#39;</span>, <span class="at">header=</span>T)</span>
+<span id="cb14-2"><a href="ngs-plot.html#cb14-2" aria-hidden="true" tabindex="-1"></a>gene <span class="ot">&lt;-</span> data<span class="sc">$</span>Gene</span>
+<span id="cb14-3"><a href="ngs-plot.html#cb14-3" aria-hidden="true" tabindex="-1"></a>logfc <span class="ot">&lt;-</span> data<span class="sc">$</span>log2FoldChange</span>
+<span id="cb14-4"><a href="ngs-plot.html#cb14-4" aria-hidden="true" tabindex="-1"></a>pvalue <span class="ot">&lt;-</span> data<span class="sc">$</span>pvalue</span>
+<span id="cb14-5"><a href="ngs-plot.html#cb14-5" aria-hidden="true" tabindex="-1"></a>label.gene <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;DOK6&#39;</span>,<span class="st">&#39;TBX5&#39;</span>,<span class="st">&#39;EMILIN2&#39;</span>)</span>
+<span id="cb14-6"><a href="ngs-plot.html#cb14-6" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">Bior_Volcano</span>(gene, logfc, pvalue, label.gene, <span class="at">label.size=</span><span class="dv">5</span>, <span class="at">title=</span><span class="st">&quot;Test Bior_Volcano&quot;</span>, </span>
+<span id="cb14-7"><a href="ngs-plot.html#cb14-7" aria-hidden="true" tabindex="-1"></a>                  <span class="at">legend.position=</span><span class="st">&quot;none&quot;</span>, <span class="at">limits.x=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">3</span>,<span class="dv">3</span>),<span class="at">limits.y=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">10</span>))</span>
+<span id="cb14-8"><a href="ngs-plot.html#cb14-8" aria-hidden="true" tabindex="-1"></a>p</span></code></pre></div>
+<p><img src="images/4.1%20Bior_Volcano.png" /></p>
 
 </div>
 </div>
@@ -233,8 +241,8 @@ fontsize=20, title=’‘, limits.x=c(-10,10), limits.y=c(0,15), legend.position
           </div>
         </div>
       </div>
-<a href="scrnaseq-plot.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="scrnaseq-plot.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="data-analysis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

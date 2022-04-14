@@ -7,6 +7,7 @@ library(ggrepel)
 
 # some colors
 category20 <- pal_d3("category20")(20)
+two_Y_B <- c('#f8cb7f','#90a5e1')
 
 
 # 2 Basic Plot =================================================================
@@ -41,7 +42,7 @@ Bior_Sankey <- function(links, Nodes.colour=NULL, Nodes.order=NULL, fontSize=12,
     pastecolor <- paste(pastecolor,'"])', sep = '')
     colourScale <- pastecolor
   }
-  # 画图
+  # plot
   links$Group <- links$source
   links$Group <- as.factor(links$Group)
   sank <- sankeyNetwork(Links=links, Nodes=nodes, Source="IDsource", 
@@ -106,26 +107,45 @@ Bior_StackBarplot <- function(data, x.order=NULL, type.order=NULL, col=category2
 }
 
 
+# 2.4 Bior_Line ----------------------------------------------------------------
+Bior_Line <- function(data, line.size=1.5, labs.x='', labs.y='', title='',
+                      text.size=20, title.size=30, legend.position='right',
+                      col=category20, vline=NULL, theme=theme_minimal()){
+  p <- ggplot() +
+    geom_line(aes(x=data[,1], y=data[,2], color=data[,3]), size=line.size) +
+    theme + 
+    labs(x=labs.x,y=labs.y,title=title) +
+    theme(text=element_text(size=text.size), 
+          plot.title=element_text(size=title.size,hjust=0.5),
+          legend.title=element_blank(), legend.position=legend.position) + 
+    scale_color_manual(values = col) + 
+    geom_vline(aes(xintercept= vline),colour="#9192ab",linetype="dashed",size = 1.5)
+  return(p)
+}
+
 
 
 # 3 scRNAseq Plot ==============================================================
 # 3.1 Bior_DimPlot -------------------------------------------------------------
 Bior_DimPlot <- function(seuratobject, reduction="umap", pt.size=1, label = TRUE,
-                         label.size=5, cols = NULL){
+                         label.size=5, cols = NULL, group.by=NULL, legend.key.size=1,
+	         text.size=15,cells.highlight = NULL,cols.highlight='#f8cb7f',
+	         sizes.highlight=1){
   p <- DimPlot(seuratobject, reduction=reduction, pt.size=pt.size, label=label, 
-               label.size=label.size, cols=cols) + 
+               label.size=label.size, cols=cols, group.by=group.by,cells.highlight = cells.highlight,
+	cols.highlight=cols.highlight,sizes.highlight= sizes.highlight) + 
     theme_bw() + 
     theme(panel.grid=element_blank(), panel.border=element_rect(size=1.5), 
-          text=element_text(size=15, face='bold'))
+          text=element_text(size=text.size, face='bold'), legend.key.size=unit(legend.key.size, "cm"))
   return(p)
 }
 
 
 # 3.2 Bior_FeatureVlnplot ------------------------------------------------------
 Bior_FeatureVlnplot <- function(seuratobject, genes, title.size=15, axis.text.size=10,
-                                pt.size=1, nrow=1, scale=1, cols=NULL){
+                                pt.size=1, nrow=1, scale=1, cols=NULL,reduction='umap'){
   two_plot <- function(gene){
-    featureplot <- FeaturePlot(seuratobject, features=c(gene), pt.size=pt.size) +
+    featureplot <- FeaturePlot(seuratobject, features=c(gene), pt.size=pt.size,reduction=reduction) +
       NoLegend() +
       theme(axis.line=element_blank(), axis.text=element_blank(), axis.ticks=element_blank(),
             axis.title=element_blank(), plot.title=element_text(size=title.size))
@@ -155,7 +175,7 @@ Bior_DoHeatmap <- function(seuratobject, features, group.by="ident", group.bar=T
     axis.text.y <- element_blank()
   }
   
-  p <- DoHeatmap(seuratobject, features=top10$gene, group.by=group.by, group.bar=group.bar,
+  p <- DoHeatmap(seuratobject, features=features, group.by=group.by, group.bar=group.bar,
                  group.colors=group.colors, size=group.size, label=group.label) +
     theme(axis.text.y = axis.text.y, 
           plot.margin = margin) +
@@ -165,6 +185,20 @@ Bior_DoHeatmap <- function(seuratobject, features, group.by="ident", group.bar=T
 }
 
 
+# 3.4 Bior_Featurebox ----------------------------------------------------------
+Bior_Featurebox <- function(seuratobject, feature, text.size=18, hline.min=NULL, 
+                            hline.size=NA, cols=NULL){
+  p <- VlnPlot(seuratobject, feature=feature, adjust=0, pt.size=0, cols=cols) + 
+    geom_boxplot() +
+    geom_hline(yintercept=hline.min, colour="dimgray", linetype="dashed",size=hline.size)+
+    theme_bw() + 
+    labs(x='') +
+    theme(panel.border=element_rect(size=1.5) ,text = element_text(size = text.size, face='bold'),
+          plot.title = element_text(hjust = 0.5)) +
+    coord_flip() +
+    NoLegend()
+  return(p)
+}
 
 
 # 4 NGS Plot ===================================================================
@@ -172,7 +206,8 @@ Bior_DoHeatmap <- function(seuratobject, features, group.by="ident", group.bar=T
 Bior_Volcano <- function(gene, logfc, pvalue, label.gene='',label.size=5, logfc.threshold.up=1, 
                          logfc.threshold.Down=-1, pvalue.threshold=0.01, point.size=2, 
                          point.shape= 20, fontsize=20, title='', limits.x=c(-10,10), 
-                         limits.y=c(0,15), legend.position='right'){
+                         limits.y=c(0,15), legend.position='right', 
+                         color=c('#2f5688','#BBBBBB','#CC0000')){
   # adjust data format
   deg.data <- data.frame(gene=gene, logfc=logfc, pvalue=pvalue)
   deg.data$logpv <- -log10(deg.data$pvalue)
@@ -194,7 +229,7 @@ Bior_Volcano <- function(gene, logfc, pvalue, label.gene='',label.size=5, logfc.
     theme(text=element_text(size=fontsize), plot.title=element_text(hjust = 0.5),
           legend.title=element_blank(), legend.position=legend.position, 
           panel.grid=element_blank()) +
-    scale_color_manual(values = c('#2f5688','#BBBBBB','#CC0000')) + 
+    scale_color_manual(values = color) + 
     scale_x_continuous(limits=limits.x) +
     scale_y_continuous(limits=limits.y)
 }
@@ -203,4 +238,32 @@ Bior_Volcano <- function(gene, logfc, pvalue, label.gene='',label.size=5, logfc.
 
 
 
+# 5 Data analysis ==============================================================
+# 5.1 Bior_Dim2to1 -------------------------------------------------------------
+Bior_Dim2to1 <- function(data){
+  row_vectory <- c()
+  col_vectory <- c()
+  value <- c()
+  for (i in 1:dim(data)[1]){
+    for (j in 1:dim(data)[2]){
+      row_vectory <- c(row_vectory,rownames(data)[i])
+      col_vectory <- c(col_vectory,colnames(data)[j])
+      value <- c(value,data[i,j])
+    }
+  }
+  df <- data.frame('row'=row_vectory,'col'=col_vectory,'value'=value)
+  return(df)
+}
 
+
+# 5.2 Bior_Combn ---------------------------------------------------------------
+Bior_Combn <- function(inputdata){
+  motifs <- c()
+  for (i in 1:length(inputdata)){
+    combi <- combn(inputdata,i)
+    for (j in 1:dim(combi)[2]){
+      motifs <- c(motifs,paste(combi[,j],collapse='+'))
+    }
+  }
+  return(motifs)
+}

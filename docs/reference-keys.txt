@@ -5,9 +5,14 @@ basic-plot
 bior_sankey
 bior_pie
 bior_stackbarplot
+bior_line
 scrnaseq-plot
 bior_dimplot
 bior_featurevlnplot
 bior_doheatmap
+bior_featurebox
 ngs-plot
 bior_volcano
+data-analysis
+bior_dim2to1
+bior_combn

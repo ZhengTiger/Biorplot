@@ -30,7 +30,7 @@ The HTML output format for this example is bookdown::gitbook,</p>" />
 <meta name="author" content="Zheng Hu" />
 
 
-<meta name="date" content="2022-04-14" />
+<meta name="date" content="2022-04-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -155,6 +155,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.2" data-path="basic-plot.html"><a href="basic-plot.html#bior_pie"><i class="fa fa-check"></i><b>2.2</b> Bior_pie<span></span></a></li>
 <li class="chapter" data-level="2.3" data-path="basic-plot.html"><a href="basic-plot.html#bior_stackbarplot"><i class="fa fa-check"></i><b>2.3</b> Bior_StackBarplot<span></span></a></li>
 <li class="chapter" data-level="2.4" data-path="basic-plot.html"><a href="basic-plot.html#bior_line"><i class="fa fa-check"></i><b>2.4</b> Bior_Line<span></span></a></li>
+<li class="chapter" data-level="2.5" data-path="basic-plot.html"><a href="basic-plot.html#bior_dotplot"><i class="fa fa-check"></i><b>2.5</b> Bior_Dotplot<span></span></a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="scrnaseq-plot.html"><a href="scrnaseq-plot.html"><i class="fa fa-check"></i><b>3</b> scRNAseq Plot<span></span></a>
 <ul>
@@ -162,6 +163,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.2" data-path="scrnaseq-plot.html"><a href="scrnaseq-plot.html#bior_featurevlnplot"><i class="fa fa-check"></i><b>3.2</b> Bior_FeatureVlnplot<span></span></a></li>
 <li class="chapter" data-level="3.3" data-path="scrnaseq-plot.html"><a href="scrnaseq-plot.html#bior_doheatmap"><i class="fa fa-check"></i><b>3.3</b> Bior_DoHeatmap<span></span></a></li>
 <li class="chapter" data-level="3.4" data-path="scrnaseq-plot.html"><a href="scrnaseq-plot.html#bior_featurebox"><i class="fa fa-check"></i><b>3.4</b> Bior_Featurebox<span></span></a></li>
+<li class="chapter" data-level="3.5" data-path="scrnaseq-plot.html"><a href="scrnaseq-plot.html#bior_stackvlnplot"><i class="fa fa-check"></i><b>3.5</b> Bior_StackVlnplot<span></span></a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="ngs-plot.html"><a href="ngs-plot.html"><i class="fa fa-check"></i><b>4</b> NGS Plot<span></span></a>
 <ul>
@@ -206,26 +208,26 @@ Bior_Dim2to1(data)<br />
 * data: a two-dimensional dataframe<br />
 <strong>Examples</strong><br />
 </p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="data-analysis.html#cb15-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>), <span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">ncol =</span> <span class="dv">3</span>)</span>
-<span id="cb15-2"><a href="data-analysis.html#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(data) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;A&#39;</span>,<span class="st">&#39;B&#39;</span>,<span class="st">&#39;C&#39;</span>)</span>
-<span id="cb15-3"><a href="data-analysis.html#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(data) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;a&#39;</span>,<span class="st">&#39;b&#39;</span>,<span class="st">&#39;c&#39;</span>)</span>
-<span id="cb15-4"><a href="data-analysis.html#cb15-4" aria-hidden="true" tabindex="-1"></a>data</span>
-<span id="cb15-5"><a href="data-analysis.html#cb15-5" aria-hidden="true" tabindex="-1"></a>  A B C</span>
-<span id="cb15-6"><a href="data-analysis.html#cb15-6" aria-hidden="true" tabindex="-1"></a>a <span class="dv">1</span> <span class="dv">4</span> <span class="dv">7</span></span>
-<span id="cb15-7"><a href="data-analysis.html#cb15-7" aria-hidden="true" tabindex="-1"></a>b <span class="dv">2</span> <span class="dv">5</span> <span class="dv">8</span></span>
-<span id="cb15-8"><a href="data-analysis.html#cb15-8" aria-hidden="true" tabindex="-1"></a>c <span class="dv">3</span> <span class="dv">6</span> <span class="dv">9</span></span>
-<span id="cb15-9"><a href="data-analysis.html#cb15-9" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">Bior_Dim2to1</span>(data)</span>
-<span id="cb15-10"><a href="data-analysis.html#cb15-10" aria-hidden="true" tabindex="-1"></a>df</span>
-<span id="cb15-11"><a href="data-analysis.html#cb15-11" aria-hidden="true" tabindex="-1"></a>   row col value</span>
-<span id="cb15-12"><a href="data-analysis.html#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>   a   A     <span class="dv">1</span></span>
-<span id="cb15-13"><a href="data-analysis.html#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span>   a   B     <span class="dv">4</span></span>
-<span id="cb15-14"><a href="data-analysis.html#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span>   a   C     <span class="dv">7</span></span>
-<span id="cb15-15"><a href="data-analysis.html#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span>   b   A     <span class="dv">2</span></span>
-<span id="cb15-16"><a href="data-analysis.html#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span>   b   B     <span class="dv">5</span></span>
-<span id="cb15-17"><a href="data-analysis.html#cb15-17" aria-hidden="true" tabindex="-1"></a><span class="dv">6</span>   b   C     <span class="dv">8</span></span>
-<span id="cb15-18"><a href="data-analysis.html#cb15-18" aria-hidden="true" tabindex="-1"></a><span class="dv">7</span>   c   A     <span class="dv">3</span></span>
-<span id="cb15-19"><a href="data-analysis.html#cb15-19" aria-hidden="true" tabindex="-1"></a><span class="dv">8</span>   c   B     <span class="dv">6</span></span>
-<span id="cb15-20"><a href="data-analysis.html#cb15-20" aria-hidden="true" tabindex="-1"></a><span class="dv">9</span>   c   C     <span class="dv">9</span></span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="data-analysis.html#cb17-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>), <span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">ncol =</span> <span class="dv">3</span>)</span>
+<span id="cb17-2"><a href="data-analysis.html#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(data) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;A&#39;</span>,<span class="st">&#39;B&#39;</span>,<span class="st">&#39;C&#39;</span>)</span>
+<span id="cb17-3"><a href="data-analysis.html#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(data) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;a&#39;</span>,<span class="st">&#39;b&#39;</span>,<span class="st">&#39;c&#39;</span>)</span>
+<span id="cb17-4"><a href="data-analysis.html#cb17-4" aria-hidden="true" tabindex="-1"></a>data</span>
+<span id="cb17-5"><a href="data-analysis.html#cb17-5" aria-hidden="true" tabindex="-1"></a>  A B C</span>
+<span id="cb17-6"><a href="data-analysis.html#cb17-6" aria-hidden="true" tabindex="-1"></a>a <span class="dv">1</span> <span class="dv">4</span> <span class="dv">7</span></span>
+<span id="cb17-7"><a href="data-analysis.html#cb17-7" aria-hidden="true" tabindex="-1"></a>b <span class="dv">2</span> <span class="dv">5</span> <span class="dv">8</span></span>
+<span id="cb17-8"><a href="data-analysis.html#cb17-8" aria-hidden="true" tabindex="-1"></a>c <span class="dv">3</span> <span class="dv">6</span> <span class="dv">9</span></span>
+<span id="cb17-9"><a href="data-analysis.html#cb17-9" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">Bior_Dim2to1</span>(data)</span>
+<span id="cb17-10"><a href="data-analysis.html#cb17-10" aria-hidden="true" tabindex="-1"></a>df</span>
+<span id="cb17-11"><a href="data-analysis.html#cb17-11" aria-hidden="true" tabindex="-1"></a>   row col value</span>
+<span id="cb17-12"><a href="data-analysis.html#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>   a   A     <span class="dv">1</span></span>
+<span id="cb17-13"><a href="data-analysis.html#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span>   a   B     <span class="dv">4</span></span>
+<span id="cb17-14"><a href="data-analysis.html#cb17-14" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span>   a   C     <span class="dv">7</span></span>
+<span id="cb17-15"><a href="data-analysis.html#cb17-15" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span>   b   A     <span class="dv">2</span></span>
+<span id="cb17-16"><a href="data-analysis.html#cb17-16" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span>   b   B     <span class="dv">5</span></span>
+<span id="cb17-17"><a href="data-analysis.html#cb17-17" aria-hidden="true" tabindex="-1"></a><span class="dv">6</span>   b   C     <span class="dv">8</span></span>
+<span id="cb17-18"><a href="data-analysis.html#cb17-18" aria-hidden="true" tabindex="-1"></a><span class="dv">7</span>   c   A     <span class="dv">3</span></span>
+<span id="cb17-19"><a href="data-analysis.html#cb17-19" aria-hidden="true" tabindex="-1"></a><span class="dv">8</span>   c   B     <span class="dv">6</span></span>
+<span id="cb17-20"><a href="data-analysis.html#cb17-20" aria-hidden="true" tabindex="-1"></a><span class="dv">9</span>   c   C     <span class="dv">9</span></span></code></pre></div>
 </div>
 <div id="bior_combn" class="section level2 hasAnchor" number="5.2">
 <h2><span class="header-section-number">5.2</span> Bior_Combn<a href="data-analysis.html#bior_combn" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -237,10 +239,10 @@ Bior_Combn(inputdata)<br />
 * inputdata: a vector<br />
 <strong>Examples</strong><br />
 </p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="data-analysis.html#cb16-1" aria-hidden="true" tabindex="-1"></a>inputdata <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;A&#39;</span>,<span class="st">&#39;B&#39;</span>,<span class="st">&#39;C&#39;</span>)</span>
-<span id="cb16-2"><a href="data-analysis.html#cb16-2" aria-hidden="true" tabindex="-1"></a>motifs <span class="ot">&lt;-</span> <span class="fu">Bior_Combn</span>(inputdata)</span>
-<span id="cb16-3"><a href="data-analysis.html#cb16-3" aria-hidden="true" tabindex="-1"></a>motifs</span>
-<span id="cb16-4"><a href="data-analysis.html#cb16-4" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">&quot;A&quot;</span>     <span class="st">&quot;B&quot;</span>     <span class="st">&quot;C&quot;</span>     <span class="st">&quot;A+B&quot;</span>   <span class="st">&quot;A+C&quot;</span>   <span class="st">&quot;B+C&quot;</span>   <span class="st">&quot;A+B+C&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="data-analysis.html#cb18-1" aria-hidden="true" tabindex="-1"></a>inputdata <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;A&#39;</span>,<span class="st">&#39;B&#39;</span>,<span class="st">&#39;C&#39;</span>)</span>
+<span id="cb18-2"><a href="data-analysis.html#cb18-2" aria-hidden="true" tabindex="-1"></a>motifs <span class="ot">&lt;-</span> <span class="fu">Bior_Combn</span>(inputdata)</span>
+<span id="cb18-3"><a href="data-analysis.html#cb18-3" aria-hidden="true" tabindex="-1"></a>motifs</span>
+<span id="cb18-4"><a href="data-analysis.html#cb18-4" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">&quot;A&quot;</span>     <span class="st">&quot;B&quot;</span>     <span class="st">&quot;C&quot;</span>     <span class="st">&quot;A+B&quot;</span>   <span class="st">&quot;A+C&quot;</span>   <span class="st">&quot;B+C&quot;</span>   <span class="st">&quot;A+B+C&quot;</span></span></code></pre></div>
 
 </div>
 </div>

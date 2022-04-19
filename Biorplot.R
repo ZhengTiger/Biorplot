@@ -124,6 +124,27 @@ Bior_Line <- function(data, line.size=1.5, labs.x='', labs.y='', title='',
 }
 
 
+# 2.5 Bior_Dotplot -------------------------------------------------------------
+Bior_Dotplot <- function(x, y, size, group.by, colour=NULL, max_size=5, text.size=15,
+                         breaks=waiver(), theme=theme_bw(), labs.x='',
+                         labs.y='', title='', legendtitle.color='Types',
+                         legendtitle.size='Value'){
+  if (is.null(colour)){
+    colour <- hue_pal()(length(unique(df$col)))
+  }else{
+    colour <- colour
+  }
+  p <- ggplot(df) + 
+    geom_point(aes(x = x, y = y, size = size, colour = group.by)) +
+    scale_size_area(max_size = max_size, breaks = breaks) +
+    scale_color_manual(values = colour) +
+    theme +
+    theme(plot.title = element_text(hjust = 0.5), text=element_text(size=text.size)) +
+    labs(x=labs.x, y=labs.y, title=title) +
+    guides(color=guide_legend(legendtitle.color), size=guide_legend(legendtitle.size))
+  return(p)
+}
+
 
 # 3 scRNAseq Plot ==============================================================
 # 3.1 Bior_DimPlot -------------------------------------------------------------
@@ -199,6 +220,38 @@ Bior_Featurebox <- function(seuratobject, feature, text.size=18, hline.min=NULL,
     NoLegend()
   return(p)
 }
+
+
+# 3.5 Bior_StackVlnplot --------------------------------------------------------
+Bior_StackVlnplot <- function(seuratobject, gene, fontsize = 10, cols = NULL){
+  plist <- list()
+  for (i in 1:length(gene)){
+    if (i==length(gene)){
+      axis.text.x <- element_text(angle=45, hjust=1, size=fontsize, colour='black')
+    }else{
+      axis.text.x <- element_blank()
+    }
+    plist[[i]] <- VlnPlot(seuratobject, features = gene[i], pt.size = 0, cols = cols) +
+      theme_tufte() +
+      theme(axis.title.x = element_blank(), 
+            axis.title.y = element_text(angle = 0, vjust = 0.5, size = fontsize),
+            axis.text.x = axis.text.x, axis.text.y = element_blank(),
+            axis.ticks = element_blank(), plot.title = element_blank(),
+            plot.margin = unit(c(0, 0, 0, 0), "lines")) + 
+      labs(y = gene[i]) +
+      stat_summary(fun = "median", geom = "point", size = 1) +
+      NoLegend()
+    if (i == 1){
+      p <- plist[[1]]
+    }else{
+      p <- p + plist[[i]]
+    }
+  }
+  return(p)
+}
+
+
+
 
 
 # 4 NGS Plot ===================================================================

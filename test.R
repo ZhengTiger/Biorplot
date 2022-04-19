@@ -51,6 +51,18 @@ p <- Bior_Line(data, title = 'Test Bior_Line', col = col)
 p
 
 
+# 2.5 Bior_Dotplot -------------------------------------------------------------
+data <- data.frame(matrix(rnorm(20, mean = 10, sd = 5),c(4,5)))
+data <- round(data)
+rownames(data) <- paste('gene',1:4, sep='')
+colnames(data) <- paste('sample',1:5,sep='')
+df <- Bior_Dim2to1(data)
+df
+colour <- pal_d3("category20")(20)
+p <- Bior_Dotplot(x=df$col, y=df$row, size=df$value, group.by=df$col, colour=colour, max_size=10)
+p
+
+
 
 
 
@@ -93,6 +105,12 @@ cols <- pal_d3("category20")(20)
 P <- Bior_Featurebox(seuratobject, feature = 'nFeature_RNA', cols = cols)
 P
 
+
+# 3.5 Bior_StackVlnplot --------------------------------------------------------
+gene <- c("MS4A1", "GNLY", "CD3E", "CD14", "FCER1A", "FCGR3A")
+cols <- pal_d3("category20")(20)
+P <- Bior_StackVlnplot(seuratobject, gene = gene, cols = cols)
+P
 
 
 

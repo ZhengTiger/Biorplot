@@ -30,7 +30,7 @@ The HTML output format for this example is bookdown::gitbook,</p>" />
 <meta name="author" content="Zheng Hu" />
 
 
-<meta name="date" content="2022-04-14" />
+<meta name="date" content="2022-04-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -155,6 +155,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.2" data-path="basic-plot.html"><a href="basic-plot.html#bior_pie"><i class="fa fa-check"></i><b>2.2</b> Bior_pie<span></span></a></li>
 <li class="chapter" data-level="2.3" data-path="basic-plot.html"><a href="basic-plot.html#bior_stackbarplot"><i class="fa fa-check"></i><b>2.3</b> Bior_StackBarplot<span></span></a></li>
 <li class="chapter" data-level="2.4" data-path="basic-plot.html"><a href="basic-plot.html#bior_line"><i class="fa fa-check"></i><b>2.4</b> Bior_Line<span></span></a></li>
+<li class="chapter" data-level="2.5" data-path="basic-plot.html"><a href="basic-plot.html#bior_dotplot"><i class="fa fa-check"></i><b>2.5</b> Bior_Dotplot<span></span></a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="scrnaseq-plot.html"><a href="scrnaseq-plot.html"><i class="fa fa-check"></i><b>3</b> scRNAseq Plot<span></span></a>
 <ul>
@@ -162,6 +163,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.2" data-path="scrnaseq-plot.html"><a href="scrnaseq-plot.html#bior_featurevlnplot"><i class="fa fa-check"></i><b>3.2</b> Bior_FeatureVlnplot<span></span></a></li>
 <li class="chapter" data-level="3.3" data-path="scrnaseq-plot.html"><a href="scrnaseq-plot.html#bior_doheatmap"><i class="fa fa-check"></i><b>3.3</b> Bior_DoHeatmap<span></span></a></li>
 <li class="chapter" data-level="3.4" data-path="scrnaseq-plot.html"><a href="scrnaseq-plot.html#bior_featurebox"><i class="fa fa-check"></i><b>3.4</b> Bior_Featurebox<span></span></a></li>
+<li class="chapter" data-level="3.5" data-path="scrnaseq-plot.html"><a href="scrnaseq-plot.html#bior_stackvlnplot"><i class="fa fa-check"></i><b>3.5</b> Bior_StackVlnplot<span></span></a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="ngs-plot.html"><a href="ngs-plot.html"><i class="fa fa-check"></i><b>4</b> NGS Plot<span></span></a>
 <ul>
@@ -325,6 +327,61 @@ Bior_Line(data, line.size=1.5, labs.x=’‘, labs.y=’‘, title=’‘, text.
 <span id="cb7-3"><a href="basic-plot.html#cb7-3" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">Bior_Line</span>(data, <span class="at">title =</span> <span class="st">&#39;Test Bior_Line&#39;</span>, <span class="at">col =</span> col)</span>
 <span id="cb7-4"><a href="basic-plot.html#cb7-4" aria-hidden="true" tabindex="-1"></a>p</span></code></pre></div>
 <p><img src="images/2.4%20Bior_Line.png" /></p>
+</div>
+<div id="bior_dotplot" class="section level2 hasAnchor" number="2.5">
+<h2><span class="header-section-number">2.5</span> Bior_Dotplot<a href="basic-plot.html#bior_dotplot" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>Description</strong><br />
+Dot plot based on ggplot<br />
+<strong>Usage</strong><br />
+Bior_Dotplot(x, y, size, group.by, colour=NULL, max_size=5, text.size=15, breaks=waiver(), theme=theme_bw(), labs.x=’‘, labs.y=’‘, title=’‘, legendtitle.color=’Types,’ legendtitle.size=‘Value’)<br />
+<strong>Arguments</strong><br />
+* x: A vector, x-axis value<br />
+* y: A vector, y-axis value<br />
+* size: A vector, point size value<br />
+* group.by: color group by x or y<br />
+* colour: colour<br />
+* max_size: max point size<br />
+* text.size: text size<br />
+* breaks: scale_size_area(breaks)<br />
+* theme: choose ggthemes, default:theme_bw()<br />
+* labs.x: labs x<br />
+* labs.y: labs y<br />
+* title: title<br />
+* legendtitle.color: guides(color=guide_legend(legendtitle.color))<br />
+* legendtitle.size: guides(size=guide_legend(legendtitle.size))<br />
+<strong>Examples</strong><br />
+</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="basic-plot.html#cb8-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">matrix</span>(<span class="fu">rnorm</span>(<span class="dv">20</span>, <span class="at">mean =</span> <span class="dv">10</span>, <span class="at">sd =</span> <span class="dv">5</span>),<span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">5</span>)))</span>
+<span id="cb8-2"><a href="basic-plot.html#cb8-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">round</span>(data)</span>
+<span id="cb8-3"><a href="basic-plot.html#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(data) <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">&#39;gene&#39;</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">sep=</span><span class="st">&#39;&#39;</span>)</span>
+<span id="cb8-4"><a href="basic-plot.html#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(data) <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">&#39;sample&#39;</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,<span class="at">sep=</span><span class="st">&#39;&#39;</span>)</span>
+<span id="cb8-5"><a href="basic-plot.html#cb8-5" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">Bior_Dim2to1</span>(data)</span>
+<span id="cb8-6"><a href="basic-plot.html#cb8-6" aria-hidden="true" tabindex="-1"></a>df</span>
+<span id="cb8-7"><a href="basic-plot.html#cb8-7" aria-hidden="true" tabindex="-1"></a>     row     col value</span>
+<span id="cb8-8"><a href="basic-plot.html#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>  gene1 sample1    <span class="dv">12</span></span>
+<span id="cb8-9"><a href="basic-plot.html#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span>  gene1 sample2     <span class="dv">8</span></span>
+<span id="cb8-10"><a href="basic-plot.html#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span>  gene1 sample3     <span class="dv">7</span></span>
+<span id="cb8-11"><a href="basic-plot.html#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span>  gene1 sample4     <span class="dv">3</span></span>
+<span id="cb8-12"><a href="basic-plot.html#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span>  gene1 sample5     <span class="dv">8</span></span>
+<span id="cb8-13"><a href="basic-plot.html#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="dv">6</span>  gene2 sample1    <span class="dv">14</span></span>
+<span id="cb8-14"><a href="basic-plot.html#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="dv">7</span>  gene2 sample2    <span class="dv">10</span></span>
+<span id="cb8-15"><a href="basic-plot.html#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="dv">8</span>  gene2 sample3    <span class="dv">23</span></span>
+<span id="cb8-16"><a href="basic-plot.html#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="dv">9</span>  gene2 sample4     <span class="dv">7</span></span>
+<span id="cb8-17"><a href="basic-plot.html#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span> gene2 sample5    <span class="dv">17</span></span>
+<span id="cb8-18"><a href="basic-plot.html#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="dv">11</span> gene3 sample1     <span class="dv">6</span></span>
+<span id="cb8-19"><a href="basic-plot.html#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="dv">12</span> gene3 sample2     <span class="dv">4</span></span>
+<span id="cb8-20"><a href="basic-plot.html#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="dv">13</span> gene3 sample3     <span class="dv">7</span></span>
+<span id="cb8-21"><a href="basic-plot.html#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="dv">14</span> gene3 sample4     <span class="dv">8</span></span>
+<span id="cb8-22"><a href="basic-plot.html#cb8-22" aria-hidden="true" tabindex="-1"></a><span class="dv">15</span> gene3 sample5    <span class="dv">10</span></span>
+<span id="cb8-23"><a href="basic-plot.html#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="dv">16</span> gene4 sample1    <span class="dv">14</span></span>
+<span id="cb8-24"><a href="basic-plot.html#cb8-24" aria-hidden="true" tabindex="-1"></a><span class="dv">17</span> gene4 sample2    <span class="sc">-</span><span class="dv">1</span></span>
+<span id="cb8-25"><a href="basic-plot.html#cb8-25" aria-hidden="true" tabindex="-1"></a><span class="dv">18</span> gene4 sample3    <span class="dv">16</span></span>
+<span id="cb8-26"><a href="basic-plot.html#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="dv">19</span> gene4 sample4    <span class="dv">12</span></span>
+<span id="cb8-27"><a href="basic-plot.html#cb8-27" aria-hidden="true" tabindex="-1"></a><span class="dv">20</span> gene4 sample5     <span class="dv">8</span></span>
+<span id="cb8-28"><a href="basic-plot.html#cb8-28" aria-hidden="true" tabindex="-1"></a>colour <span class="ot">&lt;-</span> <span class="fu">pal_d3</span>(<span class="st">&quot;category20&quot;</span>)(<span class="dv">20</span>)</span>
+<span id="cb8-29"><a href="basic-plot.html#cb8-29" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">Bior_Dotplot</span>(<span class="at">x=</span>df<span class="sc">$</span>col, <span class="at">y=</span>df<span class="sc">$</span>row, <span class="at">size=</span>df<span class="sc">$</span>value, <span class="at">group.by=</span>df<span class="sc">$</span>col, <span class="at">colour=</span>colour, <span class="at">max_size=</span><span class="dv">10</span>)</span>
+<span id="cb8-30"><a href="basic-plot.html#cb8-30" aria-hidden="true" tabindex="-1"></a>p</span></code></pre></div>
+<p><img src="images/2.5%20Bior_Dotplot.png" /></p>
 
 </div>
 </div>

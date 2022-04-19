@@ -30,7 +30,7 @@ The HTML output format for this example is bookdown::gitbook,</p>" />
 <meta name="author" content="Zheng Hu" />
 
 
-<meta name="date" content="2022-04-14" />
+<meta name="date" content="2022-04-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -155,6 +155,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.2" data-path="basic-plot.html"><a href="basic-plot.html#bior_pie"><i class="fa fa-check"></i><b>2.2</b> Bior_pie<span></span></a></li>
 <li class="chapter" data-level="2.3" data-path="basic-plot.html"><a href="basic-plot.html#bior_stackbarplot"><i class="fa fa-check"></i><b>2.3</b> Bior_StackBarplot<span></span></a></li>
 <li class="chapter" data-level="2.4" data-path="basic-plot.html"><a href="basic-plot.html#bior_line"><i class="fa fa-check"></i><b>2.4</b> Bior_Line<span></span></a></li>
+<li class="chapter" data-level="2.5" data-path="basic-plot.html"><a href="basic-plot.html#bior_dotplot"><i class="fa fa-check"></i><b>2.5</b> Bior_Dotplot<span></span></a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="scrnaseq-plot.html"><a href="scrnaseq-plot.html"><i class="fa fa-check"></i><b>3</b> scRNAseq Plot<span></span></a>
 <ul>
@@ -162,6 +163,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.2" data-path="scrnaseq-plot.html"><a href="scrnaseq-plot.html#bior_featurevlnplot"><i class="fa fa-check"></i><b>3.2</b> Bior_FeatureVlnplot<span></span></a></li>
 <li class="chapter" data-level="3.3" data-path="scrnaseq-plot.html"><a href="scrnaseq-plot.html#bior_doheatmap"><i class="fa fa-check"></i><b>3.3</b> Bior_DoHeatmap<span></span></a></li>
 <li class="chapter" data-level="3.4" data-path="scrnaseq-plot.html"><a href="scrnaseq-plot.html#bior_featurebox"><i class="fa fa-check"></i><b>3.4</b> Bior_Featurebox<span></span></a></li>
+<li class="chapter" data-level="3.5" data-path="scrnaseq-plot.html"><a href="scrnaseq-plot.html#bior_stackvlnplot"><i class="fa fa-check"></i><b>3.5</b> Bior_StackVlnplot<span></span></a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="ngs-plot.html"><a href="ngs-plot.html"><i class="fa fa-check"></i><b>4</b> NGS Plot<span></span></a>
 <ul>
@@ -197,11 +199,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Some plots commonly used in scRNAseq analysis.<br />
 The test data used in Examples is <a href="https://satijalab.org/seurat/archive/v3.1/pbmc3k_tutorial.html">Seurat Tutorial Data</a><br />
 </p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="scrnaseq-plot.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># first you should install and library Seurat packages</span></span>
-<span id="cb8-2"><a href="scrnaseq-plot.html#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;Seurat&quot;</span>) </span>
-<span id="cb8-3"><a href="scrnaseq-plot.html#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Seurat)</span>
-<span id="cb8-4"><a href="scrnaseq-plot.html#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># load test data</span></span>
-<span id="cb8-5"><a href="scrnaseq-plot.html#cb8-5" aria-hidden="true" tabindex="-1"></a>seuratobject <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;testdata/pbmc3k_final.rds&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="scrnaseq-plot.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># first you should install and library Seurat packages</span></span>
+<span id="cb9-2"><a href="scrnaseq-plot.html#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;Seurat&quot;</span>) </span>
+<span id="cb9-3"><a href="scrnaseq-plot.html#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Seurat)</span>
+<span id="cb9-4"><a href="scrnaseq-plot.html#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># load test data</span></span>
+<span id="cb9-5"><a href="scrnaseq-plot.html#cb9-5" aria-hidden="true" tabindex="-1"></a>seuratobject <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;testdata/pbmc3k_final.rds&quot;</span>)</span></code></pre></div>
 <div id="bior_dimplot" class="section level2 hasAnchor" number="3.1">
 <h2><span class="header-section-number">3.1</span> Bior_DimPlot<a href="scrnaseq-plot.html#bior_dimplot" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><strong>Description</strong><br />
@@ -222,15 +224,15 @@ Bior_DimPlot(seuratobject, reduction=“umap,” pt.size=1, label = TRUE, label.
 * cols.highlight: A vector of colors to highlight the cells as<br />
 * sizes.highlight: Size of highlighted cells<br />
 <strong>Examples</strong></p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="scrnaseq-plot.html#cb9-1" aria-hidden="true" tabindex="-1"></a>cols <span class="ot">&lt;-</span> <span class="fu">pal_d3</span>(<span class="st">&quot;category20&quot;</span>)(<span class="dv">20</span>)</span>
-<span id="cb9-2"><a href="scrnaseq-plot.html#cb9-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">Bior_DimPlot</span>(seuratobject, <span class="at">reduction=</span><span class="st">&#39;umap&#39;</span>, <span class="at">cols =</span> cols)</span>
-<span id="cb9-3"><a href="scrnaseq-plot.html#cb9-3" aria-hidden="true" tabindex="-1"></a>p</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="scrnaseq-plot.html#cb10-1" aria-hidden="true" tabindex="-1"></a>cols <span class="ot">&lt;-</span> <span class="fu">pal_d3</span>(<span class="st">&quot;category20&quot;</span>)(<span class="dv">20</span>)</span>
+<span id="cb10-2"><a href="scrnaseq-plot.html#cb10-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">Bior_DimPlot</span>(seuratobject, <span class="at">reduction=</span><span class="st">&#39;umap&#39;</span>, <span class="at">cols =</span> cols)</span>
+<span id="cb10-3"><a href="scrnaseq-plot.html#cb10-3" aria-hidden="true" tabindex="-1"></a>p</span></code></pre></div>
 <p><img src="images/3.1.1%20Bior_DimPlot.png" /></p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="scrnaseq-plot.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># highlight cell</span></span>
-<span id="cb10-2"><a href="scrnaseq-plot.html#cb10-2" aria-hidden="true" tabindex="-1"></a>highlight_cell <span class="ot">&lt;-</span> <span class="fu">names</span>(seuratobject<span class="sc">@</span>active.ident)[<span class="fu">which</span>(seuratobject<span class="sc">@</span>active.ident<span class="sc">==</span><span class="st">&#39;Naive CD4 T&#39;</span>)]</span>
-<span id="cb10-3"><a href="scrnaseq-plot.html#cb10-3" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">Bior_DimPlot</span>(seuratobject, <span class="at">reduction=</span><span class="st">&#39;umap&#39;</span>, <span class="at">text.size=</span><span class="dv">20</span>, <span class="at">cells.highlight=</span>highlight_cell,</span>
-<span id="cb10-4"><a href="scrnaseq-plot.html#cb10-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">cols.highlight=</span><span class="st">&#39;#f8cb7f&#39;</span>, <span class="at">sizes.highlight=</span><span class="dv">1</span>, <span class="at">pt.size=</span><span class="dv">1</span>, <span class="at">cols=</span><span class="st">&#39;#90a5e1&#39;</span>, <span class="at">label =</span> F)</span>
-<span id="cb10-5"><a href="scrnaseq-plot.html#cb10-5" aria-hidden="true" tabindex="-1"></a>p</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="scrnaseq-plot.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># highlight cell</span></span>
+<span id="cb11-2"><a href="scrnaseq-plot.html#cb11-2" aria-hidden="true" tabindex="-1"></a>highlight_cell <span class="ot">&lt;-</span> <span class="fu">names</span>(seuratobject<span class="sc">@</span>active.ident)[<span class="fu">which</span>(seuratobject<span class="sc">@</span>active.ident<span class="sc">==</span><span class="st">&#39;Naive CD4 T&#39;</span>)]</span>
+<span id="cb11-3"><a href="scrnaseq-plot.html#cb11-3" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">Bior_DimPlot</span>(seuratobject, <span class="at">reduction=</span><span class="st">&#39;umap&#39;</span>, <span class="at">text.size=</span><span class="dv">20</span>, <span class="at">cells.highlight=</span>highlight_cell,</span>
+<span id="cb11-4"><a href="scrnaseq-plot.html#cb11-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">cols.highlight=</span><span class="st">&#39;#f8cb7f&#39;</span>, <span class="at">sizes.highlight=</span><span class="dv">1</span>, <span class="at">pt.size=</span><span class="dv">1</span>, <span class="at">cols=</span><span class="st">&#39;#90a5e1&#39;</span>, <span class="at">label =</span> F)</span>
+<span id="cb11-5"><a href="scrnaseq-plot.html#cb11-5" aria-hidden="true" tabindex="-1"></a>p</span></code></pre></div>
 <p><img src="images/3.1.2%20Bior_DimPlot.png" /></p>
 </div>
 <div id="bior_featurevlnplot" class="section level2 hasAnchor" number="3.2">
@@ -251,10 +253,10 @@ Bior_FeatureVlnplot(seuratobject, genes, title.size=15, axis.text.size=10, pt.si
 * reduction: Choose “umap” or “tsne”<br />
 <strong>Examples</strong><br />
 </p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="scrnaseq-plot.html#cb11-1" aria-hidden="true" tabindex="-1"></a>genes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;MS4A1&quot;</span>, <span class="st">&quot;GNLY&quot;</span>, <span class="st">&quot;CD3E&quot;</span>, <span class="st">&quot;CD14&quot;</span>, <span class="st">&quot;FCER1A&quot;</span>, <span class="st">&quot;FCGR3A&quot;</span>)</span>
-<span id="cb11-2"><a href="scrnaseq-plot.html#cb11-2" aria-hidden="true" tabindex="-1"></a>cols <span class="ot">&lt;-</span> <span class="fu">pal_d3</span>(<span class="st">&quot;category20&quot;</span>)(<span class="dv">20</span>)</span>
-<span id="cb11-3"><a href="scrnaseq-plot.html#cb11-3" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">Bior_FeatureVlnplot</span>(seuratobject, genes, <span class="at">scale=</span><span class="fl">0.8</span>, <span class="at">pt.size=</span><span class="fl">0.5</span>, <span class="at">nrow=</span><span class="dv">2</span>, <span class="at">cols=</span>cols)</span>
-<span id="cb11-4"><a href="scrnaseq-plot.html#cb11-4" aria-hidden="true" tabindex="-1"></a>p</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="scrnaseq-plot.html#cb12-1" aria-hidden="true" tabindex="-1"></a>genes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;MS4A1&quot;</span>, <span class="st">&quot;GNLY&quot;</span>, <span class="st">&quot;CD3E&quot;</span>, <span class="st">&quot;CD14&quot;</span>, <span class="st">&quot;FCER1A&quot;</span>, <span class="st">&quot;FCGR3A&quot;</span>)</span>
+<span id="cb12-2"><a href="scrnaseq-plot.html#cb12-2" aria-hidden="true" tabindex="-1"></a>cols <span class="ot">&lt;-</span> <span class="fu">pal_d3</span>(<span class="st">&quot;category20&quot;</span>)(<span class="dv">20</span>)</span>
+<span id="cb12-3"><a href="scrnaseq-plot.html#cb12-3" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">Bior_FeatureVlnplot</span>(seuratobject, genes, <span class="at">scale=</span><span class="fl">0.8</span>, <span class="at">pt.size=</span><span class="fl">0.5</span>, <span class="at">nrow=</span><span class="dv">2</span>, <span class="at">cols=</span>cols)</span>
+<span id="cb12-4"><a href="scrnaseq-plot.html#cb12-4" aria-hidden="true" tabindex="-1"></a>p</span></code></pre></div>
 <p><img src="images/3.2%20Bior_FeatureVlnplot.png" /></p>
 </div>
 <div id="bior_doheatmap" class="section level2 hasAnchor" number="3.3">
@@ -278,12 +280,12 @@ margin=margin(0,0,0,0))<br />
 * margin: R margin<br />
 <strong>Examples</strong><br />
 </p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="scrnaseq-plot.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb12-2"><a href="scrnaseq-plot.html#cb12-2" aria-hidden="true" tabindex="-1"></a>pbmc.markers <span class="ot">&lt;-</span> <span class="fu">FindAllMarkers</span>(seuratobject, <span class="at">only.pos =</span> <span class="cn">TRUE</span>, <span class="at">min.pct =</span> <span class="fl">0.25</span>, <span class="at">logfc.threshold =</span> <span class="fl">0.25</span>)</span>
-<span id="cb12-3"><a href="scrnaseq-plot.html#cb12-3" aria-hidden="true" tabindex="-1"></a>top10 <span class="ot">&lt;-</span> pbmc.markers <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(cluster) <span class="sc">%&gt;%</span> <span class="fu">top_n</span>(<span class="at">n =</span> <span class="dv">10</span>, <span class="at">wt =</span> avg_log2FC)</span>
-<span id="cb12-4"><a href="scrnaseq-plot.html#cb12-4" aria-hidden="true" tabindex="-1"></a>cols <span class="ot">&lt;-</span> <span class="fu">pal_d3</span>(<span class="st">&quot;category20&quot;</span>)(<span class="dv">20</span>)</span>
-<span id="cb12-5"><a href="scrnaseq-plot.html#cb12-5" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">Bior_DoHeatmap</span>(seuratobject, top10<span class="sc">$</span>gene, <span class="at">group.colors=</span>cols, <span class="at">group.size=</span><span class="dv">3</span>, <span class="at">gene.label=</span>F,  <span class="at">margin=</span><span class="fu">margin</span>(<span class="dv">20</span>,<span class="dv">20</span>,<span class="dv">0</span>,<span class="dv">0</span>))</span>
-<span id="cb12-6"><a href="scrnaseq-plot.html#cb12-6" aria-hidden="true" tabindex="-1"></a>p</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="scrnaseq-plot.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb13-2"><a href="scrnaseq-plot.html#cb13-2" aria-hidden="true" tabindex="-1"></a>pbmc.markers <span class="ot">&lt;-</span> <span class="fu">FindAllMarkers</span>(seuratobject, <span class="at">only.pos =</span> <span class="cn">TRUE</span>, <span class="at">min.pct =</span> <span class="fl">0.25</span>, <span class="at">logfc.threshold =</span> <span class="fl">0.25</span>)</span>
+<span id="cb13-3"><a href="scrnaseq-plot.html#cb13-3" aria-hidden="true" tabindex="-1"></a>top10 <span class="ot">&lt;-</span> pbmc.markers <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(cluster) <span class="sc">%&gt;%</span> <span class="fu">top_n</span>(<span class="at">n =</span> <span class="dv">10</span>, <span class="at">wt =</span> avg_log2FC)</span>
+<span id="cb13-4"><a href="scrnaseq-plot.html#cb13-4" aria-hidden="true" tabindex="-1"></a>cols <span class="ot">&lt;-</span> <span class="fu">pal_d3</span>(<span class="st">&quot;category20&quot;</span>)(<span class="dv">20</span>)</span>
+<span id="cb13-5"><a href="scrnaseq-plot.html#cb13-5" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">Bior_DoHeatmap</span>(seuratobject, top10<span class="sc">$</span>gene, <span class="at">group.colors=</span>cols, <span class="at">group.size=</span><span class="dv">3</span>, <span class="at">gene.label=</span>F,  <span class="at">margin=</span><span class="fu">margin</span>(<span class="dv">20</span>,<span class="dv">20</span>,<span class="dv">0</span>,<span class="dv">0</span>))</span>
+<span id="cb13-6"><a href="scrnaseq-plot.html#cb13-6" aria-hidden="true" tabindex="-1"></a>p</span></code></pre></div>
 <p><img src="images/3.3%20Bior_DoHeatmap.png" /></p>
 </div>
 <div id="bior_featurebox" class="section level2 hasAnchor" number="3.4">
@@ -301,10 +303,28 @@ Bior_Featurebox(seuratobject, feature, text.size=18, hline.min=NULL, hline.size=
 * cols: cluster colors<br />
 <strong>Examples</strong><br />
 </p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="scrnaseq-plot.html#cb13-1" aria-hidden="true" tabindex="-1"></a>cols <span class="ot">&lt;-</span> <span class="fu">pal_d3</span>(<span class="st">&quot;category20&quot;</span>)(<span class="dv">20</span>)</span>
-<span id="cb13-2"><a href="scrnaseq-plot.html#cb13-2" aria-hidden="true" tabindex="-1"></a>P <span class="ot">&lt;-</span> <span class="fu">Bior_Featurebox</span>(seuratobject, <span class="at">feature =</span> <span class="st">&#39;nFeature_RNA&#39;</span>, <span class="at">cols =</span> cols)</span>
-<span id="cb13-3"><a href="scrnaseq-plot.html#cb13-3" aria-hidden="true" tabindex="-1"></a>P</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="scrnaseq-plot.html#cb14-1" aria-hidden="true" tabindex="-1"></a>cols <span class="ot">&lt;-</span> <span class="fu">pal_d3</span>(<span class="st">&quot;category20&quot;</span>)(<span class="dv">20</span>)</span>
+<span id="cb14-2"><a href="scrnaseq-plot.html#cb14-2" aria-hidden="true" tabindex="-1"></a>P <span class="ot">&lt;-</span> <span class="fu">Bior_Featurebox</span>(seuratobject, <span class="at">feature =</span> <span class="st">&#39;nFeature_RNA&#39;</span>, <span class="at">cols =</span> cols)</span>
+<span id="cb14-3"><a href="scrnaseq-plot.html#cb14-3" aria-hidden="true" tabindex="-1"></a>P</span></code></pre></div>
 <p><img src="images/3.4%20Bior_Featurebox.png" /></p>
+</div>
+<div id="bior_stackvlnplot" class="section level2 hasAnchor" number="3.5">
+<h2><span class="header-section-number">3.5</span> Bior_StackVlnplot<a href="scrnaseq-plot.html#bior_stackvlnplot" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Plot multiple genes stack Vlnplot<br />
+<strong>Usage</strong><br />
+Bior_StackVlnplot(seuratobject, gene, fontsize = 10, cols = NULL)<br />
+<strong>Arguments</strong><br />
+* seuratobject: Seurat object<br />
+* gene: Multiple genes vectors, eg: c(“MS4A1,” “GNLY,” “CD3E”)<br />
+* fontsize: font size<br />
+* cols: colors<br />
+<strong>Examples</strong><br />
+</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="scrnaseq-plot.html#cb15-1" aria-hidden="true" tabindex="-1"></a>gene <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;MS4A1&quot;</span>, <span class="st">&quot;GNLY&quot;</span>, <span class="st">&quot;CD3E&quot;</span>, <span class="st">&quot;CD14&quot;</span>, <span class="st">&quot;FCER1A&quot;</span>, <span class="st">&quot;FCGR3A&quot;</span>)</span>
+<span id="cb15-2"><a href="scrnaseq-plot.html#cb15-2" aria-hidden="true" tabindex="-1"></a>cols <span class="ot">&lt;-</span> <span class="fu">pal_d3</span>(<span class="st">&quot;category20&quot;</span>)(<span class="dv">20</span>)</span>
+<span id="cb15-3"><a href="scrnaseq-plot.html#cb15-3" aria-hidden="true" tabindex="-1"></a>P <span class="ot">&lt;-</span> <span class="fu">Bior_StackVlnplot</span>(seuratobject, <span class="at">gene =</span> gene, <span class="at">cols =</span> cols)</span>
+<span id="cb15-4"><a href="scrnaseq-plot.html#cb15-4" aria-hidden="true" tabindex="-1"></a>P</span></code></pre></div>
+<p><img src="images/3.5%20Bior_StackVlnplot.png" /></p>
 
 </div>
 </div>

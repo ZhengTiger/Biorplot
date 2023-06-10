@@ -1,24 +1,4 @@
 url: http://tigerz.online/Biorplot/
 template:
-  params:
-    bootswatch: flatly
+  bootstrap: 5
 
-reference:
-- title: General Plot
-  contents:
-  - Bior_LinePlot
-  - Bior_PiePlot
-  - Bior_StackBarplot
-  - Bior_DotPlot
-  - Bior_Sankeyplot
-
-articles:
-- title: General plots
-  navbar: ~
-  contents: General_Plots
-- title: Single cell analysis plots
-  navbar: ~
-  contents: single_cell_Plots
-
-deploy:
-  install_metadata: true

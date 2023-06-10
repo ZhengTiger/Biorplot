@@ -3,7 +3,6 @@ template:
   params:
     bootswatch: flatly
 
-
 reference:
 - title: General Plot
   contents:
@@ -13,14 +12,11 @@ reference:
   - Bior_DotPlot
   - Bior_Sankeyplot
 
-
 articles:
 - title: General plots
   navbar: ~
-  contents:
-  - General_Plots
-
+  contents: General_Plots
 - title: Single cell analysis plots
   navbar: ~
-  contents:
-  - single_cell_Plots
+  contents: single_cell_Plots
+

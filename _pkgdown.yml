@@ -20,3 +20,5 @@ articles:
   navbar: ~
   contents: single_cell_Plots
 
+deploy:
+  install_metadata: true

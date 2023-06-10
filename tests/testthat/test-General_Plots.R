@@ -1,16 +1,63 @@
-test_that("Bior_LinePlot() Line plot", {
-  library(ggplot2)
+test_that("Bior_LinePlot() test", {
   data <- data.frame('x' = c(1:20), 'y' = rnorm(20), 'Type' = rep(c('A','B'), 10))
   palette <- c("#f89588","#63b2ee")
   Bior_LinePlot(data, x = "x", y = "y", color = "Type", title = "Test Bior_LinePlot",
-                palette = palette, plot_type = "l", size = 1, ggtheme = theme_minimal())
+                palette = palette, plot_type = "l", size = 2, text.size = 30,
+                ggtheme = theme_minimal()) +
+    font("title", size = 35)
 })
 
 
 
+test_that("Bior_PiePlot() test", {
+  x <- c(3,7,9,1,2)
+  labels <- c("A", "B", "C", "D", "E")
+  col <- c("#AEC7E8B2", "#FFBB78B2", "#98DF8AB2", "#FF9896B2", "#C5B0D5B2")
+  p <- Bior_PiePlot(x, labels, col=col, title="Test Bior_PiePlot")
+  p
+})
 
 
 
+test_that("Bior_StackBarplot() test", {
+  data <- data.frame(matrix(rnorm(20, mean = 20, sd = 5),c(4,5)))
+  data <- round(data)
+  rownames(data) <- paste('gene',1:4, sep='')
+  colnames(data) <- paste('sample',1:5,sep='')
+  x.order <- c('sample1','sample5','sample4','sample3','sample2')
+  type.order <- c('gene1','gene2','gene3','gene4')
+  col <- c("#AEC7E8FF","#FFBB78FF","#98DF8AFF","#FF9896FF")
+  p <- Bior_StackBarplot(data, x.order=x.order, type.order=type.order, col = col,
+                         labs.x='Samples', labs.y='Numbers', title='Test Bior_StackBarplot',
+                         theme=theme_minimal())
+  p
+})
 
 
 
+test_that("Bior_DotPlot() test", {
+  x <- rep(paste('sample', 1:5, sep=''), 4)
+  y <- rep(paste('gene', 1:4, sep=''), 5)
+  size <- round(rnorm(20, mean = 10, sd = 5))
+  colour <- c("#1F77B4FF","#FF7F0EFF","#2CA02CFF","#D62728FF","#9467BDFF")
+  p <- Bior_DotPlot(x = x, y = y, size = size, group.by = x, colour = colour, max_size=10)
+  p
+})
+
+
+
+test_that("Bior_Sankeyplot() test", {
+  # links data, colnames must have 'source' 'target' 'value'
+  links <- data.frame(
+    source=c("C","A", "B", "E", "D"),
+    target=c("b","c", "a", "e", "d"),
+    value=c(1, 2, 0, 4, 5)
+  )
+
+  # Set Nodes order and colour
+  Nodes.order <- c("A", "B", "C", "D", "E", "a", "b", "c", "d", "e")
+  Nodes.colour <- c("#1F77B4B2","#FF7F0EB2","#2CA02CB2","#D62728B2","#9467BDB2",
+                    "#8C564BB2","#E377C2B2","#7F7F7FB2","#BCBD22B2","#17BECFB2")
+  p <- Bior_Sankeyplot(links, Nodes.order=Nodes.order, Nodes.colour=Nodes.colour, fontSize=20)
+  p
+})

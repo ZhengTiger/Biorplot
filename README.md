@@ -13,3 +13,5 @@ You can install the development version of Biorplot using `devtools`:
 ``` r
 devtools::install_github("zhenghu159/Biorplot")
 ```
+
+## Biorplot Gallery

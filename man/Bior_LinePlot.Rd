@@ -41,7 +41,9 @@ Bior_LinePlot(
   show.line.label = FALSE,
   position = "identity",
   ggtheme = theme_pubr(),
-  title.hjust = 0.5
+  title.hjust = 0.5,
+  text.size = 20,
+  ...
 )
 }
 \arguments{
@@ -169,6 +171,10 @@ Allowed values include ggplot2 official themes: theme_gray(), theme_bw(),
 theme_minimal(), theme_classic(), theme_void(), ....}
 
 \item{title.hjust}{(defaut: title.hjust = 0.5); title hjust value}
+
+\item{text.size}{(defaut: text.size = 20); text size value}
+
+\item{...}{other arguments to be passed to geom_dotplot.}
 }
 \value{
 A ggplot object
@@ -178,11 +184,12 @@ Create a line plot.
 }
 \examples{
 # Examples 1
-library(ggplot2)
 data <- data.frame('x' = c(1:20), 'y' = rnorm(20), 'Type' = rep(c('A','B'), 10))
 palette <- c("#f89588","#63b2ee")
 Bior_LinePlot(data, x = "x", y = "y", color = "Type", title = "Test Bior_LinePlot",
-              palette = palette, plot_type = "l", size = 1, ggtheme = theme_minimal())
+              palette = palette, plot_type = "l", size = 2, text.size = 30,
+              ggtheme = theme_minimal()) +
+  font("title", size = 35)
 }
 \seealso{
 \code{\link{ggline}}

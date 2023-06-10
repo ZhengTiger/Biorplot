@@ -17,6 +17,8 @@ knitr::opts_chunk$set(
 
 Biorplot is an R package for plotting bioinformatics graphs with low-code.
 
+
+
 ## Installation
 
 You can install the development version of Biorplot using `devtools`:
@@ -24,5 +26,14 @@ You can install the development version of Biorplot using `devtools`:
 ``` r
 devtools::install_github("zhenghu159/Biorplot")
 ```
+
+
+
+## Biorplot Gallery
+
+
+
+
+
 
 

@@ -1,8 +1,8 @@
 ---
-title: "Biorplot"
+title: "Single cell analysis Plots"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Biorplot}
+  %\VignetteIndexEntry{Single cell analysis Plots}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

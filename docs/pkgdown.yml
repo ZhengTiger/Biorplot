@@ -4,5 +4,8 @@ pkgdown_sha: ~
 articles:
   General_Plots: General_Plots.html
   single_cell_Plots: single_cell_Plots.html
-last_built: 2023-06-10T16:04Z
+last_built: 2023-06-11T01:42Z
+urls:
+  reference: https://tigerz.github.io/Biorplot/reference
+  article: https://tigerz.github.io/Biorplot/articles
 

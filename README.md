@@ -49,7 +49,7 @@ devtools::install_github("zhenghu159/Biorplot")
 <td width="300">
 <justify>
 <a href=https://tigerz.online/Biorplot/articles/General_Plots.html#bior_sankeyplot target="-blank" title="Bior_Sankeyplot()">
-<img src="https://raw.githubusercontent.com/zhenghu159/Biorplot/develop/images/Bior_Sankeyplot.png" >
+<img src="https://raw.githubusercontent.com/zhenghu159/Biorplot/main/vignettes/images/Bior_Sankeyplot.png" >
 </a> </justify>
 </td>
 <td width="300">

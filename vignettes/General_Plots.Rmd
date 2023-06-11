@@ -45,7 +45,7 @@ p
 
 
 
-## Bior_StackBarplot
+## Bior_StackBarplot()
 
 ```{r fig.height=6, fig.width=8, message=FALSE, warning=FALSE}
 data <- data.frame(matrix(rnorm(20, mean = 20, sd = 5),c(4,5)))

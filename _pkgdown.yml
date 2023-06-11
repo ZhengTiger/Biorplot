@@ -1,29 +1,28 @@
 title: Biorplot
-
-url: https://zhenghu159.github.io/Biorplot/
-
+url: http://tigerz.online/Biorplot/
 template:
   params:
     bootswatch: flatly
-
 authors:
   Hu Zheng:
     href: https://github.com/zhenghu159
-
 navbar:
   structure:
-    left: [articles, reference]
-    right: [search, github]
+    left:
+    - articles
+    - reference
+    right:
+    - search
+    - github
   components:
-   articles:
-    text: Vignettes
-    menu:
-    - text: Plotting Vignettes
-    - text: "Plotting #1: General Plots"
-      href: articles/General_Plots.html
-    - text: "Plotting #2: scRNAseq Plots"
-      href: articles/single_cell_Plots.html
-
+    articles:
+      text: Vignettes
+      menu:
+      - text: Plotting Vignettes
+      - text: 'Plotting #1: General Plots'
+        href: articles/General_Plots.html
+      - text: 'Plotting #2: scRNAseq Plots'
+        href: articles/single_cell_Plots.html
 reference:
 - title: General Plots
   desc: General analysis Plots in Bioinformatics
@@ -35,6 +34,6 @@ reference:
   - '`Bior_Sankeyplot`'
 - title: scRNAseq Plots
   desc: Single-cell RNAseq analysis Plots
-
 deploy:
-  install_metadata: true
+  install_metadata: yes
+

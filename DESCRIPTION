@@ -24,7 +24,7 @@ Imports:
     networkD3,
     scales
 VignetteBuilder: knitr
-URL: https://tigerz.github.io/Biorplot/
+URL: https://zhenghu159.github.io/Biorplot/
 Collate: 
     'utils.R'
     'General_Plots.R'

@@ -25,25 +25,25 @@ You can learn how to draw a plot by clicking on the gallery below.
 <td width="300">
 <justify>
 <a href=https://zhenghu159.github.io/Biorplot/articles/General_Plots.html#base-lineplot target="-blank" title="Bior_LinePlot()">
-<img src="https://zhenghu159.github.io/Biorplot/articles/General_Plots_files/figure-html/unnamed-chunk-3-1.png" >
+<img src="https://raw.githubusercontent.com/zhenghu159/Biorplot/main/vignettes/images/Bior_LinePlot1.png" >
 </a> </justify>
 </td>
 <td width="300">
 <justify>
 <a href=https://zhenghu159.github.io/Biorplot/articles/General_Plots.html#correlation-lineplot target="-blank" title="Bior_LinePlot()">
-<img src="https://zhenghu159.github.io/Biorplot/articles/General_Plots_files/figure-html/unnamed-chunk-4-1.png" >
+<img src="https://raw.githubusercontent.com/zhenghu159/Biorplot/main/vignettes/images/Bior_LinePlot2.png" >
 </a> </justify>
 </td>
 <td width="300">
 <justify>
 <a href=https://zhenghu159.github.io/Biorplot/articles/General_Plots.html#bior_pieplot target="-blank" title="Bior_PiePlot()">
-<img src="https://zhenghu159.github.io/Biorplot/articles/General_Plots_files/figure-html/unnamed-chunk-4-1.png" >
+<img src="https://raw.githubusercontent.com/zhenghu159/Biorplot/main/vignettes/images/Bior_PiePlot.png" >
 </a> </justify>
 </td>
 <td width="300">
 <justify>
 <a href=https://zhenghu159.github.io/Biorplot/articles/General_Plots.html#bior_stackbarplot target="-blank" title="Bior_StackBarplot()">
-<img src="https://zhenghu159.github.io/Biorplot/articles/General_Plots_files/figure-html/unnamed-chunk-5-1.png" >
+<img src="https://raw.githubusercontent.com/zhenghu159/Biorplot/main/vignettes/images/Bior_StackBarplot.png" >
 </a> <justify>
 </td>
 </tr>
@@ -51,7 +51,7 @@ You can learn how to draw a plot by clicking on the gallery below.
 <td width="300">
 <justify>
 <a href=https://zhenghu159.github.io/Biorplot/articles/General_Plots.html#bior_dotplot target="-blank"  title="Bior_DotPlot()">
-<img src="https://zhenghu159.github.io/Biorplot/articles/General_Plots_files/figure-html/unnamed-chunk-6-1.png" >
+<img src="https://raw.githubusercontent.com/zhenghu159/Biorplot/main/vignettes/images/Bior_DotPlot.png" >
 </a> <justify>
 </td>
 <td width="300">

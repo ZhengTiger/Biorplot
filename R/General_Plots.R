@@ -8,8 +8,15 @@
 #' @importFrom ggpubr ggline theme_pubr
 #'
 #' @inheritParams ggpubr::ggline
+#' @inheritParams stats::cor.test
 #' @param title.hjust (defaut: title.hjust = 0.5); title hjust value
 #' @param text.size (defaut: text.size = 20); text size value
+#' @param cor.test (defaut: cor.test = FALSE); whether to use cor.test to calculate correlations
+#' @param R.digits (defaut: R.digits = 2); digits for R
+#' @param P.digits (defaut: P.digits = 2); digits for P
+#' @param cor.label.x (defaut: cor.label.x = 1); cor.label x position
+#' @param cor.label.y (defaut: cor.label.y = 1); cor.label y position
+#' @param cor.label.size (defaut: cor.label.size=10); cor.label size
 #'
 #' @return A ggplot object
 #' @export
@@ -23,6 +30,19 @@
 #'               palette = palette, plot_type = "l", size = 2, text.size = 30,
 #'               ggtheme = theme_minimal()) +
 #'   font("title", size = 35)
+#'
+#'
+#' # Examples 2
+#' data <- data.frame('x' = c(1:10), 'y' = c(1,1.5,1.8,2.3,3.3,5.3,7.5,8,9,10))
+#' Bior_LinePlot(data, x = "x", y = "y",
+#'               color = "firebrick3", plot_type = "l", size = 2,
+#'               cor.test = TRUE, cor.label.x=1, cor.label.y=9, R.digits = 2, P.digits = 2,
+#'               cor.label.size = 10,
+#'               text.size = 30, ggtheme = theme_classic()) +
+#'   geom_point(color="black", fill="firebrick3", shape=21, size=4, stroke=1) +
+#'   font("title", size = 30)
+#'
+#'
 Bior_LinePlot <- function(
     # ggpubr::ggline Arguments
     data, x, y, group = 1, numeric.x.axis = FALSE, combine = FALSE, merge = FALSE,
@@ -35,8 +55,15 @@ Bior_LinePlot <- function(
     position = "identity", ggtheme = theme_pubr(),
     # add new Arguments
     title.hjust = 0.5, text.size = 20,
+    # stats::cor.test Arguments
+    alternative = "two.sided", method = "pearson", exact = NULL, conf.level = 0.95,
+    continuity = FALSE,
+    # add new Arguments
+    cor.test = FALSE, R.digits = 2, P.digits = 2, cor.label.x = 1, cor.label.y = 1,
+    cor.label.size=10,
     ...)
 {
+
   ggline.Arguments <- list(
     data = data, x = x, y = y, group = group, numeric.x.axis = numeric.x.axis,
     combine = combine, merge = merge, color = color, palette = palette, linetype = linetype,
@@ -48,9 +75,23 @@ Bior_LinePlot <- function(
     repel = repel, label.rectangle = label.rectangle, show.line.label = show.line.label,
     position = position, ggtheme = ggtheme, ...)
 
+  cor.test.Arguments <- list(
+    alternative = alternative, method = method, exact = exact, conf.level = conf.level,
+    continuity = continuity, ...
+  )
+
   p <- do.call(ggpubr::ggline, ggline.Arguments) +
     theme(plot.title = element_text(hjust = title.hjust),
           text = element_text(size = text.size))
+
+  if (cor.test == TRUE) {
+    cor <- do.call(stats::cor.test, c(data[x], data[y], cor.test.Arguments))
+    R <- round(cor$estimate, R.digits)
+    P_value <- format(cor$p.value, digits = P.digits)
+    p <- p +
+      geom_text(x = cor.label.x, y = cor.label.y, label = paste('R =',R,'\nP =',P_value,sep=' '),
+                hjust=0, color="black", size=cor.label.size)
+  }
 
   return(p)
 }

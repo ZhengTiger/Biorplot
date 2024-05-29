@@ -2,7 +2,7 @@ Package: Biorplot
 Title: Some bioinformatic plots using R
 Version: 0.0.2
 Authors@R: 
-    person("Hu", "Zheng", , "1308155474@qq.com", role = c("aut", "cre"),
+    person("Hu", "Zheng", , "tiger.zheng@foxmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "YOUR-ORCID-ID"))
 Description: Some bioinformatic plots using R.
 License: MIT + file LICENSE
@@ -24,8 +24,7 @@ Imports:
     networkD3,
     scales
 VignetteBuilder: knitr
-URL: https://zhenghu159.github.io/Biorplot/,
-    http://tigerz.online/Biorplot/
+URL: https://zhenghu159.github.io/Biorplot/
 Collate: 
     'utils.R'
     'General_Plots.R'

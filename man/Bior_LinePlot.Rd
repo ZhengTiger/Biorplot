@@ -43,6 +43,17 @@ Bior_LinePlot(
   ggtheme = theme_pubr(),
   title.hjust = 0.5,
   text.size = 20,
+  alternative = "two.sided",
+  method = "pearson",
+  exact = NULL,
+  conf.level = 0.95,
+  continuity = FALSE,
+  cor.test = FALSE,
+  R.digits = 2,
+  P.digits = 2,
+  cor.label.x = 1,
+  cor.label.y = 1,
+  cor.label.size = 10,
   ...
 )
 }
@@ -174,6 +185,41 @@ theme_minimal(), theme_classic(), theme_void(), ....}
 
 \item{text.size}{(defaut: text.size = 20); text size value}
 
+\item{alternative}{indicates the alternative hypothesis and must be
+    one of \code{"two.sided"}, \code{"greater"} or \code{"less"}.  You
+    can specify just the initial letter.  \code{"greater"} corresponds
+    to positive association, \code{"less"} to negative association.}
+
+\item{method}{a character string indicating which correlation
+    coefficient is to be  used for the test.  One of \code{"pearson"},
+    \code{"kendall"}, or \code{"spearman"}, can be abbreviated.}
+
+\item{exact}{a logical indicating whether an exact p-value should be
+    computed.  Used for Kendall's \eqn{\tau}{tau} and
+    Spearman's \eqn{\rho}{rho}.
+    See \sQuote{Details} for the meaning of \code{NULL} (the default).}
+
+\item{conf.level}{confidence level for the returned confidence
+    interval.  Currently only used for the Pearson product moment
+    correlation coefficient if there are at least 4 complete pairs of
+    observations.}
+
+\item{continuity}{logical: if true, a continuity correction is used
+    for Kendall's \eqn{\tau}{tau} and Spearman's \eqn{\rho}{rho} when
+    not computed exactly.}
+
+\item{cor.test}{(defaut: cor.test = FALSE); whether to use cor.test to calculate correlations}
+
+\item{R.digits}{(defaut: R.digits = 2); digits for R}
+
+\item{P.digits}{(defaut: P.digits = 2); digits for P}
+
+\item{cor.label.x}{(defaut: cor.label.x = 1); cor.label x position}
+
+\item{cor.label.y}{(defaut: cor.label.y = 1); cor.label y position}
+
+\item{cor.label.size}{(defaut: cor.label.size=10); cor.label size}
+
 \item{...}{other arguments to be passed to geom_dotplot.}
 }
 \value{
@@ -190,6 +236,19 @@ Bior_LinePlot(data, x = "x", y = "y", color = "Type", title = "Test Bior_LinePlo
               palette = palette, plot_type = "l", size = 2, text.size = 30,
               ggtheme = theme_minimal()) +
   font("title", size = 35)
+
+
+# Examples 2
+data <- data.frame('x' = c(1:10), 'y' = c(1,1.5,1.8,2.3,3.3,5.3,7.5,8,9,10))
+Bior_LinePlot(data, x = "x", y = "y",
+              color = "firebrick3", plot_type = "l", size = 2,
+              cor.test = T, cor.label.x=1, cor.label.y=9.5, R.digits = 2, P.digits = 2,
+              cor.label.size = 10,
+              text.size = 30, ggtheme = theme_classic()) +
+  geom_point(color="black", fill="firebrick3", shape=21, size=4, stroke=1) +
+  font("title", size = 30)
+
+
 }
 \seealso{
 \code{\link{ggline}}

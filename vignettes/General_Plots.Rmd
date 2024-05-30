@@ -22,7 +22,13 @@ library(Biorplot)
 
 ## Bior_LinePlot()
 
+Line plot use line segments to connect data points to show data trends. Each data point represents a specific time point or value, and the line segments reflect the relationship between data points. Line plot are usually used to display time series data, trend analysis, cyclical changes, etc.
+
+In `Biorplot` package, we use the `Bior_LinePlot()` function to draw a line plot.
+
 ### Base linePlot
+
+Draw a base line plot with different type:
 
 ```{r fig.height=6, fig.width=8, message=FALSE, warning=FALSE}
 data <- data.frame('x' = c(1:20), 'y' = rnorm(20), 'Type' = rep(c('A','B'), 10))
@@ -35,6 +41,8 @@ Bior_LinePlot(data, x = "x", y = "y", color = "Type", title = "Test Bior_LinePlo
 
 
 ### Correlation linePlot
+
+Draw a line plot with correlation coefficient R and P-value:
 
 ```{r fig.height=6, fig.width=8, message=FALSE, warning=FALSE}
 data <- data.frame('x' = c(1:10), 'y' = c(1,1.5,1.8,2.3,3.3,5.3,7.5,8,9,10))
@@ -51,15 +59,40 @@ Bior_LinePlot(data, x = "x", y = "y",
 
 
 
+
 ## Bior_PiePlot()
 
-```{r fig.height=6, fig.width=8, message=FALSE, warning=FALSE}
-x <- c(3,7,9,1,2)
-labels <- c("A", "B", "C", "D", "E")
+Pie plot are often used to show the relative proportions of data. Based on a circular pattern, it divides the data into different sectors, and the size of each sector represents the relative size of the corresponding data. Pie plot can intuitively show the proportional relationship between different data, helping observers quickly understand the data distribution.
+
+In `Biorplot` package, we use the `Bior_PiePlot()` function to draw a Pie plot.
+
+### Base PiePlot
+
+Draw a base pie plot with different type:
+
+```{r fig.height=4, fig.width=6, message=FALSE, warning=FALSE}
+value <- c(0.1,0.2,0.4,0.1,0.3)
+type <- c("A (10%)", "B (20%)", "C (40%)", "D (10%)", "E (30%)")
 col <- c("#AEC7E8B2", "#FFBB78B2", "#98DF8AB2", "#FF9896B2", "#C5B0D5B2")
-p <- Bior_PiePlot(x, labels, col=col, title="Test Bior_pie")
+p <- Bior_PiePlot(value=value, type=type, col=col, title="Test Bior_pie")
 p
 ```
+
+### PiePlot with label
+
+Draw a pie plot with text labels
+
+```{r fig.height=4, fig.width=6, message=FALSE, warning=FALSE}
+value <- c(0.1,0.2,0.4,0.1,0.3)
+type <- c("A", "B", "C", "D", "E")
+label <- c("10%","20%","40%","10%","30%")
+col <- c("#1F77B4B2", "#FF7F0EB2", "#2CA02CB2", "#D62728B2", "#9467BDB2")
+p <- Bior_PiePlot(value=value, type=type, label=label, col=col, title="Test Bior_pie", label.x=1.2, label.color="white", label.size=5)
+p
+```
+
+
+
 
 
 

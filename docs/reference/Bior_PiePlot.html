@@ -59,39 +59,59 @@
 
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">Bior_PiePlot</span><span class="op">(</span></span>
-<span>  <span class="va">x</span>,</span>
-<span>  <span class="va">labels</span>,</span>
-<span>  col <span class="op">=</span> <span class="fu">pal_d3</span><span class="op">(</span><span class="st">"category20,"</span>, alpha <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span><span class="op">(</span><span class="fl">20</span><span class="op">)</span>,</span>
+<span>  <span class="va">value</span>,</span>
+<span>  <span class="va">type</span>,</span>
+<span>  label <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  col <span class="op">=</span> <span class="fu">pal_d3</span><span class="op">(</span><span class="st">"category20"</span>, alpha <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span><span class="op">(</span><span class="fl">20</span><span class="op">)</span>,</span>
 <span>  title <span class="op">=</span> <span class="st">""</span>,</span>
-<span>  fontsize <span class="op">=</span> <span class="fl">20</span>,</span>
-<span>  legend.key.size <span class="op">=</span> <span class="fl">1</span></span>
+<span>  text.size <span class="op">=</span> <span class="fl">15</span>,</span>
+<span>  plot.title.size <span class="op">=</span> <span class="fl">20</span>,</span>
+<span>  label.x <span class="op">=</span> <span class="fl">1.2</span>,</span>
+<span>  label.color <span class="op">=</span> <span class="st">"white"</span>,</span>
+<span>  label.size <span class="op">=</span> <span class="fl">5</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
-    <dl><dt>x</dt>
+    <dl><dt>value</dt>
 <dd><p>A vector of value</p></dd>
 
 
-<dt>labels</dt>
-<dd><p>A vector of labels for x</p></dd>
+<dt>type</dt>
+<dd><p>A vector of type</p></dd>
+
+
+<dt>label</dt>
+<dd><p>(defaut: label=NULL); A vector of label</p></dd>
 
 
 <dt>col</dt>
-<dd><p>colour</p></dd>
+<dd><p>(defaut: col=pal_d3("category20,",alpha=0.7)(20)); colour for type</p></dd>
 
 
 <dt>title</dt>
-<dd><p>title</p></dd>
+<dd><p>(defaut: title=""); title for plot</p></dd>
 
 
-<dt>fontsize</dt>
-<dd><p>fontsize</p></dd>
+<dt>text.size</dt>
+<dd><p>(defaut: text.size=15); text size</p></dd>
 
 
-<dt>legend.key.size</dt>
-<dd><p>legend size</p></dd>
+<dt>plot.title.size</dt>
+<dd><p>(defaut: plot.title.size=20); plot.title size</p></dd>
+
+
+<dt>label.x</dt>
+<dd><p>(defaut: label.x=1.2); geom_text x for label</p></dd>
+
+
+<dt>label.color</dt>
+<dd><p>(defaut: label.color="white"); geom_text color for label</p></dd>
+
+
+<dt>label.size</dt>
+<dd><p>(defaut: label.size=5); geom_text size for label</p></dd>
 
 </dl></div>
     <div id="value">
@@ -104,12 +124,23 @@
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Examples 1</span></span></span>
-<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">7</span>,<span class="fl">9</span>,<span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">labels</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>, <span class="st">"D"</span>, <span class="st">"E"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">value</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.1</span>,<span class="fl">0.2</span>,<span class="fl">0.4</span>,<span class="fl">0.1</span>,<span class="fl">0.3</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">type</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A (10%)"</span>, <span class="st">"B (20%)"</span>, <span class="st">"C (40%)"</span>, <span class="st">"D (10%)"</span>, <span class="st">"E (30%)"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">col</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#AEC7E8B2"</span>, <span class="st">"#FFBB78B2"</span>, <span class="st">"#98DF8AB2"</span>, <span class="st">"#FF9896B2"</span>, <span class="st">"#C5B0D5B2"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu">Bior_PiePlot</span><span class="op">(</span><span class="va">x</span>, <span class="va">labels</span>, col<span class="op">=</span><span class="va">col</span>, title<span class="op">=</span><span class="st">"Test Bior_PiePlot"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu">Bior_PiePlot</span><span class="op">(</span>value<span class="op">=</span><span class="va">value</span>, type<span class="op">=</span><span class="va">type</span>, col<span class="op">=</span><span class="va">col</span>, title<span class="op">=</span><span class="st">"Test Bior_pie"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">p</span></span></span>
 <span class="r-plt img"><img src="Bior_PiePlot-1.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Examples 2</span></span></span>
+<span class="r-in"><span><span class="va">value</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.1</span>,<span class="fl">0.2</span>,<span class="fl">0.4</span>,<span class="fl">0.1</span>,<span class="fl">0.3</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">type</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>, <span class="st">"D"</span>, <span class="st">"E"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">label</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"10%"</span>,<span class="st">"20%"</span>,<span class="st">"40%"</span>,<span class="st">"10%"</span>,<span class="st">"30%"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">col</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#AEC7E8B2"</span>, <span class="st">"#FFBB78B2"</span>, <span class="st">"#98DF8AB2"</span>, <span class="st">"#FF9896B2"</span>, <span class="st">"#C5B0D5B2"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu">Bior_PiePlot</span><span class="op">(</span>value<span class="op">=</span><span class="va">value</span>, type<span class="op">=</span><span class="va">type</span>, label<span class="op">=</span><span class="va">label</span>, col<span class="op">=</span><span class="va">col</span>, title<span class="op">=</span><span class="st">"Test Bior_pie"</span>,</span></span>
+<span class="r-in"><span>                  label.x<span class="op">=</span><span class="fl">1.2</span>, label.color<span class="op">=</span><span class="st">"white"</span>, label.size<span class="op">=</span><span class="fl">5</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">p</span></span></span>
+<span class="r-plt img"><img src="Bior_PiePlot-2.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>

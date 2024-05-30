@@ -5,26 +5,38 @@
 \title{Pie Plot}
 \usage{
 Bior_PiePlot(
-  x,
-  labels,
-  col = pal_d3("category20,", alpha = 0.7)(20),
+  value,
+  type,
+  label = NULL,
+  col = pal_d3("category20", alpha = 0.7)(20),
   title = "",
-  fontsize = 20,
-  legend.key.size = 1
+  text.size = 15,
+  plot.title.size = 20,
+  label.x = 1.2,
+  label.color = "white",
+  label.size = 5
 )
 }
 \arguments{
-\item{x}{A vector of value}
+\item{value}{A vector of value}
 
-\item{labels}{A vector of labels for x}
+\item{type}{A vector of type}
 
-\item{col}{colour}
+\item{label}{(defaut: label=NULL); A vector of label}
 
-\item{title}{title}
+\item{col}{(defaut: col=pal_d3("category20,",alpha=0.7)(20)); colour for type}
 
-\item{fontsize}{fontsize}
+\item{title}{(defaut: title=""); title for plot}
 
-\item{legend.key.size}{legend size}
+\item{text.size}{(defaut: text.size=15); text size}
+
+\item{plot.title.size}{(defaut: plot.title.size=20); plot.title size}
+
+\item{label.x}{(defaut: label.x=1.2); geom_text x for label}
+
+\item{label.color}{(defaut: label.color="white"); geom_text color for label}
+
+\item{label.size}{(defaut: label.size=5); geom_text size for label}
 }
 \value{
 A ggplot object
@@ -34,9 +46,19 @@ Create a Pie plot.
 }
 \examples{
 # Examples 1
-x <- c(3,7,9,1,2)
-labels <- c("A", "B", "C", "D", "E")
+value <- c(0.1,0.2,0.4,0.1,0.3)
+type <- c("A (10\%)", "B (20\%)", "C (40\%)", "D (10\%)", "E (30\%)")
 col <- c("#AEC7E8B2", "#FFBB78B2", "#98DF8AB2", "#FF9896B2", "#C5B0D5B2")
-p <- Bior_PiePlot(x, labels, col=col, title="Test Bior_PiePlot")
+p <- Bior_PiePlot(value=value, type=type, col=col, title="Test Bior_pie")
 p
+
+# Examples 2
+value <- c(0.1,0.2,0.4,0.1,0.3)
+type <- c("A", "B", "C", "D", "E")
+label <- c("10\%","20\%","40\%","10\%","30\%")
+col <- c("#AEC7E8B2", "#FFBB78B2", "#98DF8AB2", "#FF9896B2", "#C5B0D5B2")
+p <- Bior_PiePlot(value=value, type=type, label=label, col=col, title="Test Bior_pie",
+                  label.x=1.2, label.color="white", label.size=5)
+p
+
 }

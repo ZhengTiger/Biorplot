@@ -242,7 +242,7 @@ Bior_LinePlot(data, x = "x", y = "y", color = "Type", title = "Test Bior_LinePlo
 data <- data.frame('x' = c(1:10), 'y' = c(1,1.5,1.8,2.3,3.3,5.3,7.5,8,9,10))
 Bior_LinePlot(data, x = "x", y = "y",
               color = "firebrick3", plot_type = "l", size = 2,
-              cor.test = T, cor.label.x=1, cor.label.y=9.5, R.digits = 2, P.digits = 2,
+              cor.test = TRUE, cor.label.x=1, cor.label.y=9, R.digits = 2, P.digits = 2,
               cor.label.size = 10,
               text.size = 30, ggtheme = theme_classic()) +
   geom_point(color="black", fill="firebrick3", shape=21, size=4, stroke=1) +

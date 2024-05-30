@@ -110,35 +110,65 @@ Bior_LinePlot <- function(
 #' @import ggplot2
 #' @importFrom ggsci pal_d3
 #'
-#' @param x A vector of value
-#' @param labels A vector of labels for x
-#' @param col colour
-#' @param title title
-#' @param fontsize fontsize
-#' @param legend.key.size legend size
+#' @param value A vector of value
+#' @param type A vector of type
+#' @param label (defaut: label=NULL); A vector of label
+#' @param col (defaut: col=pal_d3("category20,",alpha=0.7)(20)); colour for type
+#' @param title (defaut: title=""); title for plot
+#' @param text.size (defaut: text.size=15); text size
+#' @param plot.title.size (defaut: plot.title.size=20); plot.title size
+#' @param label.x (defaut: label.x=1.2); geom_text x for label
+#' @param label.color (defaut: label.color="white"); geom_text color for label
+#' @param label.size (defaut: label.size=5); geom_text size for label
 #'
 #' @return A ggplot object
 #' @export
 #'
 #' @examples
 #' # Examples 1
-#' x <- c(3,7,9,1,2)
-#' labels <- c("A", "B", "C", "D", "E")
+#' value <- c(0.1,0.2,0.4,0.1,0.3)
+#' type <- c("A (10%)", "B (20%)", "C (40%)", "D (10%)", "E (30%)")
 #' col <- c("#AEC7E8B2", "#FFBB78B2", "#98DF8AB2", "#FF9896B2", "#C5B0D5B2")
-#' p <- Bior_PiePlot(x, labels, col=col, title="Test Bior_PiePlot")
+#' p <- Bior_PiePlot(value=value, type=type, col=col, title="Test Bior_pie")
 #' p
-Bior_PiePlot <- function(x, labels, col=pal_d3("category20,",alpha=0.7)(20), title="",
-                     fontsize=20, legend.key.size=1){
-  df <- data.frame(x=x, labels=labels)
-  df$labels <- factor(df$labels, levels=labels)
-  ggplot(df, aes(x='', y=x, fill=labels)) +
-    geom_bar(stat='identity')+
-    coord_polar(theta='y')+
+#'
+#' # Examples 2
+#' value <- c(0.1,0.2,0.4,0.1,0.3)
+#' type <- c("A", "B", "C", "D", "E")
+#' label <- c("10%","20%","40%","10%","30%")
+#' col <- c("#AEC7E8B2", "#FFBB78B2", "#98DF8AB2", "#FF9896B2", "#C5B0D5B2")
+#' p <- Bior_PiePlot(value=value, type=type, label=label, col=col, title="Test Bior_pie",
+#'                   label.x=1.2, label.color="white", label.size=5)
+#' p
+#'
+Bior_PiePlot <- function(
+    value, type, label=NULL, col=pal_d3("category20",alpha=0.7)(20), title="",
+    text.size=15, plot.title.size=20,
+    label.x=1.2, label.color="white", label.size=5)
+{
+  df <- data.frame(value=value, type=type)
+  df$label <- label
+  df$type <- factor(df$type, levels=type)
+
+  p <-
+    ggplot(df, aes(x='', y=value, fill=type)) +
+    geom_bar(stat="identity", width=1, color="white",
+             position = position_stack(reverse =T)) +
+    coord_polar("y", start=0) +
     theme_void() +
-    labs(title=title) +
-    theme(text=element_text(size=fontsize), plot.title=element_text(hjust=0.5),
-          legend.title=element_blank(), legend.key.size=unit(legend.key.size, "cm")) +
-    scale_fill_manual(values=col)
+    theme(text = element_text(size = text.size),
+          plot.title = element_text(size=plot.title.size, hjust = 0.5),
+          legend.title = element_blank()) +
+    scale_fill_manual(values = col) +
+    labs(title = title)
+
+  if (!is.null(label)){
+
+    p <- p +
+      geom_text(aes(x = label.x, label = label), color = label.color, size=label.size,
+                position = position_stack(reverse =T, vjust=0.5))
+  }
+  return(p)
 }
 
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

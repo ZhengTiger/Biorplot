@@ -50,19 +50,25 @@ You can learn how to draw a plot by clicking on the gallery below.
         </justify></td>
         
         <td width="300"><justify>
-        <a href=https://zhenghu159.github.io/Biorplot/articles/General_Plots.html#bior_pieplot target="-blank" title="Bior_PiePlot()">
-        <img src="https://raw.githubusercontent.com/zhenghu159/Biorplot/main/vignettes/images/Bior_PiePlot.png" >
+        <a href=https://zhenghu159.github.io/Biorplot/articles/General_Plots.html#base-pieplot target="-blank" title="Bior_PiePlot()">
+        <img src="https://raw.githubusercontent.com/zhenghu159/Biorplot/main/vignettes/images/Bior_PiePlot1.png" >
         </a>
         </justify></td>
         
+        <td width="300"><justify>
+        <a href=https://zhenghu159.github.io/Biorplot/articles/General_Plots.html#pieplot-with-label target="-blank" title="Bior_PiePlot()">
+        <img src="https://raw.githubusercontent.com/zhenghu159/Biorplot/main/vignettes/images/Bior_PiePlot2.png" >
+        </a>
+        </justify></td>
+    </tr>
+    
+    <tr>
         <td width="300"> <justify>
         <a href=https://zhenghu159.github.io/Biorplot/articles/General_Plots.html#bior_stackbarplot target="-blank" title="Bior_StackBarplot()">
         <img src="https://raw.githubusercontent.com/zhenghu159/Biorplot/main/vignettes/images/Bior_StackBarplot.png" >
         </a>
         <justify></td>
-    </tr>
     
-    <tr>
         <td width="300"> <justify>
         <a href=https://zhenghu159.github.io/Biorplot/articles/General_Plots.html#bior_dotplot target="-blank"  title="Bior_DotPlot()">
         <img src="https://raw.githubusercontent.com/zhenghu159/Biorplot/main/vignettes/images/Bior_DotPlot.png" >
@@ -78,9 +84,6 @@ You can learn how to draw a plot by clicking on the gallery below.
         <td width="300"><justify>
         </justify></td>
         
-        <td width="300"> <justify>
-        <justify></td>
-
     </tr>
 </table>
 

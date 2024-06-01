@@ -25,6 +25,9 @@
     <loc>http://tigerz.online/Biorplot/index.html</loc>
   </url>
   <url>
+    <loc>http://tigerz.online/Biorplot/reference/Bior_BarPlot.html</loc>
+  </url>
+  <url>
     <loc>http://tigerz.online/Biorplot/reference/Bior_DotPlot.html</loc>
   </url>
   <url>
@@ -35,9 +38,6 @@
   </url>
   <url>
     <loc>http://tigerz.online/Biorplot/reference/Bior_Sankeyplot.html</loc>
-  </url>
-  <url>
-    <loc>http://tigerz.online/Biorplot/reference/Bior_StackBarplot.html</loc>
   </url>
   <url>
     <loc>http://tigerz.online/Biorplot/reference/index.html</loc>

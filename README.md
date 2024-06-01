@@ -50,8 +50,20 @@ You can learn how to draw a plot by clicking on the gallery below.
 <tr>
 <td width="300">
 <justify>
-<a href=https://zhenghu159.github.io/Biorplot/articles/General_Plots.html#bior_stackbarplot target="-blank" title="Bior_StackBarplot()">
-<img src="https://raw.githubusercontent.com/zhenghu159/Biorplot/main/vignettes/images/Bior_StackBarplot.png" >
+<a href=https://zhenghu159.github.io/Biorplot/articles/General_Plots.html#base-barplot target="-blank" title="Bior_StackBarplot()">
+<img src="https://raw.githubusercontent.com/zhenghu159/Biorplot/main/vignettes/images/Bior_BarPlot1.png" >
+</a> <justify>
+</td>
+<td width="300">
+<justify>
+<a href=https://zhenghu159.github.io/Biorplot/articles/General_Plots.html#stack-barplot target="-blank" title="Bior_StackBarplot()">
+<img src="https://raw.githubusercontent.com/zhenghu159/Biorplot/main/vignettes/images/Bior_BarPlot2.png" >
+</a> <justify>
+</td>
+<td width="300">
+<justify>
+<a href=https://zhenghu159.github.io/Biorplot/articles/General_Plots.html#dodged-barplot target="-blank" title="Bior_StackBarplot()">
+<img src="https://raw.githubusercontent.com/zhenghu159/Biorplot/main/vignettes/images/Bior_BarPlot3.png" >
 </a> <justify>
 </td>
 <td width="300">
@@ -60,11 +72,19 @@ You can learn how to draw a plot by clicking on the gallery below.
 <img src="https://raw.githubusercontent.com/zhenghu159/Biorplot/main/vignettes/images/Bior_DotPlot.png" >
 </a> <justify>
 </td>
+</tr>
+<tr>
 <td width="300">
 <justify>
 <a href=https://zhenghu159.github.io/Biorplot/articles/General_Plots.html#bior_sankeyplot target="-blank" title="Bior_Sankeyplot()">
 <img src="https://raw.githubusercontent.com/zhenghu159/Biorplot/main/vignettes/images/Bior_Sankeyplot.png" >
 </a> </justify>
+</td>
+<td width="300">
+<justify> </justify>
+</td>
+<td width="300">
+<justify> </justify>
 </td>
 <td width="300">
 <justify> </justify>

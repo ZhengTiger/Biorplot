@@ -29,7 +29,7 @@ reference:
   contents:
   - '`Bior_LinePlot`'
   - '`Bior_PiePlot`'
-  - '`Bior_StackBarplot`'
+  - '`Bior_BarPlot`'
   - '`Bior_DotPlot`'
   - '`Bior_Sankeyplot`'
 - title: scRNAseq Plots

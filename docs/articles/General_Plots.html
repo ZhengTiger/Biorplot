@@ -169,38 +169,67 @@ understand the data distribution.</p>
 </div>
 </div>
 <div class="section level2">
-<h2 id="bior_stackbarplot">Bior_StackBarplot()<a class="anchor" aria-label="anchor" href="#bior_stackbarplot"></a>
+<h2 id="bior_barplot">Bior_BarPlot()<a class="anchor" aria-label="anchor" href="#bior_barplot"></a>
 </h2>
+<p>Bar plot is usually used to compare two or more values (at different
+times or under different conditions) using the length of the rectangle
+as a variable. It is usually used for analyzing smaller data sets.</p>
+<p>In <code>Biorplot</code> package, we use the
+<code><a href="../reference/Bior_BarPlot.html">Bior_BarPlot()</a></code> function to draw a Bar plot.</p>
+<div class="section level3">
+<h3 id="base-barplot">Base BarPlot<a class="anchor" aria-label="anchor" href="#base-barplot"></a>
+</h3>
+<p>Draw a basic bar chart:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">20</span>, mean <span class="op">=</span> <span class="fl">20</span>, sd <span class="op">=</span> <span class="fl">5</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">5</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">'gene'</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">4</span>, sep<span class="op">=</span><span class="st">''</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">'sample'</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,sep<span class="op">=</span><span class="st">''</span><span class="op">)</span></span>
-<span><span class="va">x.order</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'sample1'</span>,<span class="st">'sample5'</span>,<span class="st">'sample4'</span>,<span class="st">'sample3'</span>,<span class="st">'sample2'</span><span class="op">)</span></span>
-<span><span class="va">type.order</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'gene1'</span>,<span class="st">'gene2'</span>,<span class="st">'gene3'</span>,<span class="st">'gene4'</span><span class="op">)</span></span>
-<span><span class="va">col</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#AEC7E8FF"</span>,<span class="st">"#FFBB78FF"</span>,<span class="st">"#98DF8AFF"</span>,<span class="st">"#FF9896FF"</span><span class="op">)</span></span>
-<span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Bior_StackBarplot.html">Bior_StackBarplot</a></span><span class="op">(</span><span class="va">data</span>, x.order<span class="op">=</span><span class="va">x.order</span>, type.order<span class="op">=</span><span class="va">type.order</span>, col <span class="op">=</span> <span class="va">col</span>,</span>
-<span>                  labs.x<span class="op">=</span><span class="st">'Samples'</span>, labs.y<span class="op">=</span><span class="st">'Numbers'</span>, title<span class="op">=</span><span class="st">'Test Bior_StackBarplot'</span>,</span>
-<span>                  theme<span class="op">=</span><span class="fu">theme_minimal</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">p</span></span></code></pre></div>
-<p><img src="General_Plots_files/figure-html/unnamed-chunk-7-1.png" width="768"></p>
+<code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
+<span>  x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span><span class="op">)</span>,</span>
+<span>  y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/Bior_BarPlot.html">Bior_BarPlot</a></span><span class="op">(</span><span class="va">df</span>, <span class="st">"x"</span>, <span class="st">"y"</span>, fill <span class="op">=</span> <span class="st">"steelblue"</span>, color <span class="op">=</span> <span class="st">"steelblue"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="General_Plots_files/figure-html/unnamed-chunk-7-1.png" width="576"></p>
+</div>
+<div class="section level3">
+<h3 id="stack-barplot">stack BarPlot<a class="anchor" aria-label="anchor" href="#stack-barplot"></a>
+</h3>
+<p>Draw a stacked bar plot and add text label:</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
+<span>  x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'sample1'</span>,<span class="st">'sample2'</span>,<span class="st">'sample3'</span>,<span class="st">'sample4'</span><span class="op">)</span>, each<span class="op">=</span><span class="fl">2</span><span class="op">)</span>,</span>
+<span>  y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">20</span>,<span class="fl">16</span>,<span class="fl">29</span>,<span class="fl">16</span>,<span class="fl">14</span>,<span class="fl">11</span>,<span class="fl">22</span>,<span class="fl">21</span><span class="op">)</span>,</span>
+<span>  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'gene1'</span>,<span class="st">'gene2'</span><span class="op">)</span>, <span class="fl">4</span><span class="op">)</span>,</span>
+<span>  label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">20</span>,<span class="fl">16</span>,<span class="fl">29</span>,<span class="fl">16</span>,<span class="fl">14</span>,<span class="fl">11</span>,<span class="st">""</span>,<span class="st">""</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">col</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#AEC7E8FF"</span>,<span class="st">"#FFBB78FF"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/Bior_BarPlot.html">Bior_BarPlot</a></span><span class="op">(</span><span class="va">df</span>, <span class="st">"x"</span>, <span class="st">"y"</span>, fill <span class="op">=</span> <span class="st">"type"</span>, color <span class="op">=</span> <span class="st">"type"</span>, label <span class="op">=</span> <span class="va">df</span><span class="op">$</span><span class="va">label</span>,</span>
+<span>                  palette <span class="op">=</span> <span class="va">col</span>, lab.pos <span class="op">=</span> <span class="st">"in"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">theme</span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"right"</span>, legend.key.size<span class="op">=</span><span class="fu">unit</span><span class="op">(</span><span class="fl">1</span>, <span class="st">"cm"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p><img src="General_Plots_files/figure-html/unnamed-chunk-8-1.png" width="576"></p>
+</div>
+<div class="section level3">
+<h3 id="dodged-barplot">dodged BarPlot<a class="anchor" aria-label="anchor" href="#dodged-barplot"></a>
+</h3>
+<p>Change position: Interleaved (dodged) bar plot:</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/Bior_BarPlot.html">Bior_BarPlot</a></span><span class="op">(</span><span class="va">df</span>, <span class="st">"x"</span>, <span class="st">"y"</span>, fill <span class="op">=</span> <span class="st">"type"</span>, color <span class="op">=</span> <span class="st">"type"</span>, palette <span class="op">=</span> <span class="va">col</span>,</span>
+<span>                  label <span class="op">=</span> <span class="cn">TRUE</span>, position <span class="op">=</span> <span class="fu">position_dodge</span><span class="op">(</span><span class="fl">0.9</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p><img src="General_Plots_files/figure-html/unnamed-chunk-9-1.png" width="768"></p>
+</div>
 </div>
 <div class="section level2">
 <h2 id="bior_dotplot">Bior_DotPlot()<a class="anchor" aria-label="anchor" href="#bior_dotplot"></a>
 </h2>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">'sample'</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, sep<span class="op">=</span><span class="st">''</span><span class="op">)</span>, <span class="fl">4</span><span class="op">)</span></span>
 <span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">'gene'</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span>, sep<span class="op">=</span><span class="st">''</span><span class="op">)</span>, <span class="fl">5</span><span class="op">)</span></span>
 <span><span class="va">size</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">20</span>, mean <span class="op">=</span> <span class="fl">10</span>, sd <span class="op">=</span> <span class="fl">5</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">colour</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#1F77B4FF"</span>,<span class="st">"#FF7F0EFF"</span>,<span class="st">"#2CA02CFF"</span>,<span class="st">"#D62728FF"</span>,<span class="st">"#9467BDFF"</span><span class="op">)</span></span>
 <span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Bior_DotPlot.html">Bior_DotPlot</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">x</span>, y <span class="op">=</span> <span class="va">y</span>, size <span class="op">=</span> <span class="va">size</span>, group.by <span class="op">=</span> <span class="va">x</span>, colour <span class="op">=</span> <span class="va">colour</span>, max_size<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span>
 <span><span class="va">p</span></span></code></pre></div>
-<p><img src="General_Plots_files/figure-html/unnamed-chunk-8-1.png" width="768"></p>
+<p><img src="General_Plots_files/figure-html/unnamed-chunk-10-1.png" width="768"></p>
 </div>
 <div class="section level2">
 <h2 id="bior_sankeyplot">Bior_Sankeyplot()<a class="anchor" aria-label="anchor" href="#bior_sankeyplot"></a>
 </h2>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># links data, colnames must have 'source' 'target' 'value'</span></span>
 <span><span class="va">links</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
 <span>  source<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"C"</span>,<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"E"</span>, <span class="st">"D"</span><span class="op">)</span>, </span>
@@ -214,8 +243,8 @@ understand the data distribution.</p>
 <span>                  <span class="st">"#8C564BB2"</span>,<span class="st">"#E377C2B2"</span>,<span class="st">"#7F7F7FB2"</span>,<span class="st">"#BCBD22B2"</span>,<span class="st">"#17BECFB2"</span><span class="op">)</span></span>
 <span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Bior_Sankeyplot.html">Bior_Sankeyplot</a></span><span class="op">(</span><span class="va">links</span>, Nodes.order<span class="op">=</span><span class="va">Nodes.order</span>, Nodes.colour<span class="op">=</span><span class="va">Nodes.colour</span>, fontSize<span class="op">=</span><span class="fl">20</span><span class="op">)</span></span>
 <span><span class="va">p</span></span></code></pre></div>
-<div id="htmlwidget-e2fc9dd4371ce034f426" style="width:600px;height:600px;" class="sankeyNetwork html-widget "></div>
-<script type="application/json" data-for="htmlwidget-e2fc9dd4371ce034f426">{"x":{"links":{"source":[1,0,2,3],"target":[4,5,6,7],"value":[1,2,5,4],"group":["C","A","D","E"]},"nodes":{"name":["A","C","D","E","b","c","d","e"],"group":["A","C","D","E","b","c","d","e"]},"options":{"NodeID":"name","NodeGroup":"name","LinkGroup":"Group","colourScale":"d3.scaleOrdinal() .domain([\"A\", \"B\", \"C\", \"D\", \"E\", \"a\", \"b\", \"c\", \"d\", \"e\"]) .range([\"#1F77B4B2\", \"#FF7F0EB2\", \"#2CA02CB2\", \"#D62728B2\", \"#9467BDB2\", \"#8C564BB2\", \"#E377C2B2\", \"#7F7F7FB2\", \"#BCBD22B2\", \"#17BECFB2\"])","fontSize":20,"fontFamily":null,"nodeWidth":30,"nodePadding":10,"units":"","margin":{"top":null,"right":null,"bottom":null,"left":null},"iterations":0,"sinksRight":true}},"evals":[],"jsHooks":[]}</script><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div id="htmlwidget-afe8011d621c6e9040fb" style="width:600px;height:600px;" class="sankeyNetwork html-widget "></div>
+<script type="application/json" data-for="htmlwidget-afe8011d621c6e9040fb">{"x":{"links":{"source":[1,0,2,3],"target":[4,5,6,7],"value":[1,2,5,4],"group":["C","A","D","E"]},"nodes":{"name":["A","C","D","E","b","c","d","e"],"group":["A","C","D","E","b","c","d","e"]},"options":{"NodeID":"name","NodeGroup":"name","LinkGroup":"Group","colourScale":"d3.scaleOrdinal() .domain([\"A\", \"B\", \"C\", \"D\", \"E\", \"a\", \"b\", \"c\", \"d\", \"e\"]) .range([\"#1F77B4B2\", \"#FF7F0EB2\", \"#2CA02CB2\", \"#D62728B2\", \"#9467BDB2\", \"#8C564BB2\", \"#E377C2B2\", \"#7F7F7FB2\", \"#BCBD22B2\", \"#17BECFB2\"])","fontSize":20,"fontFamily":null,"nodeWidth":30,"nodePadding":10,"units":"","margin":{"top":null,"right":null,"bottom":null,"left":null},"iterations":0,"sinksRight":true}},"evals":[],"jsHooks":[]}</script><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Use saveNetwork() to save the plot as html</span></span>
 <span><span class="co"># saveNetwork(p,"sankey.html")</span></span></code></pre></div>
 </div>

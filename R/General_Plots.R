@@ -179,73 +179,73 @@ Bior_PiePlot <- function(
 
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-#' Stack Barplot
+#' Bar plot
 #' @description Create a stacked barplot.
 #'
-#' @importFrom scales hue_pal
+#' @importFrom ggpubr ggbarplot position_stack() theme_pubr()
 #' @import ggplot2
 #'
-#' @param data A dataframe, the columns are x-axis sample, the rows are fill type
-#' @param x.order x axis sample order
-#' @param type.order fill type order
-#' @param col fill colours
-#' @param label.size label size
-#' @param labs.x x axis title
-#' @param labs.y y axis title
-#' @param title figure title
-#' @param legend.key.size legend size
-#' @param text.size text size
-#' @param bar.width bar width
-#' @param theme choose ggthemes, eg:theme_bw(), theme_classic()
+#' @inheritParams ggpubr::ggbarplot
 #'
 #' @return A ggplot object
 #' @export
 #'
 #' @examples
 #' # Examples 1
-#' data <- data.frame(matrix(rnorm(20, mean = 20, sd = 5),c(4,5)))
-#' data <- round(data)
-#' rownames(data) <- paste('gene',1:4, sep='')
-#' colnames(data) <- paste('sample',1:5,sep='')
-#' x.order <- c('sample1','sample5','sample4','sample3','sample2')
-#' type.order <- c('gene1','gene2','gene3','gene4')
-#' col <- c("#AEC7E8FF","#FFBB78FF","#98DF8AFF","#FF9896FF")
-#' p <- Bior_StackBarplot(data, x.order=x.order, type.order=type.order, col = col,
-#'                        labs.x='Samples', labs.y='Numbers', title='Test Bior_StackBarplot',
-#'                        theme=theme_minimal())
-#' p
-Bior_StackBarplot <- function(data, x.order=NULL, type.order=NULL, col=scales::hue_pal(),
-                              label.size=5, labs.x='', labs.y='', title='',
-                              legend.key.size=1, text.size=15, bar.width=0.7,
-                              theme=theme_bw()){
-  # adjust data format
-  x <- c()
-  type <- c()
-  value <- c()
-  for (i in 1:nrow(data)){
-    for (j in 1:ncol(data)){
-      x <- c(x, colnames(data)[j])
-      type <- c(type, rownames(data)[i])
-      value <- c(value, data[i,j])
-    }
-  }
-  df <- data.frame(x=x, type=type, value=value)
-  if (!is.null(x.order)){
-    df$x <- factor(df$x, levels = x.order)
-  }
-  if (!is.null(type.order)){
-    df$type <- factor(df$type, levels = type.order)
-  }
-  # plot
-  p <- ggplot(data=df, aes(x=x, y=value, fill=type)) + geom_bar(stat="identity", width=bar.width) +
-    scale_fill_manual(values=col) +
-    labs(x=labs.x, y=labs.y, title=title) +
-    geom_text(aes(label=value), color="black", size=label.size, position=position_stack(0.5)) +
-    theme +
-    theme(panel.grid = element_blank(),
-          text=element_text(size=text.size), plot.title=element_text(hjust=0.5),
-          legend.title=element_blank(),
-          legend.key.size=unit(legend.key.size, "cm"))
+#' df <- data.frame(
+#' x = c("A", "B", "C"),
+#' y = c(3, 2, 1))
+#' Bior_BarPlot(df, "x", "y", fill = "steelblue", color = "steelblue")
+#'
+#' # Examples 2
+#' df <- data.frame(
+#'   x = rep(c('sample1','sample2','sample3','sample4'), each=2),
+#'   y = c(20,16,29,16,14,11,22,21),
+#'   type = rep(c('gene1','gene2'), 4),
+#'   label = c(20,16,29,16,14,11,"","")
+#'   )
+#' col <- c("#AEC7E8FF","#FFBB78FF")
+#' Bior_BarPlot(df, "x", "y", fill = "type", color = "type", label = df$label,
+#'              palette = col, lab.pos = "in") +
+#'   theme(legend.position = "right", legend.key.size=unit(1, "cm"))
+#'
+#' # Examples 3
+#' Bior_BarPlot(df, "x", "y", fill = "type", color = "type", palette = col,
+#'              label = TRUE, position = position_dodge(0.9))
+#'
+Bior_BarPlot <- function(data, x, y, combine = FALSE, merge = FALSE,
+                              color = "black", fill = "white", palette = NULL,
+                              size = NULL, width = NULL,
+                              title = NULL, xlab = NULL, ylab = NULL,
+                              facet.by = NULL, panel.labs = NULL, short.panel.labs = TRUE,
+                              select = NULL, remove = NULL, order = NULL,
+                              add = "none", add.params = list(), error.plot = "errorbar",
+                              label = FALSE, lab.col = "black", lab.size = 4,
+                              lab.pos = c("out", "in"), lab.vjust = NULL, lab.hjust = NULL,
+                              lab.nb.digits = NULL,
+                              sort.val = c("none", "desc", "asc"), sort.by.groups = TRUE,
+                              top = Inf,
+                              position = position_stack(),
+                              ggtheme = theme_pubr(),
+                              ...)
+{
+  # Default options
+  .opts <- list(
+    data = data, x = x, y = y, combine = combine, merge = merge,
+    color = color, fill = fill, palette = palette,
+    size = size, width = width,
+    title = title, xlab = xlab, ylab = ylab,
+    facet.by = facet.by, panel.labs = panel.labs, short.panel.labs = short.panel.labs,
+    select = select , remove = remove, order = order,
+    add = add, add.params = add.params, error.plot = error.plot,
+    label = label, lab.col = lab.col, lab.size = lab.size,
+    lab.pos = lab.pos, lab.vjust = lab.vjust, lab.hjust = lab.hjust,
+    lab.nb.digits = lab.nb.digits,
+    sort.val = sort.val, sort.by.groups = sort.by.groups, top = top,
+    position = position, ggtheme = ggtheme, ...)
+
+  p <- do.call(ggpubr::ggbarplot, .opts)
+
   return(p)
 }
 

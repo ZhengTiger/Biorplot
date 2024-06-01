@@ -95,22 +95,49 @@ p
 
 
 
+## Bior_BarPlot()
 
-## Bior_StackBarplot()
+Bar plot is usually used to compare two or more values (at different times or under different conditions) using the length of the rectangle as a variable. It is usually used for analyzing smaller data sets.
+
+In `Biorplot` package, we use the `Bior_BarPlot()` function to draw a Bar plot.
+
+### Base BarPlot
+
+Draw a basic bar chart:
+
+```{r fig.height=4, fig.width=6, message=FALSE, warning=FALSE}
+df <- data.frame(
+  x = c("A", "B", "C"),
+  y = c(3, 2, 1))
+Bior_BarPlot(df, "x", "y", fill = "steelblue", color = "steelblue")
+```
+
+### stack BarPlot
+
+Draw a stacked bar plot and add text label:
+
+```{r fig.height=4, fig.width=6, message=FALSE, warning=FALSE}
+df <- data.frame(
+  x = rep(c('sample1','sample2','sample3','sample4'), each=2),
+  y = c(20,16,29,16,14,11,22,21),
+  type = rep(c('gene1','gene2'), 4),
+  label = c(20,16,29,16,14,11,"","")
+)
+col <- c("#AEC7E8FF","#FFBB78FF")
+Bior_BarPlot(df, "x", "y", fill = "type", color = "type", label = df$label,
+                  palette = col, lab.pos = "in") +
+  theme(legend.position = "right", legend.key.size=unit(1, "cm"))
+```
+
+### dodged BarPlot
+
+Change position: Interleaved (dodged) bar plot: 
 
 ```{r fig.height=6, fig.width=8, message=FALSE, warning=FALSE}
-data <- data.frame(matrix(rnorm(20, mean = 20, sd = 5),c(4,5)))
-data <- round(data)
-rownames(data) <- paste('gene',1:4, sep='')
-colnames(data) <- paste('sample',1:5,sep='')
-x.order <- c('sample1','sample5','sample4','sample3','sample2')
-type.order <- c('gene1','gene2','gene3','gene4')
-col <- c("#AEC7E8FF","#FFBB78FF","#98DF8AFF","#FF9896FF")
-p <- Bior_StackBarplot(data, x.order=x.order, type.order=type.order, col = col,
-                  labs.x='Samples', labs.y='Numbers', title='Test Bior_StackBarplot',
-                  theme=theme_minimal())
-p
+Bior_BarPlot(df, "x", "y", fill = "type", color = "type", palette = col,
+                  label = TRUE, position = position_dodge(0.9))
 ```
+
 
 
 

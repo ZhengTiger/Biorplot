@@ -182,7 +182,7 @@ Bior_PiePlot <- function(
 #' Bar plot
 #' @description Create a stacked barplot.
 #'
-#' @importFrom ggpubr ggbarplot position_stack() theme_pubr()
+#' @importFrom ggpubr ggbarplot theme_pubr
 #' @import ggplot2
 #'
 #' @inheritParams ggpubr::ggbarplot
@@ -260,23 +260,10 @@ Bior_BarPlot <- function(data, x, y, combine = FALSE, merge = FALSE,
 #' Dot Plot
 #' @description Create a dot plot.
 #'
-#' @importFrom scales hue_pal
+#' @importFrom ggpubr ggdotchart
 #' @import ggplot2
 #'
-#' @param x A vector, x-axis value
-#' @param y A vector, y-axis value
-#' @param size A vector, point size value
-#' @param group.by color group by x or y
-#' @param colour colour
-#' @param max_size max point size
-#' @param text.size text size
-#' @param breaks scale_size_area(breaks)
-#' @param theme choose ggthemes, default:theme_bw()
-#' @param labs.x labs x
-#' @param labs.y labs y
-#' @param title title
-#' @param legendtitle.color guides(color=guide_legend(legendtitle.color))
-#' @param legendtitle.size guides(size=guide_legend(legendtitle.size))
+#' @inheritParams ggpubr::ggdotchart
 #'
 #' @return A ggplot object
 #' @export
@@ -289,23 +276,41 @@ Bior_BarPlot <- function(data, x, y, combine = FALSE, merge = FALSE,
 #' colour <- c("#1F77B4FF","#FF7F0EFF","#2CA02CFF","#D62728FF","#9467BDFF")
 #' p <- Bior_DotPlot(x = x, y = y, size = size, group.by = x, colour = colour, max_size=10)
 #' p
-Bior_DotPlot <- function(x, y, size, group.by, colour=NULL, max_size=5, text.size=15,
-                         breaks=waiver(), theme=theme_bw(), labs.x='',
-                         labs.y='', title='', legendtitle.color='Types',
-                         legendtitle.size='Value'){
-  if (is.null(colour)){
-    colour <- hue_pal()(length(unique(group.by)))
-  }else{
-    colour <- colour
-  }
-  p <- ggplot() +
-    geom_point(aes(x = x, y = y, size = size, colour = group.by)) +
-    scale_size_area(max_size = max_size, breaks = breaks) +
-    scale_color_manual(values = colour) +
-    theme +
-    theme(plot.title = element_text(hjust = 0.5), text=element_text(size=text.size)) +
-    labs(x=labs.x, y=labs.y, title=title) +
-    guides(color=guide_legend(legendtitle.color), size=guide_legend(legendtitle.size))
+Bior_DotPlot <- function(data, x, y, group = NULL,
+                         combine = FALSE,
+                         color = "black", palette = NULL,
+                         shape = 19, size = NULL, dot.size = size,
+                         sorting = c("ascending", "descending", "none"),
+                         x.text.col = TRUE,
+                         rotate = FALSE,
+                         title = NULL, xlab = NULL, ylab = NULL,
+                         facet.by = NULL, panel.labs = NULL, short.panel.labs = TRUE,
+                         select = NULL, remove = NULL, order = NULL,
+                         label = NULL, font.label = list(size = 11, color = "black"),
+                         label.select = NULL, repel = FALSE, label.rectangle = FALSE,
+                         position = "identity",
+                         ggtheme = theme_pubr(),
+                         ...)
+{
+  # Default options
+  .opts <- list(data = data, x = x, y = y, group = group,
+                combine = combine,
+                color = color, palette = palette,
+                shape = shape, size = size, dot.size = size,
+                sorting = sorting,
+                x.text.col = x.text.col,
+                rotate = rotate,
+                title = title, xlab = xlab, ylab = ylab,
+                facet.by = facet.by, panel.labs = panel.labs, short.panel.labs = short.panel.labs,
+                select = select, remove = remove, order = order,
+                label = label, font.label = font.label,
+                label.select = label.select, repel = repel, label.rectangle = label.rectangle,
+                position = position,
+                ggtheme = ggtheme,
+                ...)
+
+  p <- do.call(ggpubr::ggdotchart, .opts)
+
   return(p)
 }
 

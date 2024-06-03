@@ -26,9 +26,9 @@ Line plot use line segments to connect data points to show data trends. Each dat
 
 In `Biorplot` package, we use the `Bior_LinePlot()` function to draw a line plot.
 
-### Base linePlot
+### Basic linePlot
 
-Draw a base line plot with different type:
+Draw a basic line plot with different type:
 
 ```{r fig.height=6, fig.width=8, message=FALSE, warning=FALSE}
 data <- data.frame('x' = c(1:20), 'y' = rnorm(20), 'Type' = rep(c('A','B'), 10))
@@ -66,9 +66,9 @@ Pie plot are often used to show the relative proportions of data. Based on a cir
 
 In `Biorplot` package, we use the `Bior_PiePlot()` function to draw a Pie plot.
 
-### Base PiePlot
+### Basic PiePlot
 
-Draw a base pie plot with different type:
+Draw a basic pie plot with different type:
 
 ```{r fig.height=4, fig.width=6, message=FALSE, warning=FALSE}
 value <- c(0.1,0.2,0.4,0.1,0.3)
@@ -101,9 +101,9 @@ Bar plot is usually used to compare two or more values (at different times or un
 
 In `Biorplot` package, we use the `Bior_BarPlot()` function to draw a Bar plot.
 
-### Base BarPlot
+### Basic BarPlot
 
-Draw a basic bar chart:
+Draw a basic bar plot:
 
 ```{r fig.height=4, fig.width=6, message=FALSE, warning=FALSE}
 df <- data.frame(
@@ -141,15 +141,46 @@ Bior_BarPlot(df, "x", "y", fill = "type", color = "type", palette = col,
 
 
 
+
 ## Bior_DotPlot()
 
-```{r fig.height=6, fig.width=8, message=FALSE, warning=FALSE}
-x <- rep(paste('sample', 1:5, sep=''), 4)
-y <- rep(paste('gene', 1:4, sep=''), 5)
-size <- round(rnorm(20, mean = 10, sd = 5))
+Dot plot is usually used to displays multidimensional data in two-dimensional graphics. It plots data points in a plane coordinate system, with each data point represented by a circle. The size of the circle is usually related to the value of a certain dimension. Through the dot plot, we can easily observe the distribution of data points in various dimensions.
+
+In `Biorplot` package, we use the `Bior_DotPlot()` function to draw a Dot plot.
+
+### Basic DotPlot
+
+Draw a basic dot plot:
+
+```{r fig.height=4, fig.width=6, message=FALSE, warning=FALSE}
+df <- data.frame(
+  Sample = rep(paste('sample', 1:5, sep=''), 4),
+  Gene = rep(paste('gene', 1:4, sep=''), 5),
+  size = round(rnorm(20, mean = 10, sd = 5))
+)
 colour <- c("#1F77B4FF","#FF7F0EFF","#2CA02CFF","#D62728FF","#9467BDFF")
-p <- Bior_DotPlot(x = x, y = y, size = size, group.by = x, colour = colour, max_size=10)
-p
+Bior_DotPlot(data = df, x = "Sample", y = "Gene", size = "size", color = "Gene",
+             x.text.col = F, ggtheme = theme_bw()) + 
+  theme(axis.text.x = element_text(angle = 0, hjust = 0.5))
+```
+
+
+### Expression DotPlot
+
+Draw an expression dot plot:
+
+```{r fig.height=4, fig.width=6, message=FALSE, warning=FALSE}
+df <- data.frame(
+  Sample = rep(paste('sample', 1:4, sep=''), each=4),
+  Gene = rep(paste('gene', 1:4, sep=''), 4),
+  Pct = c(80,10,10,10,10,80,10,10,10,10,80,10,10,10,10,80),
+  Expression = c(3,0.5,0.1,0.3,0.3,3,0.2,0.6,0.1,0.7,3,0.1,0.5,0.2,0.1,3)
+)
+
+Bior_DotPlot(data = df, x = "Sample", y = "Gene", size="Pct", color = "Expression",
+             x.text.col = F, ggtheme = theme_bw()) + 
+  theme(axis.text.x = element_text(angle = 0, hjust = 0.5)) +
+  scale_color_gradientn(colours = c("lightblue3", "lightblue", "white", "red", "red4"))
 ```
 
 
@@ -159,8 +190,8 @@ p
 ```{r fig.height=6, fig.width=8, message=FALSE, warning=FALSE}
 # links data, colnames must have 'source' 'target' 'value'
 links <- data.frame(
-  source=c("C","A", "B", "E", "D"), 
-  target=c("b","c", "a", "e", "d"), 
+  source=c("C","A", "B", "E", "D"),
+  target=c("b","c", "a", "e", "d"),
   value=c(1, 2, 0, 4, 5)
 )
 

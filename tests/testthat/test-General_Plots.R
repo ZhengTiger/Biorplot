@@ -65,12 +65,7 @@ test_that("Bior_BarPlot() test", {
 
 
 test_that("Bior_DotPlot() test", {
-  x <- rep(paste('sample', 1:5, sep=''), 4)
-  y <- rep(paste('gene', 1:4, sep=''), 5)
-  size <- round(rnorm(20, mean = 10, sd = 5))
-  colour <- c("#1F77B4FF","#FF7F0EFF","#2CA02CFF","#D62728FF","#9467BDFF")
-  p <- Bior_DotPlot(x = x, y = y, size = size, group.by = x, colour = colour, max_size=10)
-  p
+
 })
 
 

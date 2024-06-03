@@ -59,79 +59,192 @@
 
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">Bior_DotPlot</span><span class="op">(</span></span>
+<span>  <span class="va">data</span>,</span>
 <span>  <span class="va">x</span>,</span>
 <span>  <span class="va">y</span>,</span>
-<span>  <span class="va">size</span>,</span>
-<span>  <span class="va">group.by</span>,</span>
-<span>  colour <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  max_size <span class="op">=</span> <span class="fl">5</span>,</span>
-<span>  text.size <span class="op">=</span> <span class="fl">15</span>,</span>
-<span>  breaks <span class="op">=</span> <span class="fu">waiver</span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  theme <span class="op">=</span> <span class="fu">theme_bw</span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  labs.x <span class="op">=</span> <span class="st">""</span>,</span>
-<span>  labs.y <span class="op">=</span> <span class="st">""</span>,</span>
-<span>  title <span class="op">=</span> <span class="st">""</span>,</span>
-<span>  legendtitle.color <span class="op">=</span> <span class="st">"Types"</span>,</span>
-<span>  legendtitle.size <span class="op">=</span> <span class="st">"Value"</span></span>
+<span>  group <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  combine <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  color <span class="op">=</span> <span class="st">"black"</span>,</span>
+<span>  palette <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  shape <span class="op">=</span> <span class="fl">19</span>,</span>
+<span>  size <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  dot.size <span class="op">=</span> <span class="va">size</span>,</span>
+<span>  sorting <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ascending"</span>, <span class="st">"descending"</span>, <span class="st">"none"</span><span class="op">)</span>,</span>
+<span>  x.text.col <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  rotate <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  title <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  xlab <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  ylab <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  facet.by <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  panel.labs <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  short.panel.labs <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  select <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  remove <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  order <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  label <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  font.label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">11</span>, color <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span>,</span>
+<span>  label.select <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  repel <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  label.rectangle <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  position <span class="op">=</span> <span class="st">"identity"</span>,</span>
+<span>  ggtheme <span class="op">=</span> <span class="fu">theme_pubr</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
-    <dl><dt>x</dt>
-<dd><p>A vector, x-axis value</p></dd>
+    <dl><dt>data</dt>
+<dd><p>a data frame</p></dd>
 
 
-<dt>y</dt>
-<dd><p>A vector, y-axis value</p></dd>
+<dt>x, y</dt>
+<dd><p>x and y variables for drawing.</p></dd>
 
 
-<dt>size</dt>
-<dd><p>A vector, point size value</p></dd>
+<dt>group</dt>
+<dd><p>an optional column name indicating how the elements of x are
+grouped.</p></dd>
 
 
-<dt>group.by</dt>
-<dd><p>color group by x or y</p></dd>
+<dt>combine</dt>
+<dd><p>logical value. Default is FALSE. Used only when y is a vector
+containing multiple variables to plot. If TRUE, create a multi-panel plot by
+combining the plot of y variables.</p></dd>
 
 
-<dt>colour</dt>
-<dd><p>colour</p></dd>
+<dt>color, size</dt>
+<dd><p>points color and size.</p></dd>
 
 
-<dt>max_size</dt>
-<dd><p>max point size</p></dd>
+<dt>palette</dt>
+<dd><p>the color palette to be used for coloring or filling by groups.
+Allowed values include "grey" for grey color palettes; brewer palettes e.g.
+"RdBu", "Blues", ...; or custom color palette e.g. c("blue", "red"); and
+scientific journal palettes from ggsci R package, e.g.: "npg", "aaas",
+"lancet", "jco", "ucscgb", "uchicago", "simpsons" and "rickandmorty".</p></dd>
 
 
-<dt>text.size</dt>
-<dd><p>text size</p></dd>
+<dt>shape</dt>
+<dd><p>point shape. See <code><a href="https://rpkgs.datanovia.com/ggpubr/reference/show_point_shapes.html" class="external-link">show_point_shapes</a></code>.</p></dd>
 
 
-<dt>breaks</dt>
-<dd><p>scale_size_area(breaks)</p></dd>
+<dt>dot.size</dt>
+<dd><p>numeric value specifying the dot size.</p></dd>
 
 
-<dt>theme</dt>
-<dd><p>choose ggthemes, default:theme_bw()</p></dd>
+<dt>sorting</dt>
+<dd><p>a character vector for sorting into ascending or descending
+order. Allowed values are one of "descending", "ascending" and "none". Partial
+match are allowed (e.g. sorting = "desc" or "asc"). Default is
+"descending".</p></dd>
 
 
-<dt>labs.x</dt>
-<dd><p>labs x</p></dd>
+<dt>x.text.col</dt>
+<dd><p>logical. If TRUE (default), x axis texts are colored by
+groups.</p></dd>
 
 
-<dt>labs.y</dt>
-<dd><p>labs y</p></dd>
+<dt>rotate</dt>
+<dd><p>logical value. If TRUE, rotate the graph by setting the plot
+orientation to horizontal.</p></dd>
 
 
 <dt>title</dt>
-<dd><p>title</p></dd>
+<dd><p>plot main title.</p></dd>
 
 
-<dt>legendtitle.color</dt>
-<dd><p>guides(color=guide_legend(legendtitle.color))</p></dd>
+<dt>xlab</dt>
+<dd><p>character vector specifying x axis labels. Use xlab = FALSE to
+hide xlab.</p></dd>
 
 
-<dt>legendtitle.size</dt>
-<dd><p>guides(size=guide_legend(legendtitle.size))</p></dd>
+<dt>ylab</dt>
+<dd><p>character vector specifying y axis labels. Use ylab = FALSE to
+hide ylab.</p></dd>
+
+
+<dt>facet.by</dt>
+<dd><p>character vector, of length 1 or 2, specifying grouping
+variables for faceting the plot into multiple panels. Should be in the data.</p></dd>
+
+
+<dt>panel.labs</dt>
+<dd><p>a list of one or two character vectors to modify facet panel
+labels. For example, panel.labs = list(sex = c("Male", "Female")) specifies
+the labels for the "sex" variable. For two grouping variables, you can use
+for example panel.labs = list(sex = c("Male", "Female"), rx = c("Obs",
+"Lev", "Lev2") ).</p></dd>
+
+
+<dt>short.panel.labs</dt>
+<dd><p>logical value. Default is TRUE. If TRUE, create short
+labels for panels by omitting variable names; in other words panels will be
+labelled only by variable grouping levels.</p></dd>
+
+
+<dt>select</dt>
+<dd><p>character vector specifying which items to display.</p></dd>
+
+
+<dt>remove</dt>
+<dd><p>character vector specifying which items to remove from the plot.</p></dd>
+
+
+<dt>order</dt>
+<dd><p>character vector specifying the order of items.</p></dd>
+
+
+<dt>label</dt>
+<dd><p>the name of the column containing point labels.</p></dd>
+
+
+<dt>font.label</dt>
+<dd><p>a list which can contain the combination of the following
+elements: the size (e.g.: 14), the style (e.g.: "plain", "bold", "italic",
+"bold.italic") and the color (e.g.: "red") of labels. For example font.label
+= list(size = 14, face = "bold", color ="red"). To specify only the size and
+the style, use font.label = list(size = 14, face = "plain").</p></dd>
+
+
+<dt>label.select</dt>
+<dd><p>can be of two formats:</p><ul><li><p>a character vector
+specifying some labels to show.</p></li>
+<li><p>a list containing one or the
+combination of the following components:</p><ul><li><p><code>top.up</code> and
+<code>top.down</code>: to display the labels  of the top up/down points. For
+example, <code>label.select = list(top.up = 10, top.down = 4)</code>.</p></li>
+<li><p><code>criteria</code>: to filter, for example, by x and y variabes values, use
+this: <code>label.select = list(criteria = "`y` &gt; 2 &amp; `y` &lt; 5 &amp; `x` %in%
+c('A', 'B')")</code>.</p></li>
+</ul></li>
+</ul></dd>
+
+
+<dt>repel</dt>
+<dd><p>a logical value, whether to use ggrepel to avoid overplotting
+text labels or not.</p></dd>
+
+
+<dt>label.rectangle</dt>
+<dd><p>logical value. If TRUE, add rectangle underneath the
+text, making it easier to read.</p></dd>
+
+
+<dt>position</dt>
+<dd><p>Position adjustment, either as a string, or the result of a
+call to a position adjustment function.</p></dd>
+
+
+<dt>ggtheme</dt>
+<dd><p>function, ggplot2 theme name. Default value is theme_pubr().
+Allowed values include ggplot2 official themes: theme_gray(), theme_bw(),
+theme_minimal(), theme_classic(), theme_void(), ....</p></dd>
+
+
+<dt>...</dt>
+<dd><p>other arguments to be passed to <code><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></code>
+and <code><a href="https://rpkgs.datanovia.com/ggpubr/reference/ggpar.html" class="external-link">ggpar</a></code>.</p></dd>
 
 </dl></div>
     <div id="value">
@@ -149,8 +262,9 @@
 <span class="r-in"><span><span class="va">size</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">20</span>, mean <span class="op">=</span> <span class="fl">10</span>, sd <span class="op">=</span> <span class="fl">5</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">colour</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#1F77B4FF"</span>,<span class="st">"#FF7F0EFF"</span>,<span class="st">"#2CA02CFF"</span>,<span class="st">"#D62728FF"</span>,<span class="st">"#9467BDFF"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu">Bior_DotPlot</span><span class="op">(</span>x <span class="op">=</span> <span class="va">x</span>, y <span class="op">=</span> <span class="va">y</span>, size <span class="op">=</span> <span class="va">size</span>, group.by <span class="op">=</span> <span class="va">x</span>, colour <span class="op">=</span> <span class="va">colour</span>, max_size<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in Bior_DotPlot(x = x, y = y, size = size, group.by = x, colour = colour,     max_size = 10):</span> argument "data" is missing, with no default</span>
 <span class="r-in"><span><span class="va">p</span></span></span>
-<span class="r-plt img"><img src="Bior_DotPlot-1.png" alt="" width="700" height="433"></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'p' not found</span>
 </code></pre></div>
     </div>
   </div>

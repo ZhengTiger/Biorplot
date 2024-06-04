@@ -140,10 +140,27 @@ Create a dot plot.
 }
 \examples{
 # Examples 1
-x <- rep(paste('sample', 1:5, sep=''), 4)
-y <- rep(paste('gene', 1:4, sep=''), 5)
-size <- round(rnorm(20, mean = 10, sd = 5))
+df <- data.frame(
+  Sample = rep(paste('sample', 1:5, sep=''), 4),
+  Gene = rep(paste('gene', 1:4, sep=''), 5),
+  size = round(rnorm(20, mean = 10, sd = 5))
+  )
 colour <- c("#1F77B4FF","#FF7F0EFF","#2CA02CFF","#D62728FF","#9467BDFF")
-p <- Bior_DotPlot(x = x, y = y, size = size, group.by = x, colour = colour, max_size=10)
-p
+Bior_DotPlot(data = df, x = "Sample", y = "Gene", size = "size", color = "Gene",
+             x.text.col = FALSE, ggtheme = theme_bw()) +
+  theme(axis.text.x = element_text(angle = 0, hjust = 0.5))
+
+# Examples 2
+df <- data.frame(
+  Sample = rep(paste('sample', 1:4, sep=''), each=4),
+  Gene = rep(paste('gene', 1:4, sep=''), 4),
+  Pct = c(80,10,10,10,10,80,10,10,10,10,80,10,10,10,10,80),
+  Expression = c(3,0.5,0.1,0.3,0.3,3,0.2,0.6,0.1,0.7,3,0.1,0.5,0.2,0.1,3)
+  )
+
+ Bior_DotPlot(data = df, x = "Sample", y = "Gene", size="Pct", color = "Expression",
+              x.text.col = FALSE, ggtheme = theme_bw()) +
+  theme(axis.text.x = element_text(angle = 0, hjust = 0.5)) +
+  scale_color_gradientn(colours = c("lightblue3", "lightblue", "white", "red", "red4"))
+
 }

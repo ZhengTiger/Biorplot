@@ -74,8 +74,7 @@ Draw a basic pie plot with different type:
 value <- c(0.1,0.2,0.4,0.1,0.3)
 type <- c("A (10%)", "B (20%)", "C (40%)", "D (10%)", "E (30%)")
 col <- c("#AEC7E8B2", "#FFBB78B2", "#98DF8AB2", "#FF9896B2", "#C5B0D5B2")
-p <- Bior_PiePlot(value=value, type=type, col=col, title="Test Bior_pie")
-p
+Bior_PiePlot(value=value, type=type, col=col, title="Test Bior_pie")
 ```
 
 ### PiePlot with label
@@ -87,8 +86,7 @@ value <- c(0.1,0.2,0.4,0.1,0.3)
 type <- c("A", "B", "C", "D", "E")
 label <- c("10%","20%","40%","10%","30%")
 col <- c("#1F77B4B2", "#FF7F0EB2", "#2CA02CB2", "#D62728B2", "#9467BDB2")
-p <- Bior_PiePlot(value=value, type=type, label=label, col=col, title="Test Bior_pie", label.x=1.2, label.color="white", label.size=5)
-p
+Bior_PiePlot(value=value, type=type, label=label, col=col, title="Test Bior_pie", label.x=1.2, label.color="white", label.size=5)
 ```
 
 
@@ -160,7 +158,7 @@ df <- data.frame(
 )
 colour <- c("#1F77B4FF","#FF7F0EFF","#2CA02CFF","#D62728FF","#9467BDFF")
 Bior_DotPlot(data = df, x = "Sample", y = "Gene", size = "size", color = "Gene",
-             x.text.col = F, ggtheme = theme_bw()) + 
+             x.text.col = FALSE, ggtheme = theme_bw()) + 
   theme(axis.text.x = element_text(angle = 0, hjust = 0.5))
 ```
 
@@ -178,32 +176,85 @@ df <- data.frame(
 )
 
 Bior_DotPlot(data = df, x = "Sample", y = "Gene", size="Pct", color = "Expression",
-             x.text.col = F, ggtheme = theme_bw()) + 
+             x.text.col = FALSE, ggtheme = theme_bw()) + 
   theme(axis.text.x = element_text(angle = 0, hjust = 0.5)) +
   scale_color_gradientn(colours = c("lightblue3", "lightblue", "white", "red", "red4"))
 ```
 
 
 
-## Bior_Sankeyplot()
+## Bior_SankeyPlot()
+
+Sankey plot is a specific type of flowchart in which the width of the branches extending in the diagram corresponds to the size of the data flow, and is more suitable for visual analysis of data such as user flow.
+
+In `Biorplot` package, we use the `Bior_SankeyPlot()` function to draw a Sankey plot.
+
+### Basic SankeyPlot
+
+Draw a basic sankey plot:
 
 ```{r fig.height=6, fig.width=8, message=FALSE, warning=FALSE}
-# links data, colnames must have 'source' 'target' 'value'
 links <- data.frame(
-  source=c("C","A", "B", "E", "D"),
-  target=c("b","c", "a", "e", "d"),
-  value=c(1, 2, 0, 4, 5)
+  Source=c("C","A", "B", "E", "D"),
+  Target=c("b","c", "a", "e", "d"),
+  Value=c(1, 2, 1, 4, 5)
 )
-
-# Set Nodes order and colour
-Nodes.order <- c("A", "B", "C", "D", "E", "a", "b", "c", "d", "e")
+nodes <- data.frame(
+  name = c("A", "B", "C", "D", "E", "a", "b", "c", "d", "e")
+)
+links$IDsource <- match(links$Source, nodes$name) -1
+links$IDtarget <- match(links$Target, nodes$name) -1
 Nodes.colour <- c("#1F77B4B2","#FF7F0EB2","#2CA02CB2","#D62728B2","#9467BDB2",
                   "#8C564BB2","#E377C2B2","#7F7F7FB2","#BCBD22B2","#17BECFB2")
-p <- Bior_Sankeyplot(links, Nodes.order=Nodes.order, Nodes.colour=Nodes.colour, fontSize=20)
+
+p <- Bior_SankeyPlot(links, nodes, Nodes.colour=Nodes.colour, Nodes.order = nodes$name,
+                     fontSize=20,iterations=0)
 p
-# Use saveNetwork() to save the plot as html
+# save plot
 # saveNetwork(p,"sankey.html")
+# webshot("sankey.html" , "sankey.pdf")
 ```
+
+
+### multi-layer SankeyPlot
+
+Draw a multi-layer Sankey plot and customize the colors:
+
+```{r}
+links <- data.frame(
+  Source = c(rep(c("A_1","B_1","C_1","D_1"),each=4), rep(c("A_2","B_2","C_2","D_2"),each=4)),
+  Target = c(rep(c("A_2","B_2","C_2","D_2"),4), rep(c("A_3","B_3","C_3","D_3"),4)),
+  Value = c(0.4,0.4,0.1,0.1, 0.1,0.8,0.05,0.05, 0.05,0.05,0.8,0.1, 0.05,0.1,0.05,0.8,
+            0.4,0.4,0.1,0.1, 0.1,0.8,0.05,0.05, 0.05,0.05,0.8,0.1, 0.05,0.1,0.05,0.8)
+)
+links$Group <- ""
+links$Group[which(links$Value > 0.5)] <- "Type1"
+links$Group[which(links$Value > 0.1 & links$Value <= 0.5)] <- "Type2"
+links$Group[which(links$Value <= 0.1)] <- "Type3"
+nodes <- data.frame(
+  name = c("A_1","B_1","C_1","D_1","A_2","B_2","C_2","D_2","A_3","B_3","C_3","D_3")
+)
+links$IDsource <- match(links$Source, nodes$name) - 1
+links$IDtarget <- match(links$Target, nodes$name) - 1
+Group.order <- c("Type1", "Type2", "Type3")
+Group.colour <- c("#6860ff","#e489dc","#d0d5da")
+Nodes.order <- nodes$name
+Nodes.colour <- rep(c('#ffda11', '#f68d45', '#26d5ff', '#f05a9e'),3)
+
+Bior_SankeyPlot(
+    Links = links, Nodes = nodes, Source = "IDsource", Target = "IDtarget",
+    Value = "Value", NodeID = "name", colourScale = colourScale, LinkGroup="Group",
+    fontSize = 20, iterations=0,
+    Group.order = Group.order, Group.colour = Group.colour, 
+    Nodes.order = Nodes.order, Nodes.colour = Nodes.colour)
+```
+
+
+
+
+
+
+
 
 
 

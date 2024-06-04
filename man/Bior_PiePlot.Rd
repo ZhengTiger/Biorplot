@@ -49,16 +49,14 @@ Create a Pie plot.
 value <- c(0.1,0.2,0.4,0.1,0.3)
 type <- c("A (10\%)", "B (20\%)", "C (40\%)", "D (10\%)", "E (30\%)")
 col <- c("#AEC7E8B2", "#FFBB78B2", "#98DF8AB2", "#FF9896B2", "#C5B0D5B2")
-p <- Bior_PiePlot(value=value, type=type, col=col, title="Test Bior_pie")
-p
+Bior_PiePlot(value=value, type=type, col=col, title="Test Bior_pie")
 
 # Examples 2
 value <- c(0.1,0.2,0.4,0.1,0.3)
 type <- c("A", "B", "C", "D", "E")
 label <- c("10\%","20\%","40\%","10\%","30\%")
 col <- c("#AEC7E8B2", "#FFBB78B2", "#98DF8AB2", "#FF9896B2", "#C5B0D5B2")
-p <- Bior_PiePlot(value=value, type=type, label=label, col=col, title="Test Bior_pie",
+Bior_PiePlot(value=value, type=type, label=label, col=col, title="Test Bior_pie",
                   label.x=1.2, label.color="white", label.size=5)
-p
 
 }

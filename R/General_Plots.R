@@ -129,17 +129,15 @@ Bior_LinePlot <- function(
 #' value <- c(0.1,0.2,0.4,0.1,0.3)
 #' type <- c("A (10%)", "B (20%)", "C (40%)", "D (10%)", "E (30%)")
 #' col <- c("#AEC7E8B2", "#FFBB78B2", "#98DF8AB2", "#FF9896B2", "#C5B0D5B2")
-#' p <- Bior_PiePlot(value=value, type=type, col=col, title="Test Bior_pie")
-#' p
+#' Bior_PiePlot(value=value, type=type, col=col, title="Test Bior_pie")
 #'
 #' # Examples 2
 #' value <- c(0.1,0.2,0.4,0.1,0.3)
 #' type <- c("A", "B", "C", "D", "E")
 #' label <- c("10%","20%","40%","10%","30%")
 #' col <- c("#AEC7E8B2", "#FFBB78B2", "#98DF8AB2", "#FF9896B2", "#C5B0D5B2")
-#' p <- Bior_PiePlot(value=value, type=type, label=label, col=col, title="Test Bior_pie",
+#' Bior_PiePlot(value=value, type=type, label=label, col=col, title="Test Bior_pie",
 #'                   label.x=1.2, label.color="white", label.size=5)
-#' p
 #'
 Bior_PiePlot <- function(
     value, type, label=NULL, col=pal_d3("category20",alpha=0.7)(20), title="",
@@ -182,7 +180,7 @@ Bior_PiePlot <- function(
 #' Bar plot
 #' @description Create a stacked barplot.
 #'
-#' @importFrom ggpubr ggbarplot theme_pubr
+#' @importFrom ggpubr ggbarplot
 #' @import ggplot2
 #'
 #' @inheritParams ggpubr::ggbarplot
@@ -260,7 +258,7 @@ Bior_BarPlot <- function(data, x, y, combine = FALSE, merge = FALSE,
 #' Dot Plot
 #' @description Create a dot plot.
 #'
-#' @importFrom ggpubr ggdotchart
+#' @importFrom ggpubr ggdotchart theme_pubr
 #' @import ggplot2
 #'
 #' @inheritParams ggpubr::ggdotchart
@@ -270,12 +268,29 @@ Bior_BarPlot <- function(data, x, y, combine = FALSE, merge = FALSE,
 #'
 #' @examples
 #' # Examples 1
-#' x <- rep(paste('sample', 1:5, sep=''), 4)
-#' y <- rep(paste('gene', 1:4, sep=''), 5)
-#' size <- round(rnorm(20, mean = 10, sd = 5))
+#' df <- data.frame(
+#'   Sample = rep(paste('sample', 1:5, sep=''), 4),
+#'   Gene = rep(paste('gene', 1:4, sep=''), 5),
+#'   size = round(rnorm(20, mean = 10, sd = 5))
+#'   )
 #' colour <- c("#1F77B4FF","#FF7F0EFF","#2CA02CFF","#D62728FF","#9467BDFF")
-#' p <- Bior_DotPlot(x = x, y = y, size = size, group.by = x, colour = colour, max_size=10)
-#' p
+#' Bior_DotPlot(data = df, x = "Sample", y = "Gene", size = "size", color = "Gene",
+#'              x.text.col = FALSE, ggtheme = theme_bw()) +
+#'   theme(axis.text.x = element_text(angle = 0, hjust = 0.5))
+#'
+#' # Examples 2
+#' df <- data.frame(
+#'   Sample = rep(paste('sample', 1:4, sep=''), each=4),
+#'   Gene = rep(paste('gene', 1:4, sep=''), 4),
+#'   Pct = c(80,10,10,10,10,80,10,10,10,10,80,10,10,10,10,80),
+#'   Expression = c(3,0.5,0.1,0.3,0.3,3,0.2,0.6,0.1,0.7,3,0.1,0.5,0.2,0.1,3)
+#'   )
+#'
+#'  Bior_DotPlot(data = df, x = "Sample", y = "Gene", size="Pct", color = "Expression",
+#'               x.text.col = FALSE, ggtheme = theme_bw()) +
+#'   theme(axis.text.x = element_text(angle = 0, hjust = 0.5)) +
+#'   scale_color_gradientn(colours = c("lightblue3", "lightblue", "white", "red", "red4"))
+#'
 Bior_DotPlot <- function(data, x, y, group = NULL,
                          combine = FALSE,
                          color = "black", palette = NULL,
@@ -327,73 +342,123 @@ Bior_DotPlot <- function(data, x, y, group = NULL,
 #'
 #' @importFrom networkD3 sankeyNetwork
 #'
-#' @param links A dataframe, colnames must have ‘source’ ‘target’ ‘value’
-#' @param Nodes.colour Set nodes colour
+#' @inheritParams networkD3::sankeyNetwork
+#'
+#' @param Group.order Set Group order
+#' @param Group.colour Set Group colour
 #' @param Nodes.order Set nodes order
-#' @param fontSize Set fontsize
-#' @param nodeWidth Set nodewidth
-#' @param nodePadding Set the gap size between nodes
-#' @param margin R margin
-#' @param height numeric height for the network graph’s frame area in pixels
-#' @param width numeric width for the network graph’s frame area in pixels
-#' @param sinksRight boolean. If TRUE, the last nodes are moved to the right border of the plot
+#' @param Nodes.colour Set Nodes colour
 #'
 #' @export
 #'
 #' @examples
 #' # Examples 1
-#' # links data, colnames must have 'source' 'target' 'value'
 #' links <- data.frame(
-#'   source=c("C","A", "B", "E", "D"),
-#'   target=c("b","c", "a", "e", "d"),
-#'   value=c(1, 2, 0, 4, 5)
-#' )
-#'
-#' # Set Nodes order and colour
-#' Nodes.order <- c("A", "B", "C", "D", "E", "a", "b", "c", "d", "e")
+#'   Source=c("C","A", "B", "E", "D"),
+#'   Target=c("b","c", "a", "e", "d"),
+#'   Value=c(1, 2, 1, 4, 5)
+#'  )
+#' nodes <- data.frame(
+#'   name = c("A", "B", "C", "D", "E", "a", "b", "c", "d", "e")
+#'  )
+#' links$IDsource <- match(links$Source, nodes$name) -1
+#' links$IDtarget <- match(links$Target, nodes$name) -1
 #' Nodes.colour <- c("#1F77B4B2","#FF7F0EB2","#2CA02CB2","#D62728B2","#9467BDB2",
 #'                   "#8C564BB2","#E377C2B2","#7F7F7FB2","#BCBD22B2","#17BECFB2")
-#' p <- Bior_Sankeyplot(links, Nodes.order=Nodes.order, Nodes.colour=Nodes.colour, fontSize=20)
+#'
+#' p <- Bior_SankeyPlot(links, nodes, Nodes.colour=Nodes.colour, Nodes.order = nodes$name,
+#'                      fontSize=20,iterations=0)
 #' p
-Bior_Sankeyplot <- function(links, Nodes.colour=NULL, Nodes.order=NULL, fontSize=12,
-                            nodeWidth=30, nodePadding=10, margin=NULL, height=600,
-                            width=600, sinksRight=TRUE){
-  # adjust data format
-  links <- links[which(links$value != 0),]
-  nodes <- unique(c(links$source, links$target))
-  if (!is.null(Nodes.order)){
-    nodes <- Nodes.order[which(Nodes.order %in% nodes)]
+#' # save plot
+#' # saveNetwork(p,"sankey.html")
+#' # webshot("sankey.html" , "sankey.pdf")
+#'
+#'
+#' # Examples 2
+#' links <- data.frame(
+#'   Source = c(rep(c("A_1","B_1","C_1","D_1"),each=4), rep(c("A_2","B_2","C_2","D_2"),each=4)),
+#'   Target = c(rep(c("A_2","B_2","C_2","D_2"),4), rep(c("A_3","B_3","C_3","D_3"),4)),
+#'   Value = c(0.4,0.4,0.1,0.1, 0.1,0.8,0.05,0.05, 0.05,0.05,0.8,0.1, 0.05,0.1,0.05,0.8,
+#'             0.4,0.4,0.1,0.1, 0.1,0.8,0.05,0.05, 0.05,0.05,0.8,0.1, 0.05,0.1,0.05,0.8)
+#' )
+#' links$Group <- ""
+#' links$Group[which(links$Value > 0.5)] <- "Type1"
+#' links$Group[which(links$Value > 0.1 & links$Value <= 0.5)] <- "Type2"
+#' links$Group[which(links$Value <= 0.1)] <- "Type3"
+#' nodes <- data.frame(
+#'   name = c("A_1","B_1","C_1","D_1","A_2","B_2","C_2","D_2","A_3","B_3","C_3","D_3")
+#' )
+#' links$IDsource <- match(links$Source, nodes$name) - 1
+#' links$IDtarget <- match(links$Target, nodes$name) - 1
+#' Group.order <- c("Type1", "Type2", "Type3")
+#' Group.colour <- c("#6860ff","#e489dc","#d0d5da")
+#' Nodes.order <- nodes$name
+#' Nodes.colour <- rep(c('#ffda11', '#f68d45', '#26d5ff', '#f05a9e'),3)
+#'
+#' Bior_SankeyPlot(
+#'   Links = links, Nodes = nodes, Source = "IDsource", Target = "IDtarget",
+#'   Value = "Value", NodeID = "name", colourScale = colourScale, LinkGroup="Group",
+#'   fontSize = 20, iterations=0,
+#'   Group.order = Group.order, Group.colour = Group.colour,
+#'   Nodes.order = Nodes.order, Nodes.colour = Nodes.colour)
+#'
+Bior_SankeyPlot <- function(Links, Nodes, Source = "IDsource", Target = "IDtarget",
+                            Value = "Value", NodeID = "name", NodeGroup = NodeID,
+                            LinkGroup = NULL, units = "",
+                            colourScale = JS("d3.scaleOrdinal(d3.schemeCategory20);"), fontSize = 7,
+                            fontFamily = NULL, nodeWidth = 15, nodePadding = 10, margin = NULL,
+                            height = NULL, width = NULL, iterations = 32, sinksRight = TRUE,
+                            Group.order=NULL, Group.colour=NULL,
+                            Nodes.order=NULL, Nodes.colour=NULL)
+{
+
+  if (is.null(Group.order)){
+    Group.order <- sort(unique(Links$Group))
   }
-  nodes <- data.frame(name=nodes)
-  nodes$index <- 0:(nrow(nodes) - 1)
-  links <- merge(links, nodes, by.x="source", by.y="name")
-  links <- merge(links, nodes, by.x="target", by.y="name")
-  names(links) <- c("target","source","Value","IDsource","IDtarget")
-  # set colour
-  if (is.null(Nodes.colour)){
-    colourScale <- "d3.scaleOrdinal(d3.schemeCategory20);"
+  if (is.null(Nodes.order)){
+    Nodes.order <- Nodes$name
+  }
+
+  if ((!is.null(Group.order)) & (is.null(Nodes.order))){
+    domain <- c(Group.order)
+    range <- c(Group.colour)
+  }else if ((is.null(Group.order)) & (!is.null(Nodes.order))){
+    domain <- c(Nodes.order)
+    range <- c(Nodes.colour)
+  }else if ((!is.null(Group.order)) & (!is.null(Nodes.order))){
+    domain <- c(Group.order, Nodes.order)
+    range <- c(Group.colour, Nodes.colour)
   }else{
-    pastecolor <- paste('d3.scaleOrdinal() .domain(["', Nodes.order[1], sep = '')
-    for (i in 2:length(Nodes.order)){
-      pastecolor <- paste(pastecolor, '", "', Nodes.order[i], sep = '')
-    }
-    pastecolor <- paste(pastecolor, '"]) .range(["', sep = '')
-    pastecolor <- paste(pastecolor, Nodes.colour[1], sep = '')
-    for (i in 2:length(Nodes.order)){
-      pastecolor <- paste(pastecolor,'", "', Nodes.colour[i], sep = '')
-    }
-    pastecolor <- paste(pastecolor,'"])', sep = '')
-    colourScale <- pastecolor
+    domain <- NULL
+    range <- NULL
   }
-  # plot
-  links$Group <- links$source
-  links$Group <- as.factor(links$Group)
-  sank <- sankeyNetwork(Links=links, Nodes=nodes, Source="IDsource",
-                        Target="IDtarget", Value="Value", NodeID="name", fontSize=fontSize,
-                        nodeWidth=nodeWidth, nodePadding=nodePadding, margin=margin,
-                        height=height, width=width, sinksRight=sinksRight,
-                        colourScale=colourScale, LinkGroup="Group",iterations=0)
-  return(sank)
+
+  colourScale <- paste('d3.scaleOrdinal() .domain(["', domain[1], sep = '')
+  for (i in 2:length(domain)){
+    colourScale <- paste(colourScale, '", "', domain[i], sep = '')
+  }
+  colourScale <- paste(colourScale, '"]) .range(["', sep = '')
+  colourScale <- paste(colourScale, range[1], sep = '')
+  for (i in 2:length(range)){
+    colourScale <- paste(colourScale,'", "', range[i], sep = '')
+  }
+  colourScale <- paste(colourScale,'"])', sep = '')
+
+  if (is.null(domain) & is.null(range)){
+    colourScale <- "d3.scaleOrdinal(d3.schemeCategory20);"
+  }
+
+  p <-
+    sankeyNetwork(
+      Links = Links, Nodes = Nodes, Source = Source, Target = Target,
+      Value = Value, NodeID = NodeID, NodeGroup = NodeID,
+      LinkGroup = LinkGroup, units = units,
+      colourScale = colourScale, fontSize = fontSize,
+      fontFamily = fontFamily, nodeWidth = nodeWidth, nodePadding = nodePadding,
+      margin = margin,
+      height = height, width = width, iterations = iterations, sinksRight = sinksRight)
+
+  return(p)
 }
 
 

@@ -31,7 +31,7 @@ reference:
   - '`Bior_PiePlot`'
   - '`Bior_BarPlot`'
   - '`Bior_DotPlot`'
-  - '`Bior_Sankeyplot`'
+  - '`Bior_SankeyPlot`'
 - title: scRNAseq Plots
   desc: Single-cell RNAseq analysis Plots
 deploy:

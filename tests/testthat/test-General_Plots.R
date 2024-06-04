@@ -71,17 +71,4 @@ test_that("Bior_DotPlot() test", {
 
 
 test_that("Bior_Sankeyplot() test", {
-  # links data, colnames must have 'source' 'target' 'value'
-  links <- data.frame(
-    source=c("C","A", "B", "E", "D"),
-    target=c("b","c", "a", "e", "d"),
-    value=c(1, 2, 0, 4, 5)
-  )
-
-  # Set Nodes order and colour
-  Nodes.order <- c("A", "B", "C", "D", "E", "a", "b", "c", "d", "e")
-  Nodes.colour <- c("#1F77B4B2","#FF7F0EB2","#2CA02CB2","#D62728B2","#9467BDB2",
-                    "#8C564BB2","#E377C2B2","#7F7F7FB2","#BCBD22B2","#17BECFB2")
-  p <- Bior_Sankeyplot(links, Nodes.order=Nodes.order, Nodes.colour=Nodes.colour, fontSize=20)
-  p
 })

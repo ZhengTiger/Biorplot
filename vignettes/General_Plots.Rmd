@@ -212,7 +212,7 @@ p <- Bior_SankeyPlot(links, nodes, Nodes.colour=Nodes.colour, Nodes.order = node
 p
 # save plot
 # saveNetwork(p,"sankey.html")
-# webshot("sankey.html" , "sankey.pdf")
+# webshot("sankey.html", "sankey.pdf")
 ```
 
 

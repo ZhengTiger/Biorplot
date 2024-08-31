@@ -344,10 +344,10 @@ Bior_DotPlot <- function(data, x, y, group = NULL,
 #'
 #' @inheritParams networkD3::sankeyNetwork
 #'
-#' @param Group.order Set Group order
-#' @param Group.colour Set Group colour
-#' @param Nodes.order Set nodes order
-#' @param Nodes.colour Set Nodes colour
+#' @param Group.order (defaut: Group.order=NULL); text size Set Group order
+#' @param Group.colour (defaut: Group.colour=NULL); Set Group colour
+#' @param Nodes.order (defaut: Nodes.order=NULL); Set nodes order
+#' @param Nodes.colour (defaut: Nodes.colour=NULL); Set Nodes colour
 #'
 #' @export
 #'
@@ -461,7 +461,7 @@ Bior_SankeyPlot <- function(Links, Nodes, Source = "IDsource", Target = "IDtarge
   return(p)
 }
 
-
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 

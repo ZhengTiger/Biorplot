@@ -1,11 +1,11 @@
 title: Biorplot
-url: http://tigerz.online/Biorplot/
+url: https://zhengtiger.github.io/Biorplot/
 template:
   params:
     bootswatch: flatly
 authors:
   Hu Zheng:
-    href: https://github.com/zhenghu159
+    href: https://github.com/ZhengTiger
 navbar:
   structure:
     left:

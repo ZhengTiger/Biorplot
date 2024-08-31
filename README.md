@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# Biorplot <a href="https://zhenghu159.github.io/Biorplot"><img src="man/figures/logo.png" align="right" height="138" /></a>
+# Biorplot <a href="https://ZhengTiger.github.io/Biorplot"><img src="man/figures/logo.png" align="right" height="138" /></a>
 
 Biorplot is an R package for plotting bioinformatics graphs with
 low-code.
@@ -11,7 +11,7 @@ low-code.
 You can install the development version of Biorplot using `devtools`:
 
 ``` r
-devtools::install_github("zhenghu159/Biorplot")
+devtools::install_github("ZhengTiger/Biorplot")
 ```
 
 ## Biorplot Gallery

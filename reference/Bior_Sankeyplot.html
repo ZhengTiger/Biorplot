@@ -3,7 +3,7 @@
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]--><!-- dependencies from examples --><script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><script src="libs/d3-4.5.0/d3.min.js"></script><script src="libs/sankey-1/sankey.js"></script><script src="libs/sankeyNetwork-binding-0.4/sankeyNetwork.js"></script></head><body data-spy="scroll" data-target="#toc">
-    
+
 
     <div class="container template-reference-topic">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -25,7 +25,7 @@
       <ul class="nav navbar-nav"><li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Vignettes
-     
+
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu"><li class="dropdown-header">Plotting Vignettes</li>
@@ -43,13 +43,13 @@
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-      
+
 
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Sankey Plot</h1>
-    
+
     <div class="hidden name"><code>Bior_Sankeyplot.Rd</code></div>
     </div>
 
@@ -87,77 +87,79 @@
 
     <div id="arguments">
     <h2>Arguments</h2>
-    <dl><dt>Links</dt>
+
+
+<dl><dt id="arg-links">Links<a class="anchor" aria-label="anchor" href="#arg-links"></a></dt>
 <dd><p>a data frame object with the links between the nodes. It should
 have include the <code>Source</code> and <code>Target</code> for each link. An optional
 <code>Value</code> variable can be included to specify how close the nodes are to
 one another.</p></dd>
 
 
-<dt>Nodes</dt>
+<dt id="arg-nodes">Nodes<a class="anchor" aria-label="anchor" href="#arg-nodes"></a></dt>
 <dd><p>a data frame containing the node id and properties of the nodes.
 If no ID is specified then the nodes must be in the same order as the
 <code>Source</code> variable column in the <code>Links</code> data frame. Currently only
 grouping variable is allowed.</p></dd>
 
 
-<dt>Source</dt>
+<dt id="arg-source">Source<a class="anchor" aria-label="anchor" href="#arg-source"></a></dt>
 <dd><p>character string naming the network source variable in the
 <code>Links</code> data frame.</p></dd>
 
 
-<dt>Target</dt>
+<dt id="arg-target">Target<a class="anchor" aria-label="anchor" href="#arg-target"></a></dt>
 <dd><p>character string naming the network target variable in the
 <code>Links</code> data frame.</p></dd>
 
 
-<dt>Value</dt>
+<dt id="arg-value">Value<a class="anchor" aria-label="anchor" href="#arg-value"></a></dt>
 <dd><p>character string naming the variable in the <code>Links</code> data
 frame for how far away the nodes are from one another.</p></dd>
 
 
-<dt>NodeID</dt>
+<dt id="arg-nodeid">NodeID<a class="anchor" aria-label="anchor" href="#arg-nodeid"></a></dt>
 <dd><p>character string specifying the node IDs in the <code>Nodes</code>.
 data frame. Must be 0-indexed.</p></dd>
 
 
-<dt>NodeGroup</dt>
+<dt id="arg-nodegroup">NodeGroup<a class="anchor" aria-label="anchor" href="#arg-nodegroup"></a></dt>
 <dd><p>character string specifying the node groups in the
 <code>Nodes</code>. Used to color the nodes in the network.</p></dd>
 
 
-<dt>LinkGroup</dt>
+<dt id="arg-linkgroup">LinkGroup<a class="anchor" aria-label="anchor" href="#arg-linkgroup"></a></dt>
 <dd><p>character string specifying the groups in the
 <code>Links</code>. Used to color the links in the network.</p></dd>
 
 
-<dt>units</dt>
+<dt id="arg-units">units<a class="anchor" aria-label="anchor" href="#arg-units"></a></dt>
 <dd><p>character string describing physical units (if any) for Value</p></dd>
 
 
-<dt>colourScale</dt>
+<dt id="arg-colourscale">colourScale<a class="anchor" aria-label="anchor" href="#arg-colourscale"></a></dt>
 <dd><p>character string specifying the categorical colour
 scale for the nodes. See
 <a href="https://github.com/d3/d3/blob/master/API.md#ordinal-scales" class="external-link">https://github.com/d3/d3/blob/master/API.md#ordinal-scales</a>.</p></dd>
 
 
-<dt>fontSize</dt>
+<dt id="arg-fontsize">fontSize<a class="anchor" aria-label="anchor" href="#arg-fontsize"></a></dt>
 <dd><p>numeric font size in pixels for the node text labels.</p></dd>
 
 
-<dt>fontFamily</dt>
+<dt id="arg-fontfamily">fontFamily<a class="anchor" aria-label="anchor" href="#arg-fontfamily"></a></dt>
 <dd><p>font family for the node text labels.</p></dd>
 
 
-<dt>nodeWidth</dt>
+<dt id="arg-nodewidth">nodeWidth<a class="anchor" aria-label="anchor" href="#arg-nodewidth"></a></dt>
 <dd><p>numeric width of each node.</p></dd>
 
 
-<dt>nodePadding</dt>
+<dt id="arg-nodepadding">nodePadding<a class="anchor" aria-label="anchor" href="#arg-nodepadding"></a></dt>
 <dd><p>numeric essentially influences the width height.</p></dd>
 
 
-<dt>margin</dt>
+<dt id="arg-margin">margin<a class="anchor" aria-label="anchor" href="#arg-margin"></a></dt>
 <dd><p>an integer or a named <code>list</code>/<code>vector</code> of integers
 for the plot margins. If using a named <code>list</code>/<code>vector</code>,
 the positions <code>top</code>, <code>right</code>, <code>bottom</code>, <code>left</code>
@@ -166,38 +168,38 @@ assigned to the right margin. Set the margin appropriately
 to accomodate long text labels.</p></dd>
 
 
-<dt>height</dt>
+<dt id="arg-height">height<a class="anchor" aria-label="anchor" href="#arg-height"></a></dt>
 <dd><p>numeric height for the network graph's frame area in pixels.</p></dd>
 
 
-<dt>width</dt>
+<dt id="arg-width">width<a class="anchor" aria-label="anchor" href="#arg-width"></a></dt>
 <dd><p>numeric width for the network graph's frame area in pixels.</p></dd>
 
 
-<dt>iterations</dt>
+<dt id="arg-iterations">iterations<a class="anchor" aria-label="anchor" href="#arg-iterations"></a></dt>
 <dd><p>numeric. Number of iterations in the diagramm layout for
 computation of the depth (y-position) of each node. Note: this runs in the
 browser on the client so don't push it too high.</p></dd>
 
 
-<dt>sinksRight</dt>
+<dt id="arg-sinksright">sinksRight<a class="anchor" aria-label="anchor" href="#arg-sinksright"></a></dt>
 <dd><p>boolean. If <code>TRUE</code>, the last nodes are moved to the
 right border of the plot.</p></dd>
 
 
-<dt>Group.order</dt>
+<dt id="arg-group-order">Group.order<a class="anchor" aria-label="anchor" href="#arg-group-order"></a></dt>
 <dd><p>Set Group order</p></dd>
 
 
-<dt>Group.colour</dt>
+<dt id="arg-group-colour">Group.colour<a class="anchor" aria-label="anchor" href="#arg-group-colour"></a></dt>
 <dd><p>Set Group colour</p></dd>
 
 
-<dt>Nodes.order</dt>
+<dt id="arg-nodes-order">Nodes.order<a class="anchor" aria-label="anchor" href="#arg-nodes-order"></a></dt>
 <dd><p>Set nodes order</p></dd>
 
 
-<dt>Nodes.colour</dt>
+<dt id="arg-nodes-colour">Nodes.colour<a class="anchor" aria-label="anchor" href="#arg-nodes-colour"></a></dt>
 <dd><p>Set Nodes colour</p></dd>
 
 </dl></div>
@@ -270,15 +272,15 @@ right border of the plot.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
 </div>
 
       </footer></div>
 
-  
 
 
-  
+
+
 
   </body></html>
 
